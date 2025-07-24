@@ -83,22 +83,18 @@ install_laml() {
     mkdir -p "$CONFIG_DIR"
     mkdir -p "$DESKTOP_DIR"
     
-    # For demo purposes, create a placeholder binary
-    # In production, this would download from GitHub releases
-    cat > /tmp/laml << 'EOF'
-#!/bin/bash
-echo "🚀 LAML Compiler v3.0.0 - Linux ($arch)"
-echo "This is a placeholder. In production, this would be the actual LAML binary."
-echo ""
-echo "Usage: laml [command] [file.lm]"
-echo "Commands:"
-echo "  run [file]     - Compile and run LAML file"
-echo "  compile [file] - Compile LAML file to binary"
-echo "  version        - Show version information"
-echo "  help           - Show this help message"
-EOF
-    
-    # Install binary
+# Install LAML binary
+echo -e "${YELLOW}📦 Installing LAML compiler...${NC}"
+
+# Check if binary exists in package
+if [ -f "${script_dir}/laml" ]; then
+    cp "${script_dir}/laml" "${install_dir}/laml"
+    chmod +x "${install_dir}/laml"
+    echo -e "${GREEN}✅ LAML binary installed${NC}"
+else
+    echo -e "${RED}❌ LAML binary not found in package!${NC}"
+    exit 1
+fi    # Install binary
     sudo cp /tmp/laml "$INSTALL_DIR/laml"
     sudo chmod +x "$INSTALL_DIR/laml"
     

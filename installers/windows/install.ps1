@@ -56,20 +56,20 @@ if (-not (Test-Path $InstallPath)) {
     New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null
 }
 
-# Download or copy LAML binary (placeholder - in real scenario, download from GitHub releases)
+# Install LAML binary
 Write-ColorText "📦 Installing LAML compiler..." "Yellow"
 
-# For demo purposes, we'll create a placeholder
-@"
-@echo off
-echo LAML Compiler v3.0.0 - Windows
-echo This is a placeholder. In production, this would be the actual LAML binary.
-echo Usage: laml [command] [file.lm]
-echo Commands:
-echo   run [file]     - Compile and run LAML file
-echo   compile [file] - Compile LAML file to binary
-echo   version        - Show version information
-"@ | Out-File -FilePath "$InstallPath\laml.bat" -Encoding ASCII
+# Copy the REAL binary from the package
+$sourceBinary = "$PSScriptRoot\laml.exe"
+$targetBinary = "$InstallPath\laml.exe"
+
+if (Test-Path $sourceBinary) {
+    Copy-Item -Path $sourceBinary -Destination $targetBinary -Force
+    Write-ColorText "✅ LAML binary installed" "Green"
+} else {
+    Write-ColorText "❌ LAML binary not found in package!" "Red"
+    exit 1
+}
 
 # Add to PATH
 Write-ColorText "🔗 Adding LAML to system PATH..." "Yellow"

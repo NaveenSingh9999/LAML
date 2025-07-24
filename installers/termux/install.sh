@@ -94,29 +94,18 @@ install_laml() {
     # Create directories
     mkdir -p "$CONFIG_DIR"
     
-    # For demo purposes, create a placeholder binary
-    # In production, this would be compiled specifically for Termux
-    cat > "$INSTALL_DIR/laml" << 'EOF'
-#!/data/data/com.termux/files/usr/bin/bash
-echo "🚀 LAML Compiler v3.0.0 - Termux"
-echo "Architecture: $(uname -m)"
-echo "This is a placeholder. In production, this would be the actual LAML binary."
-echo ""
-echo "Usage: laml [command] [file.lm]"
-echo "Commands:"
-echo "  run [file]     - Compile and run LAML file"
-echo "  compile [file] - Compile LAML file to binary"
-echo "  version        - Show version information"
-echo "  help           - Show this help message"
-echo ""
-echo "Termux-specific features:"
-echo "  • Android storage access"
-echo "  • ARM/ARM64 optimization"
-echo "  • Package integration"
-EOF
+    # Get script directory to find the binary
+    local script_dir="$(dirname "$(readlink -f "$0")")"
     
-    # Make executable
-    chmod +x "$INSTALL_DIR/laml"
+    # Install the REAL ARM binary
+    if [ -f "${script_dir}/laml" ]; then
+        cp "${script_dir}/laml" "$INSTALL_DIR/laml"
+        chmod +x "$INSTALL_DIR/laml"
+        print_colored $GREEN "✅ LAML ARM binary installed for Termux"
+    else
+        print_colored $RED "❌ LAML ARM binary not found in package!"
+        exit 1
+    fi
     
     print_colored $GREEN "✅ LAML binary installed to $INSTALL_DIR"
 }

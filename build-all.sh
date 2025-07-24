@@ -38,24 +38,33 @@ detect_os() {
 build_compiler() {
     print_colored $YELLOW "🔨 Building LAML compiler..."
     
+    # Ensure we have a clean build
+    rm -f laml laml-*
+    
     # Build for current platform
     print_colored $BLUE "Building for current platform..."
-    go build -o laml
+    go build -ldflags="-s -w" -o laml
     
     # Cross-compile for other platforms
     print_colored $BLUE "Cross-compiling for multiple platforms..."
     
     # Windows (x86_64)
-    GOOS=windows GOARCH=amd64 go build -o laml-windows-x86_64.exe
+    GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o laml-windows-x86_64.exe
     
     # Linux (x86_64)
-    GOOS=linux GOARCH=amd64 go build -o laml-linux-x86_64
+    GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o laml-linux-x86_64
     
     # Linux (ARM64)
-    GOOS=linux GOARCH=arm64 go build -o laml-linux-arm64
+    GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o laml-linux-arm64
     
     # Linux (ARMv7 for Termux)
-    GOOS=linux GOARCH=arm GOARM=7 go build -o laml-linux-armv7
+    GOOS=linux GOARCH=arm GOARM=7 go build -ldflags="-s -w" -o laml-linux-armv7
+    
+    # Verify binaries were created
+    if [ ! -f "laml" ] || [ ! -f "laml-windows-x86_64.exe" ] || [ ! -f "laml-linux-x86_64" ]; then
+        print_colored $RED "❌ Failed to build all binaries"
+        exit 1
+    fi
     
     print_colored $GREEN "✅ Compiler built for all platforms"
 }
@@ -73,7 +82,12 @@ package_windows() {
     local release_dir=$1
     print_colored $YELLOW "📦 Packaging Windows installer..."
     
-    # Copy Windows binary
+    # Copy REAL Windows binary
+    if [ ! -f "laml-windows-x86_64.exe" ]; then
+        print_colored $RED "❌ Windows binary not found!"
+        exit 1
+    fi
+    
     cp laml-windows-x86_64.exe "$release_dir/windows/laml.exe"
     
     # Copy installer script
@@ -122,9 +136,19 @@ package_linux() {
     local release_dir=$1
     print_colored $YELLOW "📦 Packaging Linux installer..."
     
-    # Copy Linux binaries
+    # Verify Linux binaries exist
+    if [ ! -f "laml-linux-x86_64" ] || [ ! -f "laml-linux-arm64" ]; then
+        print_colored $RED "❌ Linux binaries not found!"
+        exit 1
+    fi
+    
+    # Copy REAL Linux binaries
     cp laml-linux-x86_64 "$release_dir/linux/laml-x86_64"
     cp laml-linux-arm64 "$release_dir/linux/laml-arm64"
+    
+    # Make binaries executable
+    chmod +x "$release_dir/linux/laml-x86_64"
+    chmod +x "$release_dir/linux/laml-arm64"
     
     # Copy installer script
     cp installers/linux/install.sh "$release_dir/linux/"
