@@ -224,8 +224,15 @@ package_termux() {
     local release_dir=$1
     print_colored $YELLOW "📦 Packaging Termux installer..."
     
-    # Copy Termux binary
-    cp laml-linux-armv7 "$release_dir/termux/laml-termux"
+    # Verify Termux binary exists
+    if [ ! -f "laml-linux-armv7" ]; then
+        print_colored $RED "❌ Termux binary not found!"
+        exit 1
+    fi
+    
+    # Copy Termux binary with the correct name that installer expects
+    cp laml-linux-armv7 "$release_dir/termux/laml"
+    chmod +x "$release_dir/termux/laml"
     
     # Copy installer script
     cp installers/termux/install.sh "$release_dir/termux/"
