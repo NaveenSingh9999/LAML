@@ -88,8 +88,8 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print LAML version",
 	Run: func(cmd *cobra.Command, args []string) {
-		console.PrintInfo("LAML v3.0.0 - Low Abstraction Machine Language")
-		console.PrintInfo("Phase 3: Enhanced Developer Experience")
+		fmt.Println("LAML v3.2.0 - Low Abstraction Machine Language")
+		fmt.Println("Enhanced User Experience - Clean Output & VS Code Integration")
 	},
 }
 

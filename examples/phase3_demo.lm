@@ -10,12 +10,12 @@ bring xcs.class34;
 
 func main() {
     ~ Phase 2 val statement
-    val greeting = "Welcome to LAML Phase 3!";
+    val greeting = "Welcome to LAML Phase 3.2!";
     say greeting;
     
     {~ Phase 1 variables still work ~}
     let count = 5;
-    const version = "3.0";
+    const version = "3.2";
     
     ~ Basic arithmetic and output
     val result = count * 10;
@@ -35,5 +35,5 @@ func main() {
     }
     
     ~ Final message
-    say "LAML Phase 3 complete!";
+    say "LAML Phase 3.2 complete!";
 }
