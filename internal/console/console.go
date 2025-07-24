@@ -33,15 +33,14 @@ func PrintWarning(line int, message string) {
 	fmt.Printf("%s[⚠️ WARNING]%s @ line %d :: %s\n", Yellow+Bold, Reset, line, message)
 }
 
-// PrintInfo prints a styled info message
+// PrintInfo prints a simple info message (simplified)
 func PrintInfo(message string) {
-	fmt.Printf("%s[ℹ️ INFO]%s %s\n", Cyan+Bold, Reset, message)
+	// Removed decorative output - keep it simple
 }
 
-// PrintHeader prints a styled header for the compiler
+// PrintHeader prints a simple header (simplified)
 func PrintHeader(filename string) {
-	fmt.Printf("%s%s🚀 LAML Compiler%s - [%s]\n", Bold, Blue, Reset, filename)
-	fmt.Println("=====================================")
+	// Removed decorative output - keep it simple
 }
 
 // PrintCompilerStats prints compilation statistics

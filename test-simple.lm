@@ -1,0 +1,6 @@
+~ Simple hello world
+bring xcs.class34;
+
+func main() {
+    say "hello";
+}

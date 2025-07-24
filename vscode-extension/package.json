@@ -30,6 +30,27 @@
             "id": "laml-file-icons",
             "label": "LAML File Icons",
             "path": "./fileIcons/laml-icon-theme.json"
-        }]
-    }
+        }],
+        "commands": [{
+            "command": "laml.runFile",
+            "title": "Run LAML File",
+            "icon": "$(play)"
+        }],
+        "menus": {
+            "editor/title": [{
+                "when": "resourceExtname == .lm",
+                "command": "laml.runFile",
+                "group": "navigation"
+            }],
+            "explorer/context": [{
+                "when": "resourceExtname == .lm",
+                "command": "laml.runFile",
+                "group": "navigation"
+            }]
+        }
+    },
+    "activationEvents": [
+        "onLanguage:laml"
+    ],
+    "main": "./extension.js"
 }

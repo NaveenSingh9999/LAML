@@ -73,8 +73,6 @@ var runCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		console.PrintInfo("Compiling and executing...")
-
 		// Initialize compiler
 		c := compiler.New()
 
