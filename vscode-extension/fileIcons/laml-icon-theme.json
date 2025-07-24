@@ -1,0 +1,14 @@
+{
+    "iconDefinitions": {
+        "laml-file": {
+            "iconPath": "../icons/laml-icon.png"
+        }
+    },
+    "fileExtensions": {
+        "lm": "laml-file"
+    },
+    "fileNames": {},
+    "languageIds": {
+        "laml": "laml-file"
+    }
+}

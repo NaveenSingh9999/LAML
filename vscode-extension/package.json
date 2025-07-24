@@ -1,0 +1,35 @@
+{
+    "name": "laml",
+    "displayName": "LAML Language Support",
+    "description": "Syntax highlighting and language support for LAML (Low Abstraction Machine Language)",
+    "version": "0.3.0",
+    "publisher": "laml-lang",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "laml",
+            "aliases": ["LAML", "laml"],
+            "extensions": [".lm"],
+            "configuration": "./language-configuration.json",
+            "icon": {
+                "light": "./icons/laml-icon.png",
+                "dark": "./icons/laml-icon.png"
+            }
+        }],
+        "grammars": [{
+            "language": "laml",
+            "scopeName": "source.laml",
+            "path": "./syntaxes/laml.tmLanguage.json"
+        }],
+        "iconThemes": [{
+            "id": "laml-file-icons",
+            "label": "LAML File Icons",
+            "path": "./fileIcons/laml-icon-theme.json"
+        }]
+    }
+}

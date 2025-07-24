@@ -1,0 +1,39 @@
+~ LAML Phase 3 - Complete Feature Demo
+bring xcs.class34;
+
+{~ 
+   This file demonstrates all Phase 3 features:
+   - Single-line comments with ~
+   - Multi-line comments 
+   - Enhanced language constructs
+~}
+
+func main() {
+    ~ Phase 2 val statement
+    val greeting = "Welcome to LAML Phase 3!";
+    say greeting;
+    
+    {~ Phase 1 variables still work ~}
+    let count = 5;
+    const version = "3.0";
+    
+    ~ Basic arithmetic and output
+    val result = count * 10;
+    say "Count * 10 = " + result;
+    
+    ~ Conditional with comments
+    if result > 40 {
+        say "Result is greater than 40";
+    } else {
+        say "Result is less than or equal to 40";
+    }
+    
+    ~ Loop with comments
+    say "Counting down:";
+    loop i in 1 to count {
+        say "Number: " + i;
+    }
+    
+    ~ Final message
+    say "LAML Phase 3 complete!";
+}

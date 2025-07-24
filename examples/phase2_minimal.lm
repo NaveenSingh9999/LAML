@@ -1,0 +1,6 @@
+bring xcs.class34;
+
+func main() {
+    val x = 10;
+    say "Value: " + x;
+}

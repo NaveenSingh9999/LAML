@@ -1,0 +1,20 @@
+bring xcs.class34;
+
+func main() {
+    val age = 16;
+    const ID = 9016;
+    
+    say "Age: " + age;
+    say "ID: " + ID;
+    
+    if age > 15 {
+        say "Teen!";
+    } else {
+        say "Kid!";
+    }
+    
+    // Simple range loop for now
+    loop i in 0 to 4 {
+        say "Loop: " + i;
+    }
+}

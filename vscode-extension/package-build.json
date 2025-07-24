@@ -1,0 +1,10 @@
+{
+    "name": "vsce",
+    "scripts": {
+        "build": "npm install -g vsce && vsce package",
+        "install-icon": "cp icons/laml-icon.svg icons/laml-icon.png"
+    },
+    "devDependencies": {
+        "vsce": "^2.15.0"
+    }
+}

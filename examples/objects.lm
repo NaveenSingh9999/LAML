@@ -1,0 +1,30 @@
+bring xcs.class34;
+
+obj Car {
+    brand = "Generic";
+    speed = 0;
+    
+    func accelerate(amount) {
+        speed = speed + amount;
+        say brand + " accelerated to " + speed + " mph";
+    }
+    
+    func brake(amount) {
+        speed = speed - amount;
+        if speed < 0 {
+            speed = 0;
+        }
+        say brand + " slowed down to " + speed + " mph";
+    }
+}
+
+func main() {
+    let myCar = Car();
+    myCar.brand = "Tesla";
+    
+    myCar.accelerate(30);
+    myCar.accelerate(20);
+    myCar.brake(15);
+    
+    say "Final speed: " + myCar.speed;
+}
