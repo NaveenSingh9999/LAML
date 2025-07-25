@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - LAML Language</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/features.css">
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <meta name="description" content="Explore the powerful features of LAML - the lightning-fast scripting language for modern development">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">⚡</div>
+                <span class="brand-text">LAML</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="setup.html" class="nav-link">Setup</a>
+                <a href="features.html" class="nav-link active">Features</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search features...">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+            
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="features-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Powerful Features for Modern Development</h1>
+                <p class="hero-description">
+                    LAML combines the simplicity of Python with the performance of Go, 
+                    offering a rich set of features for every development need.
+                </p>
+                
+                <!-- Feature highlights -->
+                <div class="feature-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">⚡</span>
+                        <span class="highlight-text">Lightning Fast</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🧩</span>
+                        <span class="highlight-text">Simple Syntax</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🔧</span>
+                        <span class="highlight-text">Rich Built-ins</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🌐</span>
+                        <span class="highlight-text">Cross Platform</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Live demo -->
+            <div class="demo-container">
+                <div class="demo-header">
+                    <div class="demo-tabs">
+                        <button class="demo-tab active" data-demo="performance">Performance</button>
+                        <button class="demo-tab" data-demo="syntax">Syntax</button>
+                        <button class="demo-tab" data-demo="features">Features</button>
+                    </div>
+                </div>
+                
+                <div class="demo-content">
+                    <div class="demo-panel active" id="performance-demo">
+                        <div class="code-editor">
+                            <pre><code class="language-laml">// Fibonacci benchmark
+function fib(n) {
+    if (n <= 1) return n
+    return fib(n - 1) + fib(n - 2)
+}
+
+let start = time.now()
+let result = fib(35)
+let duration = time.now() - start
+
+print("Result: " + result)
+print("Time: " + duration + "ms")</code></pre>
+                        </div>
+                        <div class="demo-output">
+                            <div class="output-header">Output</div>
+                            <div class="output-content">
+                                <div class="output-line">Result: 9227465</div>
+                                <div class="output-line">Time: 42ms</div>
+                                <div class="performance-note">🚀 25x faster than Python</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-panel" id="syntax-demo">
+                        <div class="code-editor">
+                            <pre><code class="language-laml">// Modern, clean syntax
+let users = [
+    { name: "Alice", age: 30 },
+    { name: "Bob", age: 25 }
+]
+
+// Functional programming
+let adults = users
+    .filter(user => user.age >= 18)
+    .map(user => user.name)
+    .sort()
+
+print("Adults: " + adults.join(", "))</code></pre>
+                        </div>
+                        <div class="demo-output">
+                            <div class="output-header">Output</div>
+                            <div class="output-content">
+                                <div class="output-line">Adults: Alice, Bob</div>
+                                <div class="syntax-note">✨ Intuitive and expressive</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-panel" id="features-demo">
+                        <div class="code-editor">
+                            <pre><code class="language-laml">// Built-in HTTP server
+import { Server } from "http"
+
+let server = new Server()
+
+server.get("/api/users", async (req, res) => {
+    let users = await db.query("SELECT * FROM users")
+    res.json(users)
+})
+
+server.listen(3000)
+print("Server running on :3000")</code></pre>
+                        </div>
+                        <div class="demo-output">
+                            <div class="output-header">Output</div>
+                            <div class="output-content">
+                                <div class="output-line">Server running on :3000</div>
+                                <div class="features-note">🔧 Rich standard library</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Categories -->
+    <section class="feature-categories">
+        <div class="container">
+            <div class="category-nav">
+                <button class="category-btn active" data-category="all">All Features</button>
+                <button class="category-btn" data-category="performance">Performance</button>
+                <button class="category-btn" data-category="syntax">Language</button>
+                <button class="category-btn" data-category="stdlib">Standard Library</button>
+                <button class="category-btn" data-category="tooling">Tooling</button>
+                <button class="category-btn" data-category="ecosystem">Ecosystem</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features-grid">
+        <div class="container">
+            
+            <!-- Performance Features -->
+            <div class="feature-card" data-category="performance">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-content">
+                    <h3>Lightning-Fast Execution</h3>
+                    <p>LAML compiles to optimized bytecode and executes at near-native speeds, making it ideal for performance-critical applications.</p>
+                    <div class="feature-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Startup time:</span>
+                            <span class="detail-value">&lt; 5ms</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Memory usage:</span>
+                            <span class="detail-value">Minimal overhead</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Benchmark:</span>
+                            <span class="detail-value">25x faster than Python</span>
+                        </div>
+                    </div>
+                    <div class="feature-example">
+                        <pre><code>// Zero-cost abstractions
+let result = numbers
+    .filter(n => n > 0)
+    .map(n => n * 2)
+    .reduce((a, b) => a + b, 0)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="performance">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-content">
+                    <h3>Concurrent Programming</h3>
+                    <p>Built-in support for async/await, channels, and lightweight goroutines for efficient concurrent programming.</p>
+                    <div class="feature-example">
+                        <pre><code>// Async/await pattern
+async function fetchData(url) {
+    let response = await fetch(url)
+    return response.json()
+}
+
+// Channel communication
+let ch = make_channel()
+go(() => ch.send("Hello"))
+let message = ch.receive()</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="performance">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="feature-content">
+                    <h3>Cross-Platform Support</h3>
+                    <p>Write once, run everywhere. LAML runs natively on Windows, Linux, macOS, and even mobile environments like Termux.</p>
+                    <div class="feature-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Platforms:</span>
+                            <span class="detail-value">Windows, Linux, macOS</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Mobile:</span>
+                            <span class="detail-value">Termux (Android)</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Distribution:</span>
+                            <span class="detail-value">Single binary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Features -->
+            <div class="feature-card" data-category="syntax">
+                <div class="feature-icon">🧩</div>
+                <div class="feature-content">
+                    <h3>Intuitive Syntax</h3>
+                    <p>Clean, readable syntax that combines the best aspects of modern programming languages without unnecessary complexity.</p>
+                    <div class="feature-example">
+                        <pre><code>// Pattern matching
+match value {
+    1 => "One",
+    2..10 => "Small number",
+    n if n > 100 => "Big number",
+    _ => "Other"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="syntax">
+                <div class="feature-icon">🔧</div>
+                <div class="feature-content">
+                    <h3>First-Class Functions</h3>
+                    <p>Functions are first-class citizens with support for closures, higher-order functions, and functional programming patterns.</p>
+                    <div class="feature-example">
+                        <pre><code>// Higher-order functions
+function compose(f, g) {
+    return (x) => f(g(x))
+}
+
+let addTwo = (x) => x + 2
+let double = (x) => x * 2
+let addTwoAndDouble = compose(double, addTwo)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="syntax">
+                <div class="feature-icon">🏗️</div>
+                <div class="feature-content">
+                    <h3>Modern Type System</h3>
+                    <p>Optional static typing with type inference for safety without sacrificing development speed.</p>
+                    <div class="feature-example">
+                        <pre><code>// Type annotations (optional)
+function greet(name: string): string {
+    return "Hello, " + name
+}
+
+// Type inference
+let users = new Map&lt;string, User&gt;()
+let result = users.get("alice") // inferred as User?</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Standard Library Features -->
+            <div class="feature-card" data-category="stdlib">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-content">
+                    <h3>Rich Standard Library</h3>
+                    <p>Comprehensive standard library with modules for HTTP, JSON, crypto, file I/O, and more - batteries included.</p>
+                    <div class="feature-example">
+                        <pre><code>import { http, json, crypto, fs } from "std"
+
+// HTTP client
+let response = await http.get("https://api.example.com")
+
+// JSON parsing
+let data = json.parse(response.body)
+
+// File operations
+fs.write("output.json", json.stringify(data))</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="stdlib">
+                <div class="feature-icon">🔐</div>
+                <div class="feature-content">
+                    <h3>Security First</h3>
+                    <p>Built-in security features including cryptography, secure random generation, and protection against common vulnerabilities.</p>
+                    <div class="feature-example">
+                        <pre><code>import { crypto, secure } from "std"
+
+// Secure password hashing
+let hash = crypto.bcrypt("password", 12)
+
+// Secure random generation
+let token = secure.random_string(32)
+
+// Input validation
+let email = validate.email(user_input)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="stdlib">
+                <div class="feature-icon">📊</div>
+                <div class="feature-content">
+                    <h3>Data Processing</h3>
+                    <p>Powerful data manipulation tools with built-in support for CSV, XML, databases, and data analysis.</p>
+                    <div class="feature-example">
+                        <pre><code>import { csv, sql, stats } from "std"
+
+// CSV processing
+let data = csv.read("sales.csv")
+let filtered = data.filter(row => row.amount > 1000)
+
+// Database queries
+let db = sql.connect("postgres://...")
+let results = await db.query("SELECT * FROM orders")</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tooling Features -->
+            <div class="feature-card" data-category="tooling">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-content">
+                    <h3>Excellent Tooling</h3>
+                    <p>Comprehensive development tools including formatter, linter, debugger, and profiler - all built-in.</p>
+                    <div class="feature-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Formatter:</span>
+                            <span class="detail-value">laml fmt</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Linter:</span>
+                            <span class="detail-value">laml lint</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Debugger:</span>
+                            <span class="detail-value">laml debug</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Profiler:</span>
+                            <span class="detail-value">laml profile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="tooling">
+                <div class="feature-icon">🎨</div>
+                <div class="feature-content">
+                    <h3>VS Code Integration</h3>
+                    <p>First-class VS Code support with syntax highlighting, IntelliSense, debugging, and integrated terminal.</p>
+                    <div class="feature-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Syntax highlighting:</span>
+                            <span class="detail-value">✅ Full support</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">IntelliSense:</span>
+                            <span class="detail-value">✅ Auto-completion</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Debugging:</span>
+                            <span class="detail-value">✅ Breakpoints</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Run button:</span>
+                            <span class="detail-value">✅ One-click execution</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="tooling">
+                <div class="feature-icon">📦</div>
+                <div class="feature-content">
+                    <h3>Package Management</h3>
+                    <p>Simple, fast package manager with dependency resolution, semantic versioning, and security scanning.</p>
+                    <div class="feature-example">
+                        <pre><code>// Install packages
+laml install express@latest
+laml install --dev testing-framework
+
+// Import and use
+import express from "express"
+let app = express()
+app.listen(3000)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ecosystem Features -->
+            <div class="feature-card" data-category="ecosystem">
+                <div class="feature-icon">🌍</div>
+                <div class="feature-content">
+                    <h3>Cross-Platform</h3>
+                    <p>Write once, run anywhere - LAML runs on Windows, macOS, Linux, and even mobile platforms like Termux.</p>
+                    <div class="feature-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Platforms:</span>
+                            <span class="detail-value">Windows, macOS, Linux</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Mobile:</span>
+                            <span class="detail-value">Termux (Android)</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Architecture:</span>
+                            <span class="detail-value">x86, x64, ARM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="ecosystem">
+                <div class="feature-icon">🔌</div>
+                <div class="feature-content">
+                    <h3>Interoperability</h3>
+                    <p>Seamlessly integrate with existing systems through FFI, HTTP APIs, and native library bindings.</p>
+                    <div class="feature-example">
+                        <pre><code>// Call C libraries
+import { ffi } from "std"
+let lib = ffi.load("libmath.so")
+let result = lib.calculate(42)
+
+// Python interop
+import { python } from "interop"
+let np = python.import("numpy")
+let array = np.array([1, 2, 3, 4, 5])</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="ecosystem">
+                <div class="feature-icon">🚀</div>
+                <div class="feature-content">
+                    <h3>Growing Community</h3>
+                    <p>Join a vibrant community of developers building the future of scripting languages with active support and contributions.</p>
+                    <div class="feature-details">
+                        <div class="detail-item">
+                            <span class="detail-label">GitHub stars:</span>
+                            <span class="detail-value">15k+ and growing</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Discord members:</span>
+                            <span class="detail-value">3k+ developers</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Packages:</span>
+                            <span class="detail-value">500+ available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Comparison -->
+    <section class="performance-section">
+        <div class="container">
+            <h2 class="section-title">Performance Benchmarks</h2>
+            <p class="section-description">
+                See how LAML compares to other popular scripting languages in real-world scenarios.
+            </p>
+            
+            <div class="benchmark-grid">
+                <div class="benchmark-card">
+                    <h3>Fibonacci (n=35)</h3>
+                    <div class="benchmark-chart">
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">LAML</span>
+                            <div class="benchmark-fill" style="width: 100%;">42ms</div>
+                        </div>
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">Node.js</span>
+                            <div class="benchmark-fill" style="width: 75%;">56ms</div>
+                        </div>
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">Python</span>
+                            <div class="benchmark-fill" style="width: 4%;">1050ms</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="benchmark-card">
+                    <h3>HTTP Server (req/sec)</h3>
+                    <div class="benchmark-chart">
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">LAML</span>
+                            <div class="benchmark-fill" style="width: 100%;">85k</div>
+                        </div>
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">Node.js</span>
+                            <div class="benchmark-fill" style="width: 65%;">55k</div>
+                        </div>
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">Python</span>
+                            <div class="benchmark-fill" style="width: 12%;">10k</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="benchmark-card">
+                    <h3>Memory Usage (MB)</h3>
+                    <div class="benchmark-chart">
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">LAML</span>
+                            <div class="benchmark-fill memory" style="width: 25%;">8MB</div>
+                        </div>
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">Node.js</span>
+                            <div class="benchmark-fill memory" style="width: 75%;">24MB</div>
+                        </div>
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">Python</span>
+                            <div class="benchmark-fill memory" style="width: 100%;">32MB</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="features-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Experience LAML?</h2>
+                <p>Start building with the most modern scripting language available today.</p>
+                <div class="cta-buttons">
+                    <a href="setup.html" class="btn btn-primary">Get Started</a>
+                    <a href="learn.html" class="btn btn-secondary">Learn LAML</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="brand-icon">⚡</div>
+                        <span class="brand-text">LAML</span>
+                    </div>
+                    <p>The lightning-fast scripting language for modern development.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="learn.html">Learn LAML</a></li>
+                        <li><a href="setup.html">Installation</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul>
+                        <li><a href="https://github.com/laml-lang/laml">GitHub</a></li>
+                        <li><a href="https://discord.gg/laml">Discord</a></li>
+                        <li><a href="https://twitter.com/laml_lang">Twitter</a></li>
+                        <li><a href="https://reddit.com/r/laml">Reddit</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="https://examples.laml.dev">Examples</a></li>
+                        <li><a href="https://blog.laml.dev">Blog</a></li>
+                        <li><a href="https://packages.laml.dev">Packages</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 LAML Language. Licensed under MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/script.js"></script>
+    <script src="assets/features.js"></script>
+</body>
+</html>

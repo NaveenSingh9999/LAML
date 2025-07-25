@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAML - Low Abstraction Machine Language</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="icon" href="assets/laml-favicon.png" type="image/png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <span class="brand-text">LAML</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="setup.html" class="nav-link">Setup</a>
+                <a href="features.html" class="nav-link">Features</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </div>
+            
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">LAML - Low Abstraction Machine Language </h1>
+                <p class="hero-subtitle">Where machine performance meets developer joy</p>
+                
+                <div class="value-props">
+                    <div class="prop-card">
+                        <div class="prop-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Blazing Fast</h3>
+                        <p>Compile in milliseconds, execute instantly</p>
+                    </div>
+                    <div class="prop-card">
+                        <div class="prop-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Direct Control</h3>
+                        <p>Raw memory access without the complexity</p>
+                    </div>
+                    <div class="prop-card">
+                        <div class="prop-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 9h6v6h-6z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Clean Syntax</h3>
+                        <p>Assembly power with modern readability</p>
+                    </div>
+                </div>
+
+                <div class="action-hub">
+                    <a href="learn.html" class="btn btn-primary">Start Learning LAML</a>
+                    <a href="setup.html" class="btn btn-secondary">Quick Install</a>
+                    <a href="#examples" class="btn btn-text">See Examples</a>
+                    <a href="setup.html#vscode" class="btn btn-text">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>
+                        </svg>
+                        VS Code Setup
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-demo">
+                <div class="demo-window">
+                    <div class="demo-header">
+                        <div class="demo-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="demo-title">hello.lm</div>
+                        <div class="demo-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="demo-code">
+<pre><code><span class="comment">~ Simple LAML example</span>
+<span class="keyword">bring</span> <span class="module">xcs.class34</span>;
+
+<span class="keyword">func</span> <span class="function">main</span>() {
+    <span class="keyword">val</span> <span class="variable">greeting</span> = <span class="string">"Hello, World!"</span>;
+    <span class="function">say</span> <span class="variable">greeting</span>;
+}</code></pre>
+                    </div>
+                    <div class="demo-output">
+                        <div class="output-header">Output:</div>
+                        <div class="output-text">Hello, World!</div>
+                    </div>
+                    <div class="demo-actions">
+                        <button class="demo-btn">Try in Playground</button>
+                        <button class="demo-btn demo-btn-secondary">Copy Code</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Preview -->
+    <section class="features-preview" id="examples">
+        <div class="container">
+            <h2>Why Choose LAML?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Performance First</h3>
+                    <p>Zero-cost abstractions with direct hardware access. LAML compiles to efficient machine code without runtime overhead.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Developer Friendly</h3>
+                    <p>Modern syntax with VS Code integration, run buttons, and clean output. Low-level programming made accessible.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Cross Platform</h3>
+                    <p>Native support for Windows, Linux, and Android/Termux. One language, everywhere you need it.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="14,2 14,8 20,8" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+                            <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Unique Syntax</h3>
+                    <p>Intuitive <code>bring xcs.class34</code> imports, clean comment system with <code>~</code>, and readable low-level code.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="quick-start">
+        <div class="container">
+            <h2>Get Started in Minutes</h2>
+            <div class="start-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Install LAML</h3>
+                    <div class="code-block">
+                        <code>curl -sSL https://laml.dev/install.sh | bash</code>
+                        <button class="copy-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Create Your First Program</h3>
+                    <div class="code-block">
+                        <code>echo 'bring xcs.class34; func main() { say "Hello!"; }' > hello.lm</code>
+                        <button class="copy-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Run It</h3>
+                    <div class="code-block">
+                        <code>laml run hello.lm</code>
+                        <button class="copy-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+                            <div class="footer-section">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="learn.html">Learn LAML</a></li>
+                        <li><a href="setup.html">Installation</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://github.com/NaveenSingh9999/LAML">GitHub Repo</a></li>
+                    <li><a href="setup.html#vscode">VS Code Ext</a></li>
+                    <li><a href="examples.html">Examples</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="https://github.com/NaveenSingh9999/LAML/discussions">Discussions</a></li>
+                    <li><a href="#">Discord</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="https://github.com/NaveenSingh9999/LAML/issues">Bug Reports</a></li>
+                    <li><a href="https://github.com/NaveenSingh9999/LAML/issues/new">Feature Requests</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 LAML Project. Where developer experience meets machine performance.</p>
+            <div class="footer-social">
+                <a href="https://github.com/NaveenSingh9999/LAML" class="social-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                    </svg>
+                    Star on GitHub
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/script.js"></script>
+</body>
+</html>

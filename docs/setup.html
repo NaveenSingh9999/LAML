@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup - LAML Language</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/setup.css">
+    <meta name="description" content="Install LAML - the lightning-fast scripting language. Available for Windows, Linux, macOS, and Termux.">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <span class="brand-text">LAML</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="setup.html" class="nav-link active">Setup</a>
+                <a href="features.html" class="nav-link">Features</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </div>
+            
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="setup-hero">
+            <div class="container">
+                <h1 class="hero-title">Install LAML</h1>
+                <p class="hero-description">
+                    Get started with LAML in seconds. Choose your platform and follow the simple installation steps.
+                </p>
+                
+                <!-- Platform Detection -->
+                <div class="platform-detector" id="detected-platform">
+                    <div class="platform-info">
+                        <h3>Detecting your platform...</h3>
+                        <p>Automatic installation command will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Install -->
+        <section class="quick-install">
+            <div class="container">
+                <h2>Quick Install</h2>
+                <div class="install-grid">
+                    <div class="install-card" data-platform="windows">
+                        <div class="platform-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <rect x="7" y="8" width="10" height="8" fill="currentColor"/>
+                            </svg>
+                            <h3>Windows</h3>
+                        </div>
+                        <div class="install-command">
+                            <code>curl -sSL https://get.laml.dev/install.ps1 | powershell</code>
+                            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+                        </div>
+                        <div class="install-notes">
+                            <p>Requires PowerShell 5.0+ or Windows Terminal</p>
+                        </div>
+                    </div>
+
+                    <div class="install-card" data-platform="linux">
+                        <div class="platform-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="currentColor"/>
+                            </svg>
+                            <h3>Linux</h3>
+                        </div>
+                        <div class="install-command">
+                            <code>curl -sSL https://get.laml.dev/install.sh | bash</code>
+                            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+                        </div>
+                        <div class="install-notes">
+                            <p>Works on Ubuntu, Debian, CentOS, Fedora, and more</p>
+                        </div>
+                    </div>
+
+                    <div class="install-card" data-platform="macos">
+                        <div class="platform-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09z" fill="currentColor"/>
+                                <path d="M15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z" fill="currentColor"/>
+                            </svg>
+                            <h3>macOS</h3>
+                        </div>
+                        <div class="install-command">
+                            <code>curl -sSL https://get.laml.dev/install.sh | bash</code>
+                            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+                        </div>
+                        <div class="install-notes">
+                            <p>Compatible with macOS 10.15+ (Intel and Apple Silicon)</p>
+                        </div>
+                    </div>
+
+                    <div class="install-card" data-platform="termux">
+                        <div class="platform-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <h3>Termux (Android)</h3>
+                        </div>
+                        <div class="install-command">
+                            <code>pkg install curl && curl -sSL https://get.laml.dev/termux.sh | bash</code>
+                            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+                        </div>
+                        <div class="install-notes">
+                            <p>For Android devices with Termux app installed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verification -->
+        <section class="verification">
+            <div class="container">
+                <h2>Verify Installation</h2>
+                <div class="verify-steps">
+                    <div class="verify-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Check Version</h3>
+                            <p>Verify LAML is installed correctly:</p>
+                            <div class="command-block">
+                                <code>laml --version</code>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <strong>Expected output:</strong>
+                                <code>LAML 3.2.0</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verify-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Run Hello World</h3>
+                            <p>Create and run your first LAML program:</p>
+                            <div class="command-block">
+                                <code>echo 'print("Hello, LAML!")' > hello.lm && laml hello.lm</code>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="expected-output">
+                                <strong>Expected output:</strong>
+                                <code>Hello, LAML!</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VS Code Extension -->
+        <section class="vscode-section">
+            <div class="container">
+                <h2>VS Code Extension</h2>
+                <div class="vscode-content">
+                    <div class="vscode-info">
+                        <h3>Enhanced Development Experience</h3>
+                        <p>Get syntax highlighting, IntelliSense, and debugging support with the official LAML VS Code extension.</p>
+                        <div class="vscode-features">
+                            <div class="feature-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <polyline points="4 7 4 4 20 4 20 7" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="9" y1="20" x2="15" y2="20" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Syntax highlighting</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 11H1v2h8v8h2v-8h8v-2h-8V3H9v8z" fill="currentColor"/>
+                                </svg>
+                                <span>IntelliSense & auto-completion</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>
+                                </svg>
+                                <span>One-click run button</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vscode-install">
+                        <h4>Installation Options</h4>
+                        <div class="install-options">
+                            <a href="vscode:extension/laml.laml-language" class="install-option primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21.7 13.35L20.7 14.35L18.65 12.3L20.7 10.25L21.7 11.25C22.1 11.65 22.1 12.25 21.7 12.65L21.7 13.35ZM12 2L13.85 3.85L11.8 5.9L9.75 3.85L12 2ZM7.3 6.55L8.3 5.55L10.35 7.6L8.3 9.65L7.3 8.65C6.9 8.25 6.9 7.65 7.3 7.25L7.3 6.55ZM16.2 17.75L14.15 15.7L16.2 13.65L18.25 15.7L16.2 17.75Z" fill="currentColor"/>
+                                </svg>
+                                Install in VS Code
+                            </a>
+                            <a href="https://marketplace.visualstudio.com/items?itemName=laml.laml-language" class="install-option secondary">
+                                View in Marketplace
+                            </a>
+                        </div>
+                        <div class="manual-install">
+                            <p><strong>Manual installation:</strong></p>
+                            <div class="command-block">
+                                <code>code --install-extension laml.laml-language</code>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Package Managers -->
+        <section class="package-managers">
+            <div class="container">
+                <h2>Alternative Installation Methods</h2>
+                <div class="pm-grid">
+                    <div class="pm-card">
+                        <h3>Manual Download</h3>
+                        <p>Download pre-built binaries directly from GitHub releases:</p>
+                        <a href="https://github.com/NaveenSingh9999/LAML/releases/latest" class="download-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="7 10 12 15 17 10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Download Latest Release
+                        </a>
+                    </div>
+
+                    <div class="pm-card">
+                        <h3>Build from Source</h3>
+                        <p>Compile LAML yourself for maximum customization:</p>
+                        <div class="command-block">
+                            <code>git clone https://github.com/NaveenSingh9999/LAML.git
+cd LAML
+go build -o laml main.go</code>
+                            <button class="copy-btn">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section class="troubleshooting">
+            <div class="container">
+                <h2>Troubleshooting</h2>
+                <div class="trouble-grid">
+                    <div class="trouble-item">
+                        <h3>Command not found</h3>
+                        <p>If you get "laml: command not found", try:</p>
+                        <ul>
+                            <li>Restart your terminal</li>
+                            <li>Check if the binary is in your PATH</li>
+                            <li>Run <code>which laml</code> to locate the binary</li>
+                        </ul>
+                    </div>
+
+                    <div class="trouble-item">
+                        <h3>Permission denied</h3>
+                        <p>If installation fails with permission errors:</p>
+                        <ul>
+                            <li>Run with <code>sudo</code> on Linux/macOS</li>
+                            <li>Run PowerShell as Administrator on Windows</li>
+                            <li>Check write permissions in the install directory</li>
+                        </ul>
+                    </div>
+
+                    <div class="trouble-item">
+                        <h3>Network issues</h3>
+                        <p>If downloads fail or timeout:</p>
+                        <ul>
+                            <li>Check your internet connection</li>
+                            <li>Try downloading manually from GitHub</li>
+                            <li>Use a VPN if GitHub is blocked</li>
+                        </ul>
+                    </div>
+
+                    <div class="trouble-item">
+                        <h3>Version conflicts</h3>
+                        <p>If you have multiple LAML versions:</p>
+                        <ul>
+                            <li>Uninstall old versions first</li>
+                            <li>Check your PATH for multiple entries</li>
+                            <li>Use the full path to the binary</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="next-steps">
+            <div class="container">
+                <h2>What's Next?</h2>
+                <div class="steps-grid">
+                    <a href="learn.html" class="step-card">
+                        <div class="step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="14,2 14,8 20,8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Learn LAML</h3>
+                        <p>Start with our interactive tutorial and master LAML syntax step by step.</p>
+                    </a>
+
+                    <a href="features.html" class="step-card">
+                        <div class="step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Explore Features</h3>
+                        <p>Discover all the powerful features that make LAML special.</p>
+                    </a>
+
+                    <a href="faq.html" class="step-card">
+                        <div class="step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Get Help</h3>
+                        <p>Find answers to common questions and troubleshooting guides.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="brand-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <span class="brand-text">LAML</span>
+                    </div>
+                    <p>The lightning-fast scripting language for modern development.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="learn.html">Learn LAML</a></li>
+                        <li><a href="setup.html">Installation</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul>
+                        <li><a href="https://github.com/NaveenSingh9999/LAML">GitHub</a></li>
+                        <li><a href="https://discord.gg/laml">Discord</a></li>
+                        <li><a href="https://twitter.com/laml_lang">Twitter</a></li>
+                        <li><a href="https://reddit.com/r/laml">Reddit</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="https://examples.laml.dev">Examples</a></li>
+                        <li><a href="https://blog.laml.dev">Blog</a></li>
+                        <li><a href="https://packages.laml.dev">Packages</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 LAML Language. Licensed under MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/script.js"></script>
+    <script src="assets/setup.js"></script>
+</body>
+</html>

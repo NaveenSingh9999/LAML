@@ -1,0 +1,736 @@
+/* Setup Page Specific Styles - Classic Apple Design */
+
+/* Hero Section */
+.setup-hero {
+    background: linear-gradient(180deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    color: white;
+    padding: 5rem 0 4rem;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 200;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.hero-description {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+.platform-detector {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.platform-detector:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.platform-info h3 {
+    margin-bottom: 0.5rem;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.platform-info p {
+    opacity: 0.8;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* Quick Install Section */
+.quick-install {
+    padding: 5rem 0;
+    background: var(--bg-secondary);
+}
+
+.quick-install h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 32px;
+    font-weight: 200;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+/* Install Grid */
+.install-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.install-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.install-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-blue);
+}
+
+.platform-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.platform-header svg {
+    color: var(--primary-blue);
+    flex-shrink: 0;
+}
+
+.platform-header h3 {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.install-command {
+    background: var(--bg-code);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    border: 1px solid #333333;
+}
+
+.install-command code {
+    color: #EEEEEE;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.4;
+    display: block;
+    background: none;
+    border: none;
+    padding: 0;
+    word-break: break-all;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 300;
+    transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.install-notes {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.install-notes p {
+    margin: 0;
+}
+
+.quick-install h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e293b;
+}
+
+.install-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.install-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.install-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.install-command {
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    position: relative;
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+}
+
+.install-command code {
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    display: block;
+    padding-right: 3rem;
+    background: none;
+    border: none;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: #475569;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.copy-btn:hover {
+    background: #64748b;
+}
+
+.copy-btn.copied {
+    background: #10b981;
+}
+
+.install-notes {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.install-notes p {
+    margin: 0;
+}
+
+/* Verification Section */
+.verification {
+    padding: 80px 0;
+    background: white;
+}
+
+.verification h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e293b;
+}
+
+.verify-steps {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.verify-step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: #667eea;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+.step-content p {
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.command-block {
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    position: relative;
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+}
+
+.command-block code {
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    display: block;
+    padding-right: 3rem;
+    background: none;
+    border: none;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.expected-output {
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: 4px solid #10b981;
+}
+
+.expected-output strong {
+    color: #1e293b;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.expected-output code {
+    color: #059669;
+    background: none;
+    border: none;
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+}
+
+/* VS Code Section */
+.vscode-section {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.vscode-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e293b;
+}
+
+.vscode-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.vscode-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.vscode-info p {
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.vscode-features {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.feature-item svg {
+    color: #667eea;
+    flex-shrink: 0;
+}
+
+.vscode-install h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+}
+
+.install-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.install-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.install-option.primary {
+    background: #667eea;
+    color: white;
+}
+
+.install-option.primary:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
+}
+
+.install-option.secondary {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.install-option.secondary:hover {
+    background: #667eea;
+    color: white;
+}
+
+.manual-install {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+.manual-install p {
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+/* Package Managers Section */
+.package-managers {
+    padding: 80px 0;
+    background: white;
+}
+
+.package-managers h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e293b;
+}
+
+.pm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.pm-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.pm-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.pm-card p {
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #667eea;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.download-btn:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
+}
+
+/* Troubleshooting Section */
+.troubleshooting {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.troubleshooting h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e293b;
+}
+
+.trouble-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.trouble-item {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+.trouble-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #dc2626;
+}
+
+.trouble-item p {
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.trouble-item ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.trouble-item li {
+    color: #374151;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.trouble-item li::before {
+    content: "•";
+    color: #667eea;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.trouble-item code {
+    background: #f1f5f9;
+    color: #1e293b;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+    font-size: 0.9rem;
+}
+
+/* Next Steps Section */
+.next-steps {
+    padding: 80px 0;
+    background: white;
+}
+
+.next-steps h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e293b;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.step-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 2rem;
+    text-decoration: none;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    border-color: #667eea;
+}
+
+.step-icon {
+    width: 60px;
+    height: 60px;
+    background: #667eea;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.step-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.step-card p {
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-description {
+        font-size: 1.1rem;
+    }
+    
+    .platform-detector {
+        margin: 1.5rem auto;
+        padding: 1.5rem;
+    }
+    
+    .install-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .install-card {
+        padding: 1.5rem;
+    }
+    
+    .verify-step {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .vscode-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .install-options {
+        gap: 0.75rem;
+    }
+    
+    .pm-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .trouble-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.progress-step .spinner {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--border);
+    border-top: 2px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 0.75rem;
+}
+
+.progress-complete {
+    color: var(--success);
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .platform-switcher {
+        flex-direction: column;
+    }
+    
+    .platform-tab {
+        text-align: left;
+    }
+    
+    .step-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .step-title {
+        margin-left: 0;
+    }
+    
+    .command-block .copy-btn {
+        position: static;
+        margin-top: 0.75rem;
+        align-self: flex-start;
+    }
+    
+    .command-block {
+        display: flex;
+        flex-direction: column;
+    }
+}

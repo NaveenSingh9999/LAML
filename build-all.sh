@@ -73,7 +73,7 @@ create_release_directory() {
     print_colored $YELLOW "📁 Creating release directory..."
     
     rm -rf release
-    mkdir -p "release/laml-v3.2.0"/{windows,linux,termux,vscode-extension}
+    mkdir -p "release/laml-v3.2.0"/{windows,linux,termux,vscode-extension,docs}
     
     print_colored $GREEN "✅ Release directory created"
 }
