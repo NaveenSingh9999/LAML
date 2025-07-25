@@ -71,11 +71,11 @@
                             <h3>Windows</h3>
                         </div>
                         <div class="install-command">
-                            <code>curl -sSL https://get.laml.dev/install.ps1 | powershell</code>
+                            <code>curl -o laml-windows.exe https://github.com/NaveenSingh9999/LAML/releases/latest/download/laml-windows-x86_64.exe</code>
                             <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
                         </div>
                         <div class="install-notes">
-                            <p>Requires PowerShell 5.0+ or Windows Terminal</p>
+                            <p>Download and run the Windows executable</p>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                             <h3>Linux</h3>
                         </div>
                         <div class="install-command">
-                            <code>curl -sSL https://get.laml.dev/install.sh | bash</code>
+                            <code>curl -L -o laml https://github.com/NaveenSingh9999/LAML/releases/latest/download/laml-linux-x86_64 && chmod +x laml</code>
                             <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
                         </div>
                         <div class="install-notes">
@@ -207,22 +207,27 @@
                     <div class="vscode-install">
                         <h4>Installation Options</h4>
                         <div class="install-options">
-                            <a href="vscode:extension/laml.laml-language" class="install-option primary">
+                            <a href="https://github.com/NaveenSingh9999/LAML/releases/latest/download/laml-vscode-extension.vsix" class="install-option primary">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M21.7 13.35L20.7 14.35L18.65 12.3L20.7 10.25L21.7 11.25C22.1 11.65 22.1 12.25 21.7 12.65L21.7 13.35ZM12 2L13.85 3.85L11.8 5.9L9.75 3.85L12 2ZM7.3 6.55L8.3 5.55L10.35 7.6L8.3 9.65L7.3 8.65C6.9 8.25 6.9 7.65 7.3 7.25L7.3 6.55ZM16.2 17.75L14.15 15.7L16.2 13.65L18.25 15.7L16.2 17.75Z" fill="currentColor"/>
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <polyline points="7 10 12 15 17 10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
                                 </svg>
-                                Install in VS Code
+                                Download VSIX Extension
                             </a>
-                            <a href="https://marketplace.visualstudio.com/items?itemName=laml.laml-language" class="install-option secondary">
-                                View in Marketplace
+                            <a href="https://github.com/NaveenSingh9999/LAML/tree/main/vscode-extension" class="install-option secondary">
+                                View Source Code
                             </a>
                         </div>
                         <div class="manual-install">
-                            <p><strong>Manual installation:</strong></p>
-                            <div class="command-block">
-                                <code>code --install-extension laml.laml-language</code>
-                                <button class="copy-btn">Copy</button>
-                            </div>
+                            <p><strong>Install from VSIX file:</strong></p>
+                            <ol style="padding-left: 20px; margin: 8px 0;">
+                                <li>Download the .vsix file above</li>
+                                <li>Open VS Code</li>
+                                <li>Go to Extensions (Ctrl+Shift+X)</li>
+                                <li>Click "..." → "Install from VSIX..."</li>
+                                <li>Select the downloaded .vsix file</li>
+                            </ol>
                         </div>
                     </div>
                 </div>

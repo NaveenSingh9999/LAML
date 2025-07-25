@@ -1,177 +1,166 @@
-# 🌐 LAML - Low Abstraction Machine Language
+# LAML v3.3.0 - Enhanced Data Types, Arrays & Tiger UI Design System
 
-## 🔰 Introduction
+LAML (Low Abstraction Machine Language) is a **sentence-like, general-purpose compiled language** designed for speed, flexibility, and direct kernel interaction. LAML v3.3.0 introduces comprehensive data types, array support, enhanced syntax highlighting, and a beautiful Tiger UI design system.
 
-LAML is a low-abstraction, sentence-like general-purpose compiled language, built for speed, flexibility, and direct kernel interaction in mind. It uses a `.lm` extension, and compiles through a Golang-powered ultra-light compiler.
+## 🚀 What's New in v3.3.0
 
-This language is meant to blend human-readability with machine control, allowing developers to:
+### 🎯 Core Language Enhancements
+- **Enhanced Data Types**: Full support for `int`, `float`, `string`, `bool`, and `array` types
+- **Advanced Operators**: Comprehensive operator set including arithmetic, comparison, logical, and bitwise operations
+- **Array Support**: Complete array functionality with indexing, operations, and type inference
+- **Type Inference**: Smart type detection and automatic type promotion
 
-- Write programs using highly readable commands,
-- Skip complex syntax,
-- Yet access powerful features like OOP, memory control, parallel execution, and system-level access.
+### 🎨 Developer Experience
+- **Colored Syntax Highlighting**: Type-aware compiler output with color-coded feedback
+- **Tiger UI Design System**: Beautiful Mac OS X Tiger-inspired documentation interface
+- **Enhanced Error Messages**: Improved compiler feedback with better debugging information
+- **VS Code Integration**: Updated extension with proper installation and syntax support
 
-LAML aims to be:
-- **Minimal** (lightweight footprint),
-- **Fast** (compiled with Golang backend),
-- **Expressive** (easy-to-learn syntax),
-- **Secure & Scalable** (inspired by system-level lang design like Zig, Go, and C).
+### 📚 Documentation Improvements
+- **Comprehensive Learn Section**: Interactive tutorials covering all LAML features
+- **Tiger-Styled Interface**: Authentic Mac OS X Tiger design with Lucida Grande typography
+- **Fixed Installation Links**: Direct GitHub release downloads for all platforms
+- **Enhanced Examples**: New v3.3.0 demo files showcasing latest features
 
----
+## 🔧 Installation
 
-## ⚙️ Phase 1: Core Architecture Design
+### Windows
+Download `laml-windows-x86_64.exe` from [releases](https://github.com/NaveenSingh9999/LAML/releases)
 
----
-
-### 🧱 1. Compiler Core
-
-| Component | Description |
-|-----------|-------------|
-| **Lexer** | Breaks down `.lm` code into tokens (keywords, operators, identifiers). |
-| **Parser** | Validates syntax structure and creates an Abstract Syntax Tree (AST). |
-| **AST Engine** | AST is analyzed for logic, flow, and code blocks. |
-| **CodeGen** | Converts AST to Go-equivalent logic or binary-intermediate. |
-| **Optimizer** | Shrinks and simplifies before compilation. |
-| **Binary Output** | Produces a `.bin` file (or ELF/executable) for system use. |
-
----
-
-### 📦 2. Import System
-
-Every `.lm` file starts with mandatory imports to access class-like modules:
-
-```laml
-bring xcs.class34;
-bring xcn.classconstant5;
-bring xca.patentu3;
+### Linux
+```bash
+wget https://github.com/NaveenSingh9999/LAML/releases/download/v3.3.0/laml-linux-x86_64
+chmod +x laml-linux-x86_64
+sudo mv laml-linux-x86_64 /usr/local/bin/laml
 ```
 
-These are abstracted core libraries:
-- **xcs.class34**: Core system operations (print, IO, sleep, threads).
-- **xcn.classconstant5**: Constants and low-level memory.
-- **xca.patentu3**: Custom logic, crypto, security primitives.
-
-✔️ Each module can be versioned (class34) and will be mapped inside a local LAML Library cache in `/laml_modules/`.
-
----
-
-### 🔤 3. Variables & Constants
-
-```laml
-let user = "lamgerr";
-const max_limit = 100;
+### VS Code Extension
+Download `laml-vscode-extension-3.3.0.vsix` from [releases](https://github.com/NaveenSingh9999/LAML/releases) and install:
+```bash
+code --install-extension laml-vscode-extension-3.3.0.vsix
 ```
 
-- `let` declares mutable variables.
-- `const` creates fixed values.
+## 🎯 Quick Start
 
-✔️ Ends with semicolon. ✔️ Supports strings, numbers, bools, arrays.
-
----
-
-### 🧮 4. Functions
-
-```laml
-func greet(name) {
-    say "Hello, " + name;
-}
-```
-
-- `func` defines a block.
-- `say` is LAML's built-in print function (wrapped in Go fmt).
-
-Return values:
-
-```laml
-func add(x, y) {
-    return x + y;
-}
-```
-
----
-
-### 🔁 5. Conditionals and Loops
-
-```laml
-if user = "lamgerr" {
-    say "Access granted";
-} else {
-    say "Invalid user";
-}
-```
-
-Loop example:
-
-```laml
-loop x in 0 to 10 {
-    say x;
-}
-```
-
-While loop:
-
-```laml
-while i < 5 {
-    say i;
-    i = i + 1;
-}
-```
-
----
-
-### 🧊 6. Objects / OOP
-
-```laml
-obj Car {
-    brand = "Tesla";
-    speed = 0;
-
-    func drive(km) {
-        speed = speed + km;
-    }
-}
-```
-
-Create instance:
-
-```laml
-let myCar = Car();
-myCar.drive(20);
-say myCar.speed;
-```
-
----
-
-### 🛠️ 7. File System Access
-
-```laml
-bring xfs.fileio7;
-
-func read_file(path) {
-    let content = file.read(path);
-    say content;
-}
-```
-
-You'll use `file.read`, `file.write`, `file.delete`, etc., from xfs.
-
----
-
-### 🧩 Sample Hello World in LAML:
-
+### Hello World
 ```laml
 bring xcs.class34;
 
 func main() {
-    say "Yo World!";
+    say "Hello, LAML v3.3.0!";
 }
 ```
 
+### Data Types & Arrays
+```laml
+bring xcs.class34;
+
+func main() {
+    ~ Data types with inference
+    val name = "LAML";
+    val version = 3.3;
+    val isStable = true;
+    
+    ~ Arrays
+    val numbers = [10, 20, 30, 40, 50];
+    val first = numbers[0];
+    
+    say "Welcome to " + name + " v" + version;
+    say "First number: " + first;
+}
+```
+
+## 🛠️ Usage
+
+```bash
+# Run a LAML program
+laml run program.lm
+
+# Compile a LAML program
+laml compile program.lm
+
+# Check version
+laml version
+```
+
+## 📖 Learn More
+
+Visit our [comprehensive documentation](https://naveensingh9999.github.io/LAML/learn.html) with the new Tiger UI design system to explore:
+
+- **Getting Started**: Basic syntax and concepts
+- **Data Types**: Complete type system guide
+- **Operators**: All available operators and usage
+- **Arrays**: Array operations and examples
+- **Advanced Features**: Loops, conditionals, and functions
+
+## 🌟 Features
+
+### v3.3.0 Core Features
+- ✅ **Enhanced Type System**: Full support for all primary data types
+- ✅ **Array Operations**: Complete array functionality with indexing
+- ✅ **Advanced Operators**: Arithmetic, comparison, logical, and bitwise
+- ✅ **Colored Output**: Type-aware syntax highlighting in compiler
+- ✅ **Tiger UI**: Beautiful documentation with authentic design
+
+### Language Features
+- ✅ **Sentence-like Syntax**: Natural, readable code structure
+- ✅ **Fast Compilation**: Direct compilation to optimized binaries
+- ✅ **Cross-platform**: Windows, Linux, and Termux support
+- ✅ **VS Code Integration**: Full editor support with syntax highlighting
+- ✅ **Zero Dependencies**: Standalone binaries with no runtime requirements
+
+## 🎨 Tiger UI Design System
+
+LAML v3.3.0 introduces the Tiger UI design system, inspired by Mac OS X Tiger's iconic interface:
+
+- **Authentic Typography**: Lucida Grande fonts with proper kerning
+- **Classic Color Palette**: Tiger blue (#4A90E2) and refined gradients
+- **Window Chrome**: Accurate Tiger-style buttons and window decorations
+- **Interactive Elements**: Hover effects and button states matching Tiger
+
+## 📁 Project Structure
+
+```
+LAML/
+├── cmd/                    # CLI commands and main entry
+├── internal/
+│   ├── lexer/             # Enhanced lexer with v3.3.0 tokens
+│   ├── parser/            # Syntax analysis and AST
+│   ├── compiler/          # Code generation
+│   └── console/           # Colored output system
+├── docs/                  # Tiger UI documentation
+├── examples/              # v3.3.0 demo programs
+├── vscode-extension/      # VS Code extension v3.3.0
+└── installers/           # Platform-specific installers
+```
+
+## 🔄 Version History
+
+- **v3.3.0** (2024) - Enhanced Data Types, Arrays & Tiger UI Design System
+- **v3.2.0** (2024) - Enhanced User Experience & VS Code Integration  
+- **v3.1.0** (2024) - Multi-line Comments & Language Improvements
+- **v3.0.0** (2024) - Complete Rewrite with Advanced Features
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Tiger UI Design**: Inspired by Apple's Mac OS X Tiger interface design
+- **Go Community**: For the excellent tooling and ecosystem
+- **VS Code Team**: For the extensible editor platform
+- **LAML Community**: For feedback and contributions to v3.3.0
+
 ---
 
-### 🧠 Closing Notes (Phase 1)
-
-✅ Defined imports and modular system.  
-✅ Syntax = simplified but powerful.  
-✅ Base compiler flow ready.  
-✅ OOP & core features included.  
-✅ Next: Building compiler in Go, setting up .lm parser.
+**LAML v3.3.0** - Enhanced Data Types, Arrays & Tiger UI Design System  
+*Low Abstraction Machine Language with Advanced Developer Experience*

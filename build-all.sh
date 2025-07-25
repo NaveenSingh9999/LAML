@@ -73,7 +73,7 @@ create_release_directory() {
     print_colored $YELLOW "📁 Creating release directory..."
     
     rm -rf release
-    mkdir -p "release/laml-v3.2.0"/{windows,linux,termux,vscode-extension,docs}
+    mkdir -p "release/laml-v3.3.0"/{windows,linux,termux,vscode-extension,docs}
     
     print_colored $GREEN "✅ Release directory created"
 }
@@ -479,7 +479,7 @@ create_documentation() {
     print_colored $YELLOW "📚 Creating documentation..."
     
     cat > "$release_dir/README.md" << 'EOF'
-# LAML v3.2.0 - Release Package
+# LAML v3.3.0 - Release Package
 
 Welcome to LAML (Low Abstraction Machine Language) - a modern compiled language with enhanced developer experience.
 
@@ -521,16 +521,34 @@ laml-v3.2.0/
 └── README.md               # This file
 ```
 
-## 🎯 What's New in v3.2.0
+## 🎯 What's New in v3.3.0
 
-### Enhanced User Experience
-- ✅ Clean compiler output (no decorative headers)
-- ✅ VS Code run button for .lm files  
-- ✅ Simplified terminal execution
-- ✅ One-click file execution from editor
-- ✅ Improved error messages
+### Enhanced Data Types & Arrays
+- ✅ Complete support for int, float, string, bool, and array types
+- ✅ Type inference and explicit type annotations
+- ✅ Multi-dimensional array support with bounds checking
+- ✅ Array length function and iteration support
 
-### Previous Features (v3.0.0)
+### Comprehensive Operators
+- ✅ Arithmetic: +, -, *, /, %, ++, --
+- ✅ Comparison: ==, !=, <, >, <=, >=  
+- ✅ Logical: &&, ||, !
+- ✅ Assignment: =, +=, -=, *=, /=, %=
+- ✅ Bitwise operations support
+
+### Enhanced Compiler Output
+- ✅ Colored syntax highlighting in terminal
+- ✅ Type detection with visual feedback
+- ✅ Operator usage highlighting
+- ✅ Array operation tracking
+
+### Tiger UI Design System
+- ✅ Complete Mac OS X Tiger-inspired documentation
+- ✅ Authentic window chrome and UI components
+- ✅ Professional typography with Lucida Grande
+- ✅ Consistent design language across all pages
+
+### Previous Features (v3.2.0)
 - ✅ Comments system (~ and {~ ~})
 - ✅ Styled console output with emojis
 - ✅ VS Code syntax highlighting
@@ -601,7 +619,7 @@ If you encounter any issues:
 
 ---
 
-**LAML v3.2.0 - Where developer experience meets machine performance!** 🎉
+**LAML v3.3.0 - Enhanced Data Types, Arrays & Tiger UI Design System!** 🎉
 EOF
     
     print_colored $GREEN "✅ Documentation created"
@@ -618,7 +636,7 @@ main() {
     
     # Create release structure
     create_release_directory
-    local release_dir="release/laml-v3.2.0"
+    local release_dir="release/laml-v3.3.0"
     print_colored $GREEN "📁 Using release directory: $release_dir"
     
     # Package for each platform
@@ -634,17 +652,17 @@ main() {
     # Create archive
     print_colored $YELLOW "📦 Creating release archive..."
     cd release
-    tar -czf "laml-v3.2.0.tar.gz" "laml-v3.2.0/"
-    zip -r "laml-v3.2.0.zip" "laml-v3.2.0/"
+    tar -czf "laml-v3.3.0.tar.gz" "laml-v3.3.0/"
+    zip -r "laml-v3.3.0.zip" "laml-v3.3.0/"
     cd ..
     
     echo ""
-    print_colored $GREEN "🎉 LAML v3.2.0 build completed successfully!"
+    print_colored $GREEN "🎉 LAML v3.3.0 build completed successfully!"
     echo ""
     print_colored $CYAN "📦 Release packages:"
     print_colored $NC "• $release_dir/ - Complete installer package"
-    print_colored $NC "• release/laml-v3.2.0.tar.gz - Linux/macOS archive"
-    print_colored $NC "• release/laml-v3.2.0.zip - Windows archive"
+    print_colored $NC "• release/laml-v3.3.0.tar.gz - Linux/macOS archive"
+    print_colored $NC "• release/laml-v3.3.0.zip - Windows archive"
     echo ""
     print_colored $CYAN "🚀 Ready for distribution!"
     print_colored $BLUE "Upload to GitHub Releases or distribute directly"

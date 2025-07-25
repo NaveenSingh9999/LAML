@@ -1,0 +1,89 @@
+bring xcs.class34;
+
+~ LAML v3.3.0 Simple Demo
+func main() {
+    say "=== LAML v3.3.0 - Enhanced Features Demo ===";
+    
+    ~ Basic data types
+    val name = "LAML";
+    val version = 3.3;
+    val build = 0;
+    val isStable = true;
+    
+    say "Language: " + name;
+    say "Version: " + version;
+    say "Build: " + build;
+    say "Stable: " + isStable;
+    
+    ~ Basic arrays
+    val numbers = [10, 20, 30, 40, 50];
+    val first = numbers[0];
+    val last = numbers[4];
+    
+    say "";
+    say "=== Array Demo ===";
+    say "First element: " + first;
+    say "Last element: " + last;
+    
+    ~ Array operations
+    val sum = numbers[0] + numbers[1] + numbers[2];
+    say "Sum of first three: " + sum;
+    
+    ~ Operators
+    val a = 15;
+    val b = 5;
+    
+    say "";
+    say "=== Operators Demo ===";
+    say "Addition: " + a + " + " + b + " = " + (a + b);
+    say "Subtraction: " + a + " - " + b + " = " + (a - b);
+    say "Multiplication: " + a + " * " + b + " = " + (a * b);
+    say "Division: " + a + " / " + b + " = " + (a / b);
+    
+    ~ Comparisons
+    say "Equal: " + a + " == " + b + " is " + (a == b);
+    say "Greater: " + a + " > " + b + " is " + (a > b);
+    say "Not equal: " + a + " != " + b + " is " + (a != b);
+    
+    ~ Logic with conditionals
+    say "";
+    say "=== Logic Demo ===";
+    
+    if a > b {
+        say a + " is greater than " + b;
+    }
+    
+    if isStable {
+        say "Version is stable!";
+    }
+    
+    ~ Complex calculations
+    val base = 10;
+    val multiplier = 2;
+    val result = base * multiplier;
+    val finalResult = result + 5;
+    
+    say "Calculation: " + base + " * " + multiplier + " + 5 = " + finalResult;
+    
+    ~ Float operations
+    val pi = 3.14159;
+    val radius = 5.0;
+    val area = pi * radius * radius;
+    
+    say "";
+    say "=== Float Demo ===";
+    say "Circle area (r=" + radius + "): " + area;
+    
+    ~ String operations
+    val greeting = "Hello";
+    val target = "LAML";
+    val message = greeting + ", " + target + " v" + version + "!";
+    
+    say "";
+    say "=== String Demo ===";
+    say message;
+    
+    say "";
+    say "🎉 LAML v3.3.0 Demo Complete!";
+    say "Enhanced with better data types, arrays, and operators!";
+}
