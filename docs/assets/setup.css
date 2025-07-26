@@ -703,6 +703,111 @@
     text-align: center;
 }
 
+/* Alternative Methods Section */
+.alternative-methods {
+    background: var(--bg-secondary);
+    padding: 4rem 0;
+}
+
+.alt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.alt-method {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.alt-method h3 {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.alt-method > p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.step-group {
+    margin-bottom: 2rem;
+}
+
+.step-group h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.command-sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.command-sequence .command-block {
+    background: var(--bg-code);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.command-sequence .command-block code {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: #f8f8f2;
+    background: none;
+    padding: 0;
+    flex: 1;
+}
+
+.command-sequence .copy-btn {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.command-sequence .copy-btn:hover {
+    background: var(--primary-blue-dark);
+}
+
+.alt-method .install-notes {
+    background: var(--warning-yellow);
+    color: var(--text-primary);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+}
+
+.alt-method .install-notes p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.alt-method .install-notes strong {
+    font-weight: 600;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .platform-switcher {
@@ -732,5 +837,20 @@
     .command-block {
         display: flex;
         flex-direction: column;
+    }
+    
+    .alt-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .command-sequence .command-block {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    
+    .command-sequence .copy-btn {
+        margin-left: 0;
+        align-self: flex-start;
     }
 }

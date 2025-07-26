@@ -89,7 +89,7 @@
                         </div>
                         <div class="install-command">
                             <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/linux/install.sh | bash</code>
-                            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+                            <button class="copy-btn">Copy</button>
                         </div>
                         <div class="install-notes">
                             <p>Works on Ubuntu, Debian, CentOS, Fedora, and more. Includes shell completion and VS Code extension.</p>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="install-command">
                             <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/macos/install.sh | bash</code>
-                            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+                            <button class="copy-btn">Copy</button>
                         </div>
                         <div class="install-notes">
                             <p>Compatible with macOS 10.15+ (Intel and Apple Silicon). Includes bash and zsh completion.</p>
@@ -123,10 +123,83 @@
                         </div>
                         <div class="install-command">
                             <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/termux/install.sh | bash</code>
-                            <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+                            <button class="copy-btn">Copy</button>
                         </div>
                         <div class="install-notes">
                             <p>For Android devices with Termux app. Includes Termux shortcuts and auto-dependency installation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alternative Methods -->
+        <section class="alternative-methods">
+            <div class="container">
+                <h2>Alternative Installation Methods</h2>
+                <div class="alt-grid">
+                    <div class="alt-method">
+                        <h3>Manual Download + Install</h3>
+                        <p>For users who prefer manual installation or need offline setup:</p>
+                        
+                        <div class="step-group">
+                            <h4>Linux/macOS:</h4>
+                            <div class="command-sequence">
+                                <div class="command-block">
+                                    <code>wget https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/linux/install.sh</code>
+                                    <button class="copy-btn">Copy</button>
+                                </div>
+                                <div class="command-block">
+                                    <code>chmod +x install.sh</code>
+                                    <button class="copy-btn">Copy</button>
+                                </div>
+                                <div class="command-block">
+                                    <code>./install.sh</code>
+                                    <button class="copy-btn">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-group">
+                            <h4>Termux:</h4>
+                            <div class="command-sequence">
+                                <div class="command-block">
+                                    <code>wget https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/termux/install.sh</code>
+                                    <button class="copy-btn">Copy</button>
+                                </div>
+                                <div class="command-block">
+                                    <code>chmod +x install.sh</code>
+                                    <button class="copy-btn">Copy</button>
+                                </div>
+                                <div class="command-block">
+                                    <code>./install.sh</code>
+                                    <button class="copy-btn">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alt-method">
+                        <h3>Direct Binary Download</h3>
+                        <p>Download the LAML binary directly and install manually:</p>
+                        
+                        <div class="command-sequence">
+                            <div class="command-block">
+                                <code>wget https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/laml</code>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="command-block">
+                                <code>chmod +x laml</code>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="command-block">
+                                <code>sudo mv laml /usr/local/bin/</code>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                        </div>
+                        
+                        <div class="install-notes">
+                            <p><strong>Note:</strong> This method installs only the binary. For shell completions and VS Code extension, use the full installer.</p>
                         </div>
                     </div>
                 </div>
@@ -144,7 +217,7 @@
                             <h3>Check Version</h3>
                             <p>Verify LAML is installed correctly:</p>
                             <div class="command-block">
-                                <code>laml --version</code>
+                                <code>laml version</code>
                                 <button class="copy-btn">Copy</button>
                             </div>
                             <div class="expected-output">
