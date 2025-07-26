@@ -9,8 +9,8 @@ param(
 $ErrorActionPreference = "Stop"
 
 # GitHub URL for the universal laml binary
-$LAML_BINARY_URL = "https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/laml"
-$LAML_VERSION_URL = "https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/README.md"
+$LAML_BINARY_URL = "https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml"
+$LAML_VERSION_URL = "https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/README.md"
 
 function Write-ColorText {
     param([string]$Text, [string]$Color = "White")

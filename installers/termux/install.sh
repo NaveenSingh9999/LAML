@@ -18,7 +18,8 @@ INSTALL_DIR="$PREFIX/bin"
 CONFIG_DIR="$HOME/.config/laml"
 
 # GitHub URL for the universal laml binary
-LAML_BINARY_URL="https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/laml"
+# GitHub URLs  
+LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml"
 
 print_colored() {
     local color=$1
@@ -100,7 +101,7 @@ install_laml() {
         print_colored $GREEN "✅ LAML binary installed as 'laml' to $INSTALL_DIR"
         
         # Test installation
-        if "$INSTALL_DIR/laml" --version >/dev/null 2>&1; then
+        if "$INSTALL_DIR/laml" version >/dev/null 2>&1; then
             print_colored $GREEN "✅ LAML is working correctly"
         else
             print_colored $YELLOW "⚠️  LAML installed but may need configuration"
@@ -230,7 +231,7 @@ main() {
     echo ""
     print_colored $CYAN "📋 Next steps:"
     print_colored $NC "1. Restart Termux or run: source ~/.bashrc"
-    print_colored $NC "2. Type 'laml --version' to verify installation"
+    print_colored $NC "2. Type 'laml version' to verify installation"
     print_colored $NC "3. Type 'laml --help' to see available commands"
     print_colored $NC "4. Create your first .lm file and run with 'laml run file.lm'"
     echo ""

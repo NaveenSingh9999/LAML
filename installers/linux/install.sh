@@ -18,8 +18,8 @@ INSTALL_DIR="/usr/local/bin"
 CONFIG_DIR="$HOME/.config/laml"
 DESKTOP_DIR="$HOME/.local/share/applications"
 
-# GitHub URL for the universal laml binary
-LAML_BINARY_URL="https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/laml"
+# GitHub URLs
+LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml"
 
 print_colored() {
     local color=$1
@@ -74,33 +74,6 @@ download_file() {
     fi
 }
 
-check_dependencies() {
-    print_colored $YELLOW "🔍 Checking dependencies..."
-    
-    # Check for required tools
-    local missing_deps=()
-    
-    if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
-        missing_deps+=("curl or wget")
-    fi
-    
-    if [ ${#missing_deps[@]} -ne 0 ]; then
-        print_colored $RED "❌ Missing required dependencies:"
-        for dep in "${missing_deps[@]}"; do
-            print_colored $RED "   - $dep"
-        done
-        echo
-        print_colored $YELLOW "Please install the missing dependencies and try again."
-        print_colored $YELLOW "On Ubuntu/Debian: sudo apt update && sudo apt install curl"
-        print_colored $YELLOW "On CentOS/RHEL: sudo yum install curl"  
-        print_colored $YELLOW "On Arch: sudo pacman -S curl"
-        exit 1
-    fi
-    
-    print_colored $GREEN "✅ All dependencies found"
-}
-}
-
 install_laml() {
     print_colored $YELLOW "📦 Downloading and installing LAML from GitHub..."
     
@@ -124,7 +97,7 @@ install_laml() {
         print_colored $GREEN "✅ LAML binary installed as 'laml' to $INSTALL_DIR"
         
         # Test installation
-        if "$INSTALL_DIR/laml" --version >/dev/null 2>&1; then
+        if "$INSTALL_DIR/laml" version >/dev/null 2>&1; then
             print_colored $GREEN "✅ LAML is working correctly"
         else
             print_colored $YELLOW "⚠️  LAML installed but may need configuration"
@@ -272,7 +245,7 @@ main() {
     echo ""
     print_colored $CYAN "📋 Next steps:"
     print_colored $NC "1. Restart your terminal or run: source ~/.bashrc"
-    print_colored $NC "2. Type 'laml --version' to verify installation"
+    print_colored $NC "2. Type 'laml version' to verify installation"
     print_colored $NC "3. Type 'laml --help' to see available commands"
     print_colored $NC "4. Create your first .lm file and run with 'laml run file.lm'"
     echo ""

@@ -1,0 +1,150 @@
+// LAML v3.3.0 Type System Showcase
+// Demonstrates type inference and data types
+
+func main() {
+    say "=== LAML v3.3.0 - Type System Showcase ===";
+    
+    // === Integer Types ===
+    say "=== Integer Types ===";
+    
+    val userAge = 28;
+    val negativeNum = -100;
+    val largeNumber = 1000000;
+    val zero = 0;
+    
+    say "User age: " + userAge;
+    say "Negative: " + negativeNum;
+    say "Large: " + largeNumber;
+    say "Zero: " + zero;
+    
+    // === Float Types ===
+    say "";
+    say "=== Float Types ===";
+    
+    val pi = 3.14159;
+    val temperature = -25.5;
+    val ratio = 0.75;
+    val precision = 123.456789;
+    
+    say "Pi: " + pi;
+    say "Temperature: " + temperature + "°C";
+    say "Ratio: " + ratio;
+    say "Precision: " + precision;
+    
+    // === String Types ===
+    say "";
+    say "=== String Types ===";
+    
+    val name = "LAML";
+    val version = "3.3.0";
+    val path = "/usr/local/bin";
+    val empty = "";
+    
+    val fullName = name + " v" + version;
+    val message = "Welcome to " + fullName;
+    
+    say "Name: " + name;
+    say "Version: " + version;
+    say "Path: " + path;
+    say "Full: " + fullName;
+    say "Message: " + message;
+    
+    // === Boolean Types ===
+    say "";
+    say "=== Boolean Types ===";
+    
+    val isActive = true;
+    val isComplete = false;
+    val hasData = true;
+    val isEmpty = false;
+    
+    say "Active: " + isActive;
+    say "Complete: " + isComplete;
+    say "Has data: " + hasData;
+    say "Is empty: " + isEmpty;
+    
+    // === Mixed Operations ===
+    say "";
+    say "=== Mixed Operations ===";
+    
+    val score = 85;
+    val bonus = 12.5;
+    val total = score + bonus;
+    
+    val attempts = 3;
+    val success = 2;
+    val rate = success / attempts;
+    
+    say "Score: " + score;
+    say "Bonus: " + bonus;
+    say "Total: " + total;
+    say "Success rate: " + rate;
+    
+    // === Type Comparisons ===
+    say "";
+    say "=== Type Comparisons ===";
+    
+    val num1 = 10;
+    val num2 = 20;
+    val str1 = "hello";
+    val str2 = "world";
+    val bool1 = true;
+    val bool2 = false;
+    
+    val numEqual = num1 == num2;
+    val numGreater = num2 > num1;
+    val strEqual = str1 == str2;
+    val boolEqual = bool1 == bool2;
+    val boolOr = bool1 || bool2;
+    val boolAnd = bool1 && bool2;
+    
+    say "Numbers equal: " + numEqual;
+    say "20 > 10: " + numGreater;
+    say "Strings equal: " + strEqual;
+    say "Booleans equal: " + boolEqual;
+    say "Boolean OR: " + boolOr;
+    say "Boolean AND: " + boolAnd;
+    
+    // === Array Types ===
+    say "";
+    say "=== Array Types ===";
+    
+    val numbers = [1, 2, 3, 4, 5];
+    val words = ["one", "two", "three"];
+    val flags = [true, false, true];
+    val mixed = [10, 20, 30];
+    
+    val firstNum = numbers[0];
+    val lastNum = numbers[4];
+    val firstWord = words[0];
+    val firstFlag = flags[0];
+    
+    say "First number: " + firstNum;
+    say "Last number: " + lastNum;
+    say "First word: " + firstWord;
+    say "First flag: " + firstFlag;
+    
+    // === Complex Expressions ===
+    say "";
+    say "=== Complex Expressions ===";
+    
+    val a = 5;
+    val b = 10;
+    val c = 15;
+    
+    val sum = a + b + c;
+    val product = a * b;
+    val average = (a + b + c) / 3;
+    val isEven = (sum % 2) == 0;
+    val isLarge = sum > 25;
+    
+    say "Sum: " + sum;
+    say "Product: " + product;
+    say "Average: " + average;
+    say "Sum is even: " + isEven;
+    say "Sum is large: " + isLarge;
+    
+    say "";
+    say "✅ Type system showcase complete!";
+    say "LAML v3.3.0 supports rich type inference!";
+}

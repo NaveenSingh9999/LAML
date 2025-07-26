@@ -1,0 +1,82 @@
+// LAML v3.3.0 Data Types & Arrays Demo
+// This file demonstrates the enhanced v3.3.0 features
+
+func main() {
+    // === Data Types Demo ===
+    say "=== LAML v3.3.0 - Data Types Demo ===";
+    
+    // Integer types
+    val age = 25;
+    val negative = -42;
+    val large = 1000000;
+    
+    // Float types  
+    val pi = 3.14159;
+    val temp = -32.5;
+    
+    // String types
+    val name = "LAML";
+    val path = "/usr/local/bin";
+    val greeting = "Hello, " + name + "!";
+    
+    // Boolean types
+    val isActive = true;
+    val isComplete = false;
+    
+    // Display values
+    say "Age: " + age;
+    say "Pi: " + pi;
+    say "Greeting: " + greeting;
+    say "Active: " + isActive;
+    
+    // === Basic Arrays Demo ===
+    say "";
+    say "=== Basic Arrays Demo ===";
+    
+    // Simple array operations
+    val numbers = [1, 2, 3, 4, 5];
+    val names = ["Alice", "Bob", "Charlie"];
+    
+    // Array access
+    val first = numbers[0];
+    val last = numbers[4];
+    
+    say "First number: " + first;
+    say "Last number: " + last;
+    say "First name: " + names[0];
+    
+    // === Operators Demo ===
+    say "";
+    say "=== Operators Demo ===";
+    
+    // Arithmetic operators
+    val a = 10;
+    val b = 3;
+    say "Addition: " + a + " + " + b + " = " + (a + b);
+    say "Subtraction: " + a + " - " + b + " = " + (a - b);
+    say "Multiplication: " + a + " * " + b + " = " + (a * b);
+    say "Division: " + a + " / " + b + " = " + (a / b);
+    
+    // Comparison operators
+    say "Equal: " + a + " == " + b + " = " + (a == b);
+    say "Not equal: " + a + " != " + b + " = " + (a != b);
+    say "Greater: " + a + " > " + b + " = " + (a > b);
+    say "Less: " + a + " < " + b + " = " + (a < b);
+    
+    // Logical operators
+    val x = true;
+    val y = false;
+    say "AND: " + x + " && " + y + " = " + (x && y);
+    say "OR: " + x + " || " + y + " = " + (x || y);
+    say "NOT: !" + x + " = " + (!x);
+    
+    // Basic counter
+    val counter = 0;
+    counter = counter + 5;
+    counter = counter * 2;
+    counter = counter - 3;
+    say "Final counter: " + counter;
+    
+    say "";
+    say "🎉 LAML v3.3.0 Demo Complete!";
+}

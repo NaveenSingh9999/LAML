@@ -1,0 +1,8 @@
+~ Test file with syntax errors for Phase 3 console styling
+bring xcs.class34;
+
+func main() {
+    val x = ;  ~ Missing value
+    val y = 10
+    say "This will fail";
+}

@@ -1,0 +1,128 @@
+// LAML v3.3.0 Array Operations Demo
+// Advanced array operations and algorithms
+
+func main() {
+    say "=== LAML v3.3.0 - Array Operations Demo ===";
+    
+    // === Array Initialization ===
+    val numbers = [15, 8, 23, 4, 16, 42, 12, 9, 33, 7];
+    val names = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
+    val temperatures = [22.5, 18.3, 25.7, 19.8, 21.2];
+    
+    say "Working with arrays...";
+    
+    // === Array Access Examples ===
+    val firstNumber = numbers[0];
+    val lastNumber = numbers[9];
+    val middleName = names[2];
+    
+    say "First number: " + firstNumber;
+    say "Last number: " + lastNumber;
+    say "Middle name: " + middleName;
+    
+    // === Basic Array Operations ===
+    say "";
+    say "=== Basic Operations ===";
+    
+    // Simple sum calculation
+    val sum1 = numbers[0] + numbers[1] + numbers[2];
+    val sum2 = numbers[3] + numbers[4] + numbers[5];
+    val totalSum = sum1 + sum2;
+    
+    say "Sum of first 6 numbers: " + totalSum;
+    
+    // Array element comparison
+    val max = numbers[0];
+    if numbers[1] > max {
+        max = numbers[1];
+    }
+    if numbers[2] > max {
+        max = numbers[2];
+    }
+    
+    say "Maximum of first 3: " + max;
+    
+    // === Temperature Analysis ===
+    say "";
+    say "=== Temperature Analysis ===";
+    
+    val temp1 = temperatures[0];
+    val temp2 = temperatures[1];
+    val temp3 = temperatures[2];
+    val avgTemp = (temp1 + temp2 + temp3) / 3;
+    
+    say "Average temperature (first 3): " + avgTemp + "°C";
+    
+    // === String Array Operations ===
+    say "";
+    say "=== String Operations ===";
+    
+    val greeting1 = "Hello " + names[0];
+    val greeting2 = "Welcome " + names[1];
+    val greeting3 = "Hi " + names[2];
+    
+    say greeting1;
+    say greeting2;
+    say greeting3;
+    
+    // === Array Modification ===
+    say "";
+    say "=== Array Modification ===";
+    
+    val originalFirst = numbers[0];
+    numbers[0] = 100;
+    val newFirst = numbers[0];
+    
+    say "Changed first element from " + originalFirst + " to " + newFirst;
+    
+    // === Boolean Logic with Arrays ===
+    say "";
+    say "=== Boolean Logic ===";
+    
+    val hasLargeNumber = numbers[0] > 50;
+    val hasSmallNumber = numbers[3] < 10;
+    val hasBoth = hasLargeNumber && hasSmallNumber;
+    
+    say "Has large number (>50): " + hasLargeNumber;
+    say "Has small number (<10): " + hasSmallNumber;
+    say "Has both: " + hasBoth;
+    
+    // === Simple Search ===
+    say "";
+    say "=== Simple Search ===";
+    
+    val target = 23;
+    val found = false;
+    val position = -1;
+    
+    // Check each position manually
+    if numbers[0] == target {
+        found = true;
+        position = 0;
+    }
+    if numbers[1] == target {
+        found = true;
+        position = 1;
+    }
+    if numbers[2] == target {
+        found = true;
+        position = 2;
+    }
+    if numbers[3] == target {
+        found = true;
+        position = 3;
+    }
+    if numbers[4] == target {
+        found = true;
+        position = 4;
+    }
+    
+    if found {
+        say "Found " + target + " at position " + position;
+    } else {
+        say target + " not found in checked positions";
+    }
+    
+    say "";
+    say "🔢 Array operations demo complete!";
+}

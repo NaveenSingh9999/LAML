@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn LAML - Interactive Tutorials</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/learn.css">
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <meta name="description" content="Learn LAML v3.3.0 - Interactive tutorials covering enhanced data types, arrays, and new compiler features">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <span class="brand-text">LAML</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link active">Learn</a>
+                <a href="setup.html" class="nav-link">Setup</a>
+                <a href="features.html" class="nav-link">Features</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </div>
+            
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="learn-hero">
+            <div class="container">
+                <h1 class="hero-title">Learn LAML v3.3.0</h1>
+                <p class="hero-description">
+                    Master the enhanced LAML language with comprehensive data types, array support, and powerful new features. 
+                    From basics to advanced concepts, this interactive guide has everything you need.
+                </p>
+                
+                <div class="learning-path">
+                    <div class="path-item">
+                        <span class="path-number">1</span>
+                        <span class="path-text">Setup & Syntax</span>
+                    </div>
+                    <div class="path-arrow">→</div>
+                    <div class="path-item">
+                        <span class="path-number">2</span>
+                        <span class="path-text">Data Types</span>
+                    </div>
+                    <div class="path-arrow">→</div>
+                    <div class="path-item">
+                        <span class="path-number">3</span>
+                        <span class="path-text">Arrays & Functions</span>
+                    </div>
+                    <div class="path-arrow">→</div>
+                    <div class="path-item">
+                        <span class="path-number">4</span>
+                        <span class="path-text">Advanced Features</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <section class="toc-section">
+            <div class="container">
+                <h2>Table of Contents</h2>
+                <div class="toc-grid">
+                    <div class="toc-column">
+                        <h3>🚀 Getting Started</h3>
+                        <ul>
+                            <li><a href="#installation">Installation & Setup</a></li>
+                            <li><a href="#hello-world">Your First Program</a></li>
+                            <li><a href="#basic-syntax">Basic Syntax</a></li>
+                        </ul>
+                    </div>
+                    <div class="toc-column">
+                        <h3>📊 Data Types</h3>
+                        <ul>
+                            <li><a href="#data-types">Type System Overview</a></li>
+                            <li><a href="#integers">Integers (int)</a></li>
+                            <li><a href="#floats">Floating Point (float)</a></li>
+                            <li><a href="#strings">Strings (string)</a></li>
+                            <li><a href="#booleans">Booleans (bool)</a></li>
+                            <li><a href="#arrays">Arrays (array)</a></li>
+                        </ul>
+                    </div>
+                    <div class="toc-column">
+                        <h3>⚡ Language Features</h3>
+                        <ul>
+                            <li><a href="#variables">Variables & Constants</a></li>
+                            <li><a href="#operators">Operators</a></li>
+                            <li><a href="#functions">Functions</a></li>
+                            <li><a href="#control-flow">Control Flow</a></li>
+                            <li><a href="#loops">Loops</a></li>
+                        </ul>
+                    </div>
+                    <div class="toc-column">
+                        <h3>🔧 Advanced Topics</h3>
+                        <ul>
+                            <li><a href="#type-inference">Type Inference</a></li>
+                            <li><a href="#error-handling">Error Handling</a></li>
+                            <li><a href="#compiler-features">Compiler Features</a></li>
+                            <li><a href="#examples">Real-world Examples</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Content -->
+        <section class="learning-content">
+            <div class="container">
+                
+                <!-- Installation -->
+                <div class="lesson" id="installation">
+                    <h2>🚀 Installation & Setup</h2>
+                    <p>Get LAML v3.3.0 installed on your system with our one-click installers:</p>
+                    
+                    <div class="install-grid">
+                        <div class="install-card">
+                            <h3>Windows</h3>
+                            <div class="code-block">
+                                <code>iwr -useb https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/windows/install.ps1 | iex</code>
+                                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            </div>
+                        </div>
+                        <div class="install-card">
+                            <h3>Linux/macOS</h3>
+                            <div class="code-block">
+                                <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/linux/install.sh | bash</code>
+                                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4>💡 Tip</h4>
+                        <p>After installation, verify everything works by running <code>laml --version</code> in your terminal.</p>
+                    </div>
+                </div>
+
+                <!-- Hello World -->
+                <div class="lesson" id="hello-world">
+                    <h2>👋 Your First Program</h2>
+                    <p>Let's start with the classic "Hello, World!" program in LAML:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">hello.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">bring xcs.class34;
+
+func main() {
+    say "Hello, LAML v3.3.0!";
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Hello, LAML v3.3.0!</pre>
+                        </div>
+                    </div>
+
+                    <div class="explanation">
+                        <h4>Code Breakdown:</h4>
+                        <ul>
+                            <li><code>bring xcs.class34;</code> - Import the core LAML module</li>
+                            <li><code>func main() { ... }</code> - Define the main function (entry point)</li>
+                            <li><code>say "text";</code> - Print text to the console</li>
+                        </ul>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>🎯 Try It Yourself</h4>
+                        <p>Modify the program to say hello to yourself. Save it as <code>greeting.lm</code> and run with:</p>
+                        <code>laml run greeting.lm</code>
+                    </div>
+                </div>
+
+                <!-- Data Types -->
+                <div class="lesson" id="data-types">
+                    <h2>📊 Enhanced Data Types</h2>
+                    <p>LAML v3.3.0 introduces a comprehensive type system with five core data types:</p>
+                    
+                    <div class="type-showcase">
+                        <div class="type-card">
+                            <h3>int</h3>
+                            <p>Whole numbers</p>
+                            <div class="code-snippet">
+                                <code>let age: int = 25;</code>
+                            </div>
+                        </div>
+                        <div class="type-card">
+                            <h3>float</h3>
+                            <p>Decimal numbers</p>
+                            <div class="code-snippet">
+                                <code>let height: float = 5.9;</code>
+                            </div>
+                        </div>
+                        <div class="type-card">
+                            <h3>string</h3>
+                            <p>Text data</p>
+                            <div class="code-snippet">
+                                <code>let name: string = "Alice";</code>
+                            </div>
+                        </div>
+                        <div class="type-card">
+                            <h3>bool</h3>
+                            <p>True/false values</p>
+                            <div class="code-snippet">
+                                <code>let isActive: bool = true;</code>
+                            </div>
+                        </div>
+                        <div class="type-card">
+                            <h3>array</h3>
+                            <p>Collections of data</p>
+                            <div class="code-snippet">
+                                <code>let scores: array = [95, 87, 92];</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">types_demo.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">bring xcs.class34;
+
+func main() {
+    // Explicit type declarations
+    let age: int = 25;
+    let height: float = 5.9;
+    let name: string = "Alice";
+    let isStudent: bool = true;
+    let grades: array = [95, 87, 92, 88];
+    
+    say "Name: " + name;
+    say "Age: " + age;
+    say "Height: " + height;
+    say "Is Student: " + isStudent;
+    say "Grades: " + grades;
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Name: Alice
+Age: 25
+Height: 5.9
+Is Student: true
+Grades: [95, 87, 92, 88]</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrays -->
+                <div class="lesson" id="arrays">
+                    <h2>📋 Working with Arrays</h2>
+                    <p>Arrays in LAML v3.3.0 are powerful and flexible, supporting various operations:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">arrays_demo.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">bring xcs.class34;
+
+func main() {
+    // Creating arrays
+    let numbers: array = [1, 2, 3, 4, 5];
+    let names: array = ["Alice", "Bob", "Charlie"];
+    let mixed: array = [1, "hello", true, 3.14];
+    
+    say "Numbers: " + numbers;
+    say "Names: " + names;
+    say "Mixed: " + mixed;
+    
+    // Array operations
+    let doubled: array = [];
+    loop num in numbers {
+        doubled.push(num * 2);
+    }
+    
+    say "Doubled: " + doubled;
+    
+    // Array indexing
+    say "First number: " + numbers[0];
+    say "Last name: " + names[2];
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Numbers: [1, 2, 3, 4, 5]
+Names: ["Alice", "Bob", "Charlie"]
+Mixed: [1, "hello", true, 3.14]
+Doubled: [2, 4, 6, 8, 10]
+First number: 1
+Last name: Charlie</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control Flow -->
+                <div class="lesson" id="control-flow">
+                    <h2>🔀 Control Flow</h2>
+                    <p>LAML provides intuitive conditional statements for program logic:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">conditions.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">bring xcs.class34;
+
+func main() {
+    let score: int = 85;
+    let isPassingGrade: bool = score >= 60;
+    
+    // Basic if statement
+    if isPassingGrade {
+        say "Congratulations! You passed!";
+    }
+    
+    // If-else statement
+    if score >= 90 {
+        say "Grade: A";
+    } else if score >= 80 {
+        say "Grade: B";
+    } else if score >= 70 {
+        say "Grade: C";
+    } else if score >= 60 {
+        say "Grade: D";
+    } else {
+        say "Grade: F";
+    }
+    
+    // Combining conditions
+    let age: int = 20;
+    if age >= 18 && score >= 80 {
+        say "Eligible for scholarship!";
+    }
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Congratulations! You passed!
+Grade: B
+Eligible for scholarship!</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loops -->
+                <div class="lesson" id="loops">
+                    <h2>🔄 Loops</h2>
+                    <p>LAML provides powerful loop constructs for iteration:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">loops_demo.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">bring xcs.class34;
+
+func main() {
+    // Range loop
+    say "Counting from 1 to 5:";
+    loop i in 1 to 5 {
+        say "Count: " + i;
+    }
+    
+    // Array iteration
+    let fruits: array = ["apple", "banana", "orange"];
+    say "\nFruits in basket:";
+    loop fruit in fruits {
+        say "- " + fruit;
+    }
+    
+    // Nested loops for patterns
+    say "\nPattern:";
+    loop row in 1 to 3 {
+        let line: string = "";
+        loop col in 1 to row {
+            line = line + "* ";
+        }
+        say line;
+    }
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Counting from 1 to 5:
+Count: 1
+Count: 2
+Count: 3
+Count: 4
+Count: 5
+
+Fruits in basket:
+- apple
+- banana
+- orange
+
+Pattern:
+* 
+* * 
+* * *</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Functions -->
+                <div class="lesson" id="functions">
+                    <h2>⚙️ Functions</h2>
+                    <p>Functions in LAML help organize code and enable reusability:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">functions.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">bring xcs.class34;
+
+// Function to calculate area of rectangle
+func calculateArea(length: float, width: float) {
+    let area: float = length * width;
+    return area;
+}
+
+// Function to greet a person
+func greet(name: string, age: int) {
+    say "Hello, " + name + "! You are " + age + " years old.";
+}
+
+// Function to find maximum in array
+func findMax(numbers: array) {
+    let max: int = numbers[0];
+    loop num in numbers {
+        if num > max {
+            max = num;
+        }
+    }
+    return max;
+}
+
+func main() {
+    // Using functions
+    let length: float = 5.5;
+    let width: float = 3.2;
+    let area: float = calculateArea(length, width);
+    say "Area: " + area;
+    
+    greet("Alice", 25);
+    
+    let scores: array = [85, 92, 78, 96, 88];
+    let highest: int = findMax(scores);
+    say "Highest score: " + highest;
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Area: 17.6
+Hello, Alice! You are 25 years old.
+Highest score: 96</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Type Inference -->
+                <div class="lesson" id="type-inference">
+                    <h2>🧠 Type Inference</h2>
+                    <p>LAML v3.3.0 features smart type inference, allowing you to omit type annotations in many cases:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">inference.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">bring xcs.class34;
+
+func main() {
+    // Type inference in action
+    let count = 42;           // inferred as int
+    let price = 19.99;        // inferred as float
+    let message = "Hello";    // inferred as string
+    let isReady = true;       // inferred as bool
+    let items = [1, 2, 3];    // inferred as array
+    
+    say "Count: " + count + " (type: int)";
+    say "Price: " + price + " (type: float)";
+    say "Message: " + message + " (type: string)";
+    say "Ready: " + isReady + " (type: bool)";
+    say "Items: " + items + " (type: array)";
+    
+    // Mixing explicit and inferred types
+    let explicitAge: int = 25;
+    let inferredAge = 30;
+    
+    let totalAge = explicitAge + inferredAge;  // inferred as int
+    say "Total age: " + totalAge;
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Count: 42 (type: int)
+Price: 19.99 (type: float)
+Message: Hello (type: string)
+Ready: true (type: bool)
+Items: [1, 2, 3] (type: array)
+Total age: 55</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compiler Features -->
+                <div class="lesson" id="compiler-features">
+                    <h2>🎨 Enhanced Compiler Features</h2>
+                    <p>LAML v3.3.0 includes enhanced compiler features for better development experience:</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h3>🌈 Colored Output</h3>
+                            <p>The compiler provides color-coded feedback for errors, warnings, and success messages, making debugging easier and more intuitive.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>🔍 Type Checking</h3>
+                            <p>Enhanced type checking catches errors at compile time, ensuring type safety and preventing runtime errors.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>📝 Better Error Messages</h3>
+                            <p>Improved error messages with precise locations and helpful suggestions for fixing common mistakes.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>⚡ Fast Compilation</h3>
+                            <p>Optimized compilation process generates efficient bytecode for fast execution across all platforms.</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4>💡 Pro Tip</h4>
+                        <p>Use <code>laml run filename.lm</code> to compile and run your programs in one command. The compiler will show colored output to help you identify any issues quickly.</p>
+                    </div>
+                </div>
+
+                <!-- Real Examples -->
+                <div class="lesson" id="examples">
+                    <h2>🚀 Real-world Example</h2>
+                    <p>Let's build a complete program that demonstrates multiple LAML v3.3.0 features:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">student_grades.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">bring xcs.class34;
+
+// Function to calculate average grade
+func calculateAverage(grades: array) {
+    let sum: float = 0.0;
+    let count: int = 0;
+    
+    loop grade in grades {
+        sum = sum + grade;
+        count = count + 1;
+    }
+    
+    return sum / count;
+}
+
+// Function to determine letter grade
+func getLetterGrade(average: float) {
+    if average >= 90.0 {
+        return "A";
+    } else if average >= 80.0 {
+        return "B";
+    } else if average >= 70.0 {
+        return "C";
+    } else if average >= 60.0 {
+        return "D";
+    } else {
+        return "F";
+    }
+}
+
+// Function to find highest and lowest grades
+func findExtremes(grades: array) {
+    let highest = grades[0];
+    let lowest = grades[0];
+    
+    loop grade in grades {
+        if grade > highest {
+            highest = grade;
+        }
+        if grade < lowest {
+            lowest = grade;
+        }
+    }
+    
+    return [highest, lowest];
+}
+
+func main() {
+    // Student data
+    let studentName = "Alice Johnson";
+    let grades: array = [88, 92, 85, 90, 87, 94, 89];
+    
+    say "Student Grade Report";
+    say "===================";
+    say "Student: " + studentName;
+    say "Grades: " + grades;
+    
+    // Calculate statistics
+    let average = calculateAverage(grades);
+    let letterGrade = getLetterGrade(average);
+    let extremes = findExtremes(grades);
+    let highest = extremes[0];
+    let lowest = extremes[1];
+    
+    // Display results
+    say "\nGrade Statistics:";
+    say "Average: " + average;
+    say "Letter Grade: " + letterGrade;
+    say "Highest Grade: " + highest;
+    say "Lowest Grade: " + lowest;
+    
+    // Determine if passing
+    let isPassing: bool = average >= 70.0;
+    if isPassing {
+        say "\n✅ Student is passing!";
+    } else {
+        say "\n❌ Student needs improvement.";
+    }
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Student Grade Report
+===================
+Student: Alice Johnson
+Grades: [88, 92, 85, 90, 87, 94, 89]
+
+Grade Statistics:
+Average: 89.3
+Letter Grade: B
+Highest Grade: 94
+Lowest Grade: 85
+
+✅ Student is passing!</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="lesson" id="next-steps">
+                    <h2>🎓 What's Next?</h2>
+                    <p>Congratulations! You've learned the fundamentals of LAML v3.3.0. Here's what you can do next:</p>
+                    
+                    <div class="next-steps-grid">
+                        <div class="next-step">
+                            <h3>📂 Explore Examples</h3>
+                            <p>Check out the example files in the LAML repository to see more advanced usage patterns and techniques.</p>
+                            <a href="https://github.com/NaveenSingh9999/LAML/tree/main/examples" class="btn btn-primary">View Examples</a>
+                        </div>
+                        <div class="next-step">
+                            <h3>🔧 Set Up VS Code</h3>
+                            <p>Install the LAML VS Code extension for syntax highlighting and better development experience.</p>
+                            <a href="setup.html#vscode-section" class="btn btn-primary">Setup VS Code</a>
+                        </div>
+                        <div class="next-step">
+                            <h3>🌟 Build Projects</h3>
+                            <p>Start building your own projects with LAML. The language is perfect for scripting, automation, and learning programming concepts.</p>
+                            <a href="features.html" class="btn btn-primary">See Features</a>
+                        </div>
+                        <div class="next-step">
+                            <h3>🤝 Join Community</h3>
+                            <p>Join the LAML community on GitHub to ask questions, share projects, and contribute to the language development.</p>
+                            <a href="https://github.com/NaveenSingh9999/LAML" class="btn btn-primary">Join Community</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/learn.js"></script>
+</body>
+</html>

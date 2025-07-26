@@ -1,0 +1,20 @@
+bring xcs.class34;
+
+func main() {
+    val age = 16;
+    const ID = 9016;
+    
+    say "Age: " + age;
+    say "ID: " + ID;
+    
+    if age > 15 {
+        say "Teen!";
+    } else {
+        say "Kid!";
+    }
+    
+    // C-style loop
+    loop i = 0; i < 5; i++ {
+        say "C-style loop: " + i;
+    }
+}

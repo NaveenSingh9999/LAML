@@ -1,0 +1,20 @@
+bring xcs.class34;
+
+func greet(name) {
+    say "Hello, " + name + "!";
+}
+
+func add(x, y) {
+    return x + y;
+}
+
+func main() {
+    greet("LAML");
+    
+    let result = add(5, 3);
+    say "5 + 3 = " + result;
+    
+    let numbers = [1, 2, 3, 4, 5];
+    say "First number: " + numbers[0];
+    say "Last number: " + numbers[4];
+}

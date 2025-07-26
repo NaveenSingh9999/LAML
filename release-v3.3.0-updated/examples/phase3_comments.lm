@@ -1,0 +1,19 @@
+~ This is a single line comment
+bring xcs.class34;
+
+{~ 
+   This is a multi-line comment
+   that spans multiple lines
+   and tests our new syntax
+~}
+
+func main() {
+    ~ Another single line comment
+    val x = 42;
+    say "Value: " + x; ~ Inline comment
+    
+    {~ Multi-line comment
+       in the middle of code ~}
+    val y = 100;
+    say "Y: " + y;
+}
