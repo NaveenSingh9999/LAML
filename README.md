@@ -24,35 +24,28 @@ LAML (Low Abstraction Machine Language) is a **sentence-like, general-purpose co
 
 ## 🔧 Installation
 
-### Quick Install (Recommended)
-
-**Windows (PowerShell as Administrator):**
-```powershell
-iwr -useb https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/windows/install.ps1 | iex
-```
-
-**Linux:**
-```bash
-curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/linux/install.sh | bash
-```
-
-**macOS:**
-```bash
-curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/macos/install.sh | bash
-```
+### Quick Install for Termux (Android)
 
 **Termux (Android):**
 ```bash
-curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/termux/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/termux/install.sh | bash
 ```
 
 ### What the Installer Does
-- ✅ Downloads the latest LAML binary from GitHub
-- ✅ Installs as `laml` command (works from anywhere)
-- ✅ Adds to system PATH automatically
-- ✅ Sets up shell completion (bash/zsh)
-- ✅ Installs VS Code extension (if VS Code detected)
-- ✅ Creates desktop shortcuts and menu entries
+- ✅ Downloads the ARM-optimized LAML binary from GitHub
+- ✅ Installs as `laml` command in Termux
+- ✅ Creates config directory for LAML settings
+- ✅ Sets up Termux shortcuts for quick access
+- ✅ Verifies installation with version check
+- ✅ Provides clear success confirmation
+
+### Alternative Installation
+For other platforms, download the appropriate binary from [Releases](https://github.com/NaveenSingh9999/LAML/releases):
+- `laml-linux-x86_64` - Linux 64-bit
+- `laml-linux-arm64` - Linux ARM64
+- `laml-linux-armv7` - Linux ARMv7
+- `laml-windows-x86_64.exe` - Windows 64-bit
+- `laml-termux` - Android/Termux ARM
 - ✅ Provides clean uninstall option
 
 ### Manual Installation
