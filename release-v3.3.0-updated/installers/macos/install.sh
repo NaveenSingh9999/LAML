@@ -62,10 +62,12 @@ download_file() {
     local url=$1
     local output=$2
     
+    print_colored $YELLOW "🌐 Downloading from: $url"
+    
     if command -v curl >/dev/null 2>&1; then
-        curl -L -o "$output" "$url"
+        curl -fsSL -o "$output" "$url"
     elif command -v wget >/dev/null 2>&1; then
-        wget -O "$output" "$url"
+        wget -q -O "$output" "$url"
     else
         print_colored $RED "❌ Neither curl nor wget found"
         return 1
@@ -81,23 +83,30 @@ install_laml() {
     
     # Download LAML binary
     print_colored $YELLOW "📥 Downloading LAML binary..."
-    local temp_file="/tmp/laml_download"
+    local temp_file="$HOME/laml_download"
     
     if download_file "$LAML_BINARY_URL" "$temp_file"; then
-        print_colored $GREEN "✅ LAML binary downloaded successfully"
-        
-        # Install binary
-        sudo cp "$temp_file" "$INSTALL_DIR/laml"
-        sudo chmod +x "$INSTALL_DIR/laml"
-        rm -f "$temp_file"
-        
-        print_colored $GREEN "✅ LAML binary installed as 'laml' to $INSTALL_DIR"
-        
-        # Test installation
-        if "$INSTALL_DIR/laml" version >/dev/null 2>&1; then
-            print_colored $GREEN "✅ LAML is working correctly"
+        # Verify the file was downloaded and has content
+        if [ -f "$temp_file" ] && [ -s "$temp_file" ]; then
+            print_colored $GREEN "✅ LAML binary downloaded successfully"
+            
+            # Install binary
+            sudo cp "$temp_file" "$INSTALL_DIR/laml"
+            sudo chmod +x "$INSTALL_DIR/laml"
+            rm -f "$temp_file"
+            
+            print_colored $GREEN "✅ LAML binary installed as 'laml' to $INSTALL_DIR"
+            
+            # Test installation
+            if "$INSTALL_DIR/laml" version >/dev/null 2>&1; then
+                print_colored $GREEN "✅ LAML is working correctly"
+            else
+                print_colored $YELLOW "⚠️  LAML installed but may need configuration"
+            fi
         else
-            print_colored $YELLOW "⚠️  LAML installed but may need configuration"
+            print_colored $RED "❌ Downloaded file is empty or corrupted"
+            rm -f "$temp_file"
+            exit 1
         fi
     else
         print_colored $RED "❌ Failed to download LAML binary"
