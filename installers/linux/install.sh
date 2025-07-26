@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # LAML Installer for Linux
-# Downloads and installs LAML from GitHub (universal binary)
+# Downloads and installs LAML from GitHub with architecture detection
 
 set -e
-    # Download LAML binary
-    print_colored $YELLOW "📥 Downloading LAML binary..."
-    local temp_file="$HOME/laml_download"Colors for output
+
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -19,22 +18,28 @@ INSTALL_DIR="/usr/local/bin"
 CONFIG_DIR="$HOME/.config/laml"
 DESKTOP_DIR="$HOME/.local/share/applications"
 
-# GitHub URLs
+# GitHub URLs with architecture detection
 detect_architecture() {
     local arch=$(uname -m)
     case $arch in
-        x86_64)
+        x86_64|amd64)
             LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-x86_64"
+            ARCH_NAME="x86_64 (AMD64/Intel 64-bit)"
             ;;
         aarch64|arm64)
             LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-arm64"
+            ARCH_NAME="ARM64 (64-bit ARM)"
             ;;
-        armv7l|armhf)
+        armv7l|armhf|armv7)
             LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-armv7"
+            ARCH_NAME="ARMv7 (32-bit ARM)"
             ;;
         *)
             print_colored $RED "❌ Unsupported architecture: $arch"
-            print_colored $YELLOW "Supported architectures: x86_64, aarch64/arm64, armv7l/armhf"
+            print_colored $YELLOW "Supported architectures:"
+            print_colored $YELLOW "  • x86_64/amd64 (Intel/AMD 64-bit)"
+            print_colored $YELLOW "  • aarch64/arm64 (64-bit ARM)"
+            print_colored $YELLOW "  • armv7l/armhf (32-bit ARM)"
             exit 1
             ;;
     esac
@@ -48,9 +53,26 @@ print_colored() {
 
 print_header() {
     print_colored $CYAN "🚀 LAML Installer for Linux"
-    print_colored $CYAN "==========================="
-    print_colored $BLUE "📥 Downloads latest LAML from GitHub"
+    print_colored $CYAN "============================"
+    print_colored $BLUE "� Multi-architecture support (x86_64, ARM64, ARMv7)"
     echo
+}
+
+check_linux() {
+    if [[ "$OSTYPE" != "linux-gnu"* ]]; then
+        print_colored $RED "❌ This installer is designed for Linux only!"
+        print_colored $YELLOW "Please use the appropriate installer for your platform."
+        exit 1
+    fi
+    
+    print_colored $GREEN "✅ Linux environment detected"
+    
+    # Detect Linux distribution for better help messages
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        DISTRO=$NAME
+        print_colored $BLUE "📋 Distribution: $DISTRO"
+    fi
 }
 
 check_dependencies() {
@@ -70,9 +92,21 @@ check_dependencies() {
         done
         echo
         print_colored $YELLOW "Please install the missing dependencies and try again."
-        print_colored $YELLOW "On Ubuntu/Debian: sudo apt update && sudo apt install curl"
-        print_colored $YELLOW "On CentOS/RHEL: sudo yum install curl"
-        print_colored $YELLOW "On Arch: sudo pacman -S curl"
+        
+        # Distribution-specific installation commands
+        if command -v apt >/dev/null 2>&1; then
+            print_colored $YELLOW "On Ubuntu/Debian: sudo apt update && sudo apt install curl"
+        elif command -v yum >/dev/null 2>&1; then
+            print_colored $YELLOW "On CentOS/RHEL: sudo yum install curl"
+        elif command -v dnf >/dev/null 2>&1; then
+            print_colored $YELLOW "On Fedora: sudo dnf install curl"
+        elif command -v pacman >/dev/null 2>&1; then
+            print_colored $YELLOW "On Arch: sudo pacman -S curl"
+        elif command -v zypper >/dev/null 2>&1; then
+            print_colored $YELLOW "On openSUSE: sudo zypper install curl"
+        else
+            print_colored $YELLOW "Install curl using your distribution's package manager"
+        fi
         exit 1
     fi
     
@@ -96,11 +130,11 @@ download_file() {
 }
 
 install_laml() {
-    print_colored $YELLOW "📦 Downloading and installing LAML from GitHub..."
+    print_colored $YELLOW "📦 Installing LAML for Linux..."
     
     # Detect architecture and set appropriate binary URL
     detect_architecture
-    print_colored $BLUE "🏗️  Detected architecture: $(uname -m)"
+    print_colored $BLUE "🏗️  Detected architecture: $ARCH_NAME"
     print_colored $BLUE "📥 Using binary: $(basename "$LAML_BINARY_URL")"
     
     # Create directories
@@ -109,184 +143,172 @@ install_laml() {
     mkdir -p "$DESKTOP_DIR"
     
     # Download LAML binary
-    print_colored $YELLOW "� Downloading LAML binary..."
-    local temp_file="/tmp/laml_download"
+    print_colored $YELLOW "📥 Downloading LAML binary..."
+    local temp_file="/tmp/laml_download_$$"
     
     if download_file "$LAML_BINARY_URL" "$temp_file"; then
         # Verify the file was downloaded and has content
         if [ -f "$temp_file" ] && [ -s "$temp_file" ]; then
-            print_colored $GREEN "✅ LAML binary downloaded successfully"
+            local file_size=$(stat -c%s "$temp_file" 2>/dev/null || echo "unknown")
+            print_colored $GREEN "✅ LAML binary downloaded successfully ($file_size bytes)"
+            
+            # Verify it's a valid binary file
+            if file "$temp_file" 2>/dev/null | grep -q "ELF.*executable"; then
+                print_colored $GREEN "✅ Binary file verification passed"
+            else
+                print_colored $YELLOW "⚠️  File downloaded but binary verification unclear"
+            fi
             
             # Install binary
-            sudo cp "$temp_file" "$INSTALL_DIR/laml"
-            sudo chmod +x "$INSTALL_DIR/laml"
-            rm -f "$temp_file"
-            
-            print_colored $GREEN "✅ LAML binary installed as 'laml' to $INSTALL_DIR"
-            
-            # Test installation
-            if "$INSTALL_DIR/laml" version >/dev/null 2>&1; then
-                print_colored $GREEN "✅ LAML is working correctly"
+            if sudo cp "$temp_file" "$INSTALL_DIR/laml" 2>/dev/null; then
+                sudo chmod +x "$INSTALL_DIR/laml"
+                rm -f "$temp_file"
+                print_colored $GREEN "✅ LAML installed to $INSTALL_DIR"
+                
+                # Test installation
+                if "$INSTALL_DIR/laml" version >/dev/null 2>&1; then
+                    print_colored $GREEN "✅ LAML is working correctly"
+                    
+                    # Show version
+                    local version_output=$("$INSTALL_DIR/laml" version 2>/dev/null | head -1)
+                    print_colored $CYAN "📋 Installed: $version_output"
+                else
+                    print_colored $YELLOW "⚠️  LAML installed but version check failed"
+                    print_colored $YELLOW "💡 Try running: laml version"
+                fi
             else
-                print_colored $YELLOW "⚠️  LAML installed but may need configuration"
+                print_colored $RED "❌ Failed to install binary to $INSTALL_DIR"
+                print_colored $YELLOW "💡 Make sure you have sudo privileges"
+                rm -f "$temp_file"
+                exit 1
             fi
-        else
-            print_colored $RED "❌ Downloaded file is empty or corrupted"
-            rm -f "$temp_file"
-            exit 1
         fi
     else
         print_colored $RED "❌ Failed to download LAML binary"
-        print_colored $YELLOW "Please check your internet connection and try again."
+        print_colored $YELLOW "💡 Please check your internet connection and try again"
+        rm -f "$temp_file"
         exit 1
     fi
 }
 
+# Create desktop entry
 create_desktop_entry() {
     print_colored $YELLOW "🖥️  Creating desktop entry..."
     
-    cat > "$DESKTOP_DIR/laml-terminal.desktop" << EOF
+    local desktop_file="$DESKTOP_DIR/laml.desktop"
+    cat > "$desktop_file" << 'EOF'
 [Desktop Entry]
-Name=LAML Terminal
-Comment=LAML Development Environment
-Exec=gnome-terminal --title="LAML Terminal" -- bash -c "echo 'LAML Development Environment'; echo 'Type laml --help for usage'; bash"
-Icon=terminal
+Version=1.0
 Type=Application
+Name=LAML
+Comment=Lightweight, fast compiled programming language
+Exec=/usr/local/bin/laml
+Icon=text-x-script
+Terminal=true
 Categories=Development;Programming;
-Keywords=LAML;Programming;Compiler;
-StartupNotify=true
+Keywords=programming;language;compiler;
 EOF
     
-    chmod +x "$DESKTOP_DIR/laml-terminal.desktop"
-    print_colored $GREEN "✅ Desktop entry created"
-}
-
-install_vscode_extension() {
-    if command -v code >/dev/null 2>&1; then
-        print_colored $YELLOW "📝 Installing VS Code extension..."
-        
-        # Look for VSIX file
-        local vsix_file=$(find "$(dirname "$0")/.." -name "laml-*.vsix" | head -1)
-        
-        if [ -n "$vsix_file" ] && [ -f "$vsix_file" ]; then
-            code --install-extension "$vsix_file"
-            print_colored $GREEN "✅ VS Code extension installed"
-        else
-            print_colored $YELLOW "⚠️  VS Code extension not found. You can install it manually later."
-        fi
+    if [ -f "$desktop_file" ]; then
+        chmod +x "$desktop_file"
+        print_colored $GREEN "✅ Desktop entry created"
     else
-        print_colored $YELLOW "ℹ️  VS Code not found. Extension installation skipped."
+        print_colored $YELLOW "⚠️  Could not create desktop entry"
     fi
 }
 
+# Setup shell completion
 setup_shell_completion() {
-    print_colored $YELLOW "🔧 Setting up shell completion..."
+    print_colored $YELLOW "🐚 Setting up shell completion..."
     
-    # Bash completion
-    if [ -n "$BASH_VERSION" ]; then
-        local bash_completion_dir="$HOME/.local/share/bash-completion/completions"
-        mkdir -p "$bash_completion_dir"
+    # Check for common shells
+    local shell_name=$(basename "$SHELL")
+    case "$shell_name" in
+        bash)
+            local bash_completion="$HOME/.bash_completion"
+            echo "complete -C 'laml' laml" >> "$bash_completion"
+            print_colored $GREEN "✅ Bash completion added"
+            ;;
+        zsh)
+            local zsh_completion="$HOME/.zshrc"
+            echo "autoload -U +X compinit && compinit" >> "$zsh_completion"
+            echo "autoload -U +X bashcompinit && bashcompinit" >> "$zsh_completion"
+            echo "complete -C 'laml' laml" >> "$zsh_completion"
+            print_colored $GREEN "✅ Zsh completion added"
+            ;;
+        *)
+            print_colored $YELLOW "⚠️  Shell completion not set up for $shell_name"
+            print_colored $BLUE "💡 You can manually add: complete -C 'laml' laml"
+            ;;
+    esac
+}
+
+# Setup PATH if needed
+setup_path() {
+    print_colored $YELLOW "🛤️  Setting up PATH..."
+    
+    # Check if /usr/local/bin is in PATH
+    if echo "$PATH" | grep -q "/usr/local/bin"; then
+        print_colored $GREEN "✅ /usr/local/bin is already in PATH"
+    else
+        print_colored $YELLOW "⚠️  /usr/local/bin not found in PATH"
+        print_colored $BLUE "💡 You may need to add it to your shell profile"
         
-        cat > "$bash_completion_dir/laml" << 'EOF'
-_laml_completion() {
-    local cur prev commands
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    commands="run compile version help"
-    
-    if [[ ${cur} == -* ]]; then
-        COMPREPLY=($(compgen -W "--help --version" -- ${cur}))
-    elif [[ ${COMP_CWORD} -eq 1 ]]; then
-        COMPREPLY=($(compgen -W "${commands}" -- ${cur}))
-    elif [[ ${prev} == "run" || ${prev} == "compile" ]]; then
-        COMPREPLY=($(compgen -f -X "!*.lm" -- ${cur}))
-    fi
-}
-complete -F _laml_completion laml
-EOF
-        print_colored $GREEN "✅ Bash completion installed"
+        # Try to add to common profile files
+        for profile in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile"; do
+            if [ -f "$profile" ]; then
+                echo 'export PATH="/usr/local/bin:$PATH"' >> "$profile"
+                print_colored $GREEN "✅ Added to $profile"
+                break
+            fi
+        done
     fi
 }
 
-uninstall_laml() {
-    print_colored $YELLOW "🗑️  Uninstalling LAML..."
-    
-    # Remove binary
-    if [ -f "$INSTALL_DIR/laml" ]; then
-        sudo rm "$INSTALL_DIR/laml"
-        print_colored $GREEN "✅ LAML binary removed"
-    fi
-    
-    # Remove config directory
-    if [ -d "$CONFIG_DIR" ]; then
-        rm -rf "$CONFIG_DIR"
-        print_colored $GREEN "✅ Configuration directory removed"
-    fi
-    
-    # Remove desktop entry
-    if [ -f "$DESKTOP_DIR/laml-terminal.desktop" ]; then
-        rm "$DESKTOP_DIR/laml-terminal.desktop"
-        print_colored $GREEN "✅ Desktop entry removed"
-    fi
-    
-    # Remove bash completion
-    if [ -f "$HOME/.local/share/bash-completion/completions/laml" ]; then
-        rm "$HOME/.local/share/bash-completion/completions/laml"
-        print_colored $GREEN "✅ Shell completion removed"
-    fi
-    
-    print_colored $GREEN "🎉 LAML uninstalled successfully!"
-}
-
+# Main installation function
 main() {
-    # Check for uninstall flag
-    if [ "$1" = "--uninstall" ] || [ "$1" = "-u" ]; then
-        uninstall_laml
-        exit 0
-    fi
-    
     print_header
     
-    # Check for root privileges for installation
-    if [ "$EUID" -eq 0 ]; then
-        print_colored $RED "❌ Don't run this installer as root!"
-        print_colored $YELLOW "The installer will ask for sudo when needed."
-        exit 1
-    fi
+    print_colored $CYAN "🔍 Starting LAML installation for Linux..."
+    print_colored $BLUE "📊 System Information:"
+    print_colored $BLUE "   OS: $(uname -s)"
+    print_colored $BLUE "   Architecture: $(uname -m)"
+    print_colored $BLUE "   Kernel: $(uname -r)"
     
-    print_colored $BLUE " Install directory: $INSTALL_DIR"
-    print_colored $BLUE "⚙️  Config directory: $CONFIG_DIR"
-    
-    echo ""
-    read -p "Continue with installation? (y/N): " -n 1 -r
-    echo ""
-    
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        print_colored $YELLOW "Installation cancelled."
-        exit 0
-    fi
-    
+    check_linux
     check_dependencies
+    
+    print_colored $YELLOW "📂 Installation directories:"
+    print_colored $BLUE "   Binary: $INSTALL_DIR"
+    print_colored $BLUE "   Config: $CONFIG_DIR"
+    print_colored $BLUE "   Desktop: $DESKTOP_DIR"
+    
     install_laml
     create_desktop_entry
-    install_vscode_extension
     setup_shell_completion
+    setup_path
     
-    echo ""
     print_colored $GREEN "🎉 LAML installation completed successfully!"
-    echo ""
-    print_colored $CYAN "📋 Next steps:"
-    print_colored $NC "1. Restart your terminal or run: source ~/.bashrc"
-    print_colored $NC "2. Type 'laml version' to verify installation"
-    print_colored $NC "3. Type 'laml --help' to see available commands"
-    print_colored $NC "4. Create your first .lm file and run with 'laml run file.lm'"
-    echo ""
-    print_colored $BLUE "📚 Documentation: https://github.com/NaveenSingh9999/LAML"
-    print_colored $BLUE "🐛 Issues: https://github.com/NaveenSingh9999/LAML/issues"
-    echo ""
-    print_colored $CYAN "💡 You can now use 'laml' from anywhere in your terminal!"
+    print_colored $CYAN "📋 Installation Summary:"
+    print_colored $GREEN "   ✅ LAML binary installed to $INSTALL_DIR"
+    print_colored $GREEN "   ✅ Desktop entry created"
+    print_colored $GREEN "   ✅ Shell completion configured"
+    print_colored $GREEN "   ✅ PATH configured"
+    
+    print_colored $YELLOW "🚀 Getting Started:"
+    print_colored $BLUE "   • Run: laml --help"
+    print_colored $BLUE "   • Version: laml version"
+    print_colored $BLUE "   • Examples: laml run examples/hello.lm"
+    
+    print_colored $YELLOW "📚 Resources:"
+    print_colored $BLUE "   • Documentation: https://github.com/NaveenSingh9999/LAML"
+    print_colored $BLUE "   • Examples: $INSTALL_DIR/examples/"
+    print_colored $BLUE "   • Config: $CONFIG_DIR"
+    
+    print_colored $CYAN "💡 Note: You may need to restart your terminal or run 'source ~/.bashrc' to use LAML"
 }
 
-# Run main function
-main "$@"
+# Run the installer
+if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
+    main "$@"
+fi

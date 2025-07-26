@@ -36,6 +36,21 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/macos/install.sh | bash
 ```
 
+**Linux (AMD64/x86_64):**
+```bash
+curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/linux/install.sh | bash
+```
+
+**Linux (ARM64/aarch64):**
+```bash
+curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/linux/install.sh | bash
+```
+
+**Linux (ARMv7):**
+```bash
+curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/linux/install.sh | bash
+```
+
 **Termux (Android):**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/termux/install.sh | bash
@@ -57,6 +72,13 @@ curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/mai
 - ✅ Sets up shell completion (bash/zsh)
 - ✅ Includes automatic architecture detection
 
+**Linux:**
+- ✅ Automatic architecture detection (AMD64, ARM64, ARMv7)
+- ✅ Installs to `/usr/local/bin` with `laml` command
+- ✅ Creates desktop entry for development environment
+- ✅ Sets up shell completion (bash/zsh)
+- ✅ Multi-distribution support (Ubuntu, Debian, CentOS, Fedora, Arch, openSUSE)
+
 **Termux (Android):**
 - ✅ Downloads ARM-optimized binary for Android devices
 - ✅ Installs as `laml` command in Termux
@@ -70,13 +92,6 @@ For manual installation, download the appropriate binary from [Releases](https:/
 - `laml-linux-arm64` - Linux ARM64 (Apple Silicon, Raspberry Pi)
 - `laml-linux-armv7` - Linux ARMv7 (Raspberry Pi, older ARM)
 - `laml-termux` - Android/Termux ARM
-- `laml-linux-armv7` - Linux ARMv7
-- `laml-windows-x86_64.exe` - Windows 64-bit
-- `laml-termux` - Android/Termux ARM
-- ✅ Provides clean uninstall option
-
-### Manual Installation
-Download the `laml` binary from [releases](https://github.com/NaveenSingh9999/LAML/releases) and add to your PATH.
 
 ### VS Code Extension
 The installers automatically detect and install the VS Code extension. You can also download `laml-3.3.0.vsix` from the repository and install manually:
