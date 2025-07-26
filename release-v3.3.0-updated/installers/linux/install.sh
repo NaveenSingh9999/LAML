@@ -1,13 +1,12 @@
 #!/bin/bash
 
 # LAML Installer for Linux
-# Downloads and installs LAML from GitHub (u    # Download LAML binary
-    print_colored $YELLOW "📥 Downloading LAML binary..."
-    local temp_file="$HOME/laml_download"ersal binary)
+# Downloads and installs LAML from GitHub (universal binary)
 
 set -e
-
-# Colors for output
+    # Download LAML binary
+    print_colored $YELLOW "📥 Downloading LAML binary..."
+    local temp_file="$HOME/laml_download"Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -21,7 +20,25 @@ CONFIG_DIR="$HOME/.config/laml"
 DESKTOP_DIR="$HOME/.local/share/applications"
 
 # GitHub URLs
-LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml"
+detect_architecture() {
+    local arch=$(uname -m)
+    case $arch in
+        x86_64)
+            LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-x86_64"
+            ;;
+        aarch64|arm64)
+            LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-arm64"
+            ;;
+        armv7l|armhf)
+            LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-armv7"
+            ;;
+        *)
+            print_colored $RED "❌ Unsupported architecture: $arch"
+            print_colored $YELLOW "Supported architectures: x86_64, aarch64/arm64, armv7l/armhf"
+            exit 1
+            ;;
+    esac
+}
 
 print_colored() {
     local color=$1
@@ -80,6 +97,11 @@ download_file() {
 
 install_laml() {
     print_colored $YELLOW "📦 Downloading and installing LAML from GitHub..."
+    
+    # Detect architecture and set appropriate binary URL
+    detect_architecture
+    print_colored $BLUE "🏗️  Detected architecture: $(uname -m)"
+    print_colored $BLUE "📥 Using binary: $(basename "$LAML_BINARY_URL")"
     
     # Create directories
     sudo mkdir -p "$INSTALL_DIR"

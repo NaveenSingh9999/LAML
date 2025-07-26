@@ -19,7 +19,22 @@ CONFIG_DIR="$HOME/.config/laml"
 
 # GitHub URL for the universal laml binary
 # GitHub URLs
-LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml"
+detect_architecture() {
+    local arch=$(uname -m)
+    case $arch in
+        x86_64)
+            LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-x86_64"
+            ;;
+        arm64)
+            LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-arm64"
+            ;;
+        *)
+            print_colored $RED "❌ Unsupported macOS architecture: $arch"
+            print_colored $YELLOW "Supported architectures: x86_64 (Intel), arm64 (Apple Silicon)"
+            exit 1
+            ;;
+    esac
+}
 
 print_colored() {
     local color=$1
@@ -76,6 +91,11 @@ download_file() {
 
 install_laml() {
     print_colored $YELLOW "📦 Downloading and installing LAML from GitHub..."
+    
+    # Detect architecture and set appropriate binary URL
+    detect_architecture
+    print_colored $BLUE "🏗️  Detected architecture: $(uname -m)"
+    print_colored $BLUE "📥 Using binary: $(basename "$LAML_BINARY_URL")"
     
     # Create directories
     sudo mkdir -p "$INSTALL_DIR"

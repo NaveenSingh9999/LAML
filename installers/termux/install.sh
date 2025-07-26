@@ -19,7 +19,7 @@ CONFIG_DIR="$HOME/.config/laml"
 
 # GitHub URL for the universal laml binary
 # GitHub URLs  
-LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml"
+LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-termux"
 
 print_colored() {
     local color=$1

@@ -9,6 +9,15 @@
 - ✅ Fixed binary download URLs across all platforms
 - ✅ Updated documentation with correct installation commands
 
+### Architecture-Aware Installation
+- ✅ **Fixed Termux ARM compatibility** - Now uses `laml-termux` binary for Android devices
+- ✅ **Linux architecture detection** - Automatically downloads the correct binary:
+  - x86_64: `laml-linux-x86_64`
+  - ARM64: `laml-linux-arm64` 
+  - ARMv7: `laml-linux-armv7`
+- ✅ **macOS architecture detection** - Supports both Intel and Apple Silicon
+- ✅ **Improved error handling** - Better temp file management and verification
+
 ### Updated Installation Methods
 
 **Linux:**
@@ -94,6 +103,21 @@ laml version
 echo 'bring xcs.class34; func main() { say "Hello, LAML v3.3.0!"; }' > hello.lm
 laml run hello.lm
 ```
+
+## 🛠️ Troubleshooting
+
+### "cannot execute binary file: Exec format error"
+This error means the binary architecture doesn't match your system. The updated installers now automatically detect and download the correct architecture:
+
+- **Linux**: Supports x86_64, ARM64, ARMv7
+- **macOS**: Supports Intel (x86_64) and Apple Silicon (ARM64)  
+- **Termux**: Uses ARM-optimized binary for Android devices
+
+### Download Issues
+If installation fails:
+1. Check internet connection
+2. Verify you can access GitHub: `curl -I https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-termux`
+3. Try manual installation from the alternative methods section
 
 ## 🔗 Quick Links
 
