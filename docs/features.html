@@ -102,57 +102,67 @@ print("Time: " + duration + "ms")</code></pre>
                             <div class="output-header">Output</div>
                             <div class="output-content">
                                 <div class="output-line">Result: 9227465</div>
-                                <div class="output-line">Time: 42ms</div>
-                                <div class="performance-note">🚀 25x faster than Python</div>
+                                <div class="output-line">Time: Fast execution</div>
+                                <div class="performance-note">🚀 Compiled to efficient bytecode</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="demo-panel" id="syntax-demo">
                         <div class="code-editor">
-                            <pre><code class="language-laml">// Modern, clean syntax
-let users = [
-    { name: "Alice", age: 30 },
-    { name: "Bob", age: 25 }
-]
+                            <pre><code class="language-laml">// Modern LAML v3.3.0 syntax
+bring xcs.class34;
 
-// Functional programming
-let adults = users
-    .filter(user => user.age >= 18)
-    .map(user => user.name)
-    .sort()
-
-print("Adults: " + adults.join(", "))</code></pre>
+func main() {
+    let numbers: array = [1, 2, 3, 4, 5];
+    let doubled: array = [];
+    
+    loop i in numbers {
+        doubled.push(i * 2);
+    }
+    
+    say "Original: " + numbers;
+    say "Doubled: " + doubled;
+}</code></pre>
                         </div>
                         <div class="demo-output">
                             <div class="output-header">Output</div>
                             <div class="output-content">
-                                <div class="output-line">Adults: Alice, Bob</div>
-                                <div class="syntax-note">✨ Intuitive and expressive</div>
+                                <div class="output-line">Original: [1, 2, 3, 4, 5]</div>
+                                <div class="output-line">Doubled: [2, 4, 6, 8, 10]</div>
+                                <div class="syntax-note">✨ Enhanced type system and arrays</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="demo-panel" id="features-demo">
                         <div class="code-editor">
-                            <pre><code class="language-laml">// Built-in HTTP server
-import { Server } from "http"
+                            <pre><code class="language-laml">// LAML v3.3.0 features showcase
+bring xcs.class34;
 
-let server = new Server()
-
-server.get("/api/users", async (req, res) => {
-    let users = await db.query("SELECT * FROM users")
-    res.json(users)
-})
-
-server.listen(3000)
-print("Server running on :3000")</code></pre>
+func main() {
+    // Enhanced data types
+    let age: int = 25;
+    let height: float = 5.9;
+    let name: string = "Alice";
+    let isActive: bool = true;
+    let scores: array = [95, 87, 92];
+    
+    // Conditional logic
+    if age >= 18 {
+        say name + " is an adult";
+    }
+    
+    // Array operations
+    say "Scores: " + scores;
+}</code></pre>
                         </div>
                         <div class="demo-output">
                             <div class="output-header">Output</div>
                             <div class="output-content">
-                                <div class="output-line">Server running on :3000</div>
-                                <div class="features-note">🔧 Rich standard library</div>
+                                <div class="output-line">Alice is an adult</div>
+                                <div class="output-line">Scores: [95, 87, 92]</div>
+                                <div class="features-note">🔧 Rich type system and built-ins</div>
                             </div>
                         </div>
                     </div>
@@ -183,48 +193,62 @@ print("Server running on :3000")</code></pre>
             <div class="feature-card" data-category="performance">
                 <div class="feature-icon">⚡</div>
                 <div class="feature-content">
-                    <h3>Lightning-Fast Execution</h3>
-                    <p>LAML compiles to optimized bytecode and executes at near-native speeds, making it ideal for performance-critical applications.</p>
+                    <h3>Fast Execution</h3>
+                    <p>LAML compiles to optimized bytecode for efficient execution, with colored compiler output and enhanced error reporting.</p>
                     <div class="feature-details">
                         <div class="detail-item">
-                            <span class="detail-label">Startup time:</span>
-                            <span class="detail-value">&lt; 5ms</span>
+                            <span class="detail-label">Compilation:</span>
+                            <span class="detail-value">Fast bytecode generation</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Memory usage:</span>
                             <span class="detail-value">Minimal overhead</span>
                         </div>
                         <div class="detail-item">
-                            <span class="detail-label">Benchmark:</span>
-                            <span class="detail-value">25x faster than Python</span>
+                            <span class="detail-label">Features:</span>
+                            <span class="detail-value">Colored output & type checking</span>
                         </div>
                     </div>
                     <div class="feature-example">
-                        <pre><code>// Zero-cost abstractions
-let result = numbers
-    .filter(n => n > 0)
-    .map(n => n * 2)
-    .reduce((a, b) => a + b, 0)</code></pre>
+                        <pre><code>// LAML v3.3.0 syntax
+bring xcs.class34;
+
+func calculate() {
+    let numbers: array = [1, 2, 3, 4, 5];
+    let sum: int = 0;
+    
+    loop num in numbers {
+        if num > 0 {
+            sum = sum + num;
+        }
+    }
+    
+    say "Sum: " + sum;
+}</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="feature-card" data-category="performance">
+            <div class="feature-card" data-category="syntax">
                 <div class="feature-icon">🔄</div>
                 <div class="feature-content">
-                    <h3>Concurrent Programming</h3>
-                    <p>Built-in support for async/await, channels, and lightweight goroutines for efficient concurrent programming.</p>
+                    <h3>Enhanced Type System</h3>
+                    <p>LAML v3.3.0 introduces comprehensive data types with type inference and enhanced array support for safer, more expressive code.</p>
                     <div class="feature-example">
-                        <pre><code>// Async/await pattern
-async function fetchData(url) {
-    let response = await fetch(url)
-    return response.json()
-}
-
-// Channel communication
-let ch = make_channel()
-go(() => ch.send("Hello"))
-let message = ch.receive()</code></pre>
+                        <pre><code>// Type-aware programming
+func processData(items: array) {
+    let result: array = [];
+    let count: int = 0;
+    
+    loop item in items {
+        if item > 10 {
+            result.push(item);
+            count = count + 1;
+        }
+    }
+    
+    return result;
+}</code></pre>
                     </div>
                 </div>
             </div>

@@ -71,11 +71,11 @@
                             <h3>Windows</h3>
                         </div>
                         <div class="install-command">
-                            <code>curl -o laml-windows.exe https://github.com/NaveenSingh9999/LAML/releases/latest/download/laml-windows-x86_64.exe</code>
+                            <code>iwr -useb https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/windows/install.ps1 | iex</code>
                             <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
                         </div>
                         <div class="install-notes">
-                            <p>Download and run the Windows executable</p>
+                            <p>Run in PowerShell as Administrator. Automatically downloads and installs LAML from GitHub.</p>
                         </div>
                     </div>
 
@@ -88,11 +88,11 @@
                             <h3>Linux</h3>
                         </div>
                         <div class="install-command">
-                            <code>curl -L -o laml https://github.com/NaveenSingh9999/LAML/releases/latest/download/laml-linux-x86_64 && chmod +x laml</code>
+                            <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/linux/install.sh | bash</code>
                             <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
                         </div>
                         <div class="install-notes">
-                            <p>Works on Ubuntu, Debian, CentOS, Fedora, and more</p>
+                            <p>Works on Ubuntu, Debian, CentOS, Fedora, and more. Includes shell completion and VS Code extension.</p>
                         </div>
                     </div>
 
@@ -105,11 +105,11 @@
                             <h3>macOS</h3>
                         </div>
                         <div class="install-command">
-                            <code>curl -sSL https://get.laml.dev/install.sh | bash</code>
+                            <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/macos/install.sh | bash</code>
                             <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
                         </div>
                         <div class="install-notes">
-                            <p>Compatible with macOS 10.15+ (Intel and Apple Silicon)</p>
+                            <p>Compatible with macOS 10.15+ (Intel and Apple Silicon). Includes bash and zsh completion.</p>
                         </div>
                     </div>
 
@@ -122,11 +122,11 @@
                             <h3>Termux (Android)</h3>
                         </div>
                         <div class="install-command">
-                            <code>pkg install curl && curl -sSL https://get.laml.dev/termux.sh | bash</code>
+                            <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/termux/install.sh | bash</code>
                             <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
                         </div>
                         <div class="install-notes">
-                            <p>For Android devices with Termux app installed</p>
+                            <p>For Android devices with Termux app. Includes Termux shortcuts and auto-dependency installation.</p>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                             </div>
                             <div class="expected-output">
                                 <strong>Expected output:</strong>
-                                <code>LAML 3.2.0</code>
+                                <code>LAML 3.3.0</code>
                             </div>
                         </div>
                     </div>
@@ -160,12 +160,12 @@
                             <h3>Run Hello World</h3>
                             <p>Create and run your first LAML program:</p>
                             <div class="command-block">
-                                <code>echo 'print("Hello, LAML!")' > hello.lm && laml hello.lm</code>
+                                <code>echo 'bring xcs.class34; func main() { say "Hello, LAML v3.3.0!"; }' > hello.lm && laml run hello.lm</code>
                                 <button class="copy-btn">Copy</button>
                             </div>
                             <div class="expected-output">
                                 <strong>Expected output:</strong>
-                                <code>Hello, LAML!</code>
+                                <code>Hello, LAML v3.3.0!</code>
                             </div>
                         </div>
                     </div>
@@ -207,13 +207,13 @@
                     <div class="vscode-install">
                         <h4>Installation Options</h4>
                         <div class="install-options">
-                            <a href="https://github.com/NaveenSingh9999/LAML/releases/latest/download/laml-vscode-extension.vsix" class="install-option primary">
+                            <a href="https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/laml-3.3.0.vsix" class="install-option primary">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
                                     <polyline points="7 10 12 15 17 10" fill="none" stroke="currentColor" stroke-width="2"/>
                                     <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
                                 </svg>
-                                Download VSIX Extension
+                                Download VSIX Extension (v3.3.0)
                             </a>
                             <a href="https://github.com/NaveenSingh9999/LAML/tree/main/vscode-extension" class="install-option secondary">
                                 View Source Code

@@ -46,11 +46,20 @@ curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installer
 curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/termux/install.sh | bash
 ```
 
+### What the Installer Does
+- ✅ Downloads the latest LAML binary from GitHub
+- ✅ Installs as `laml` command (works from anywhere)
+- ✅ Adds to system PATH automatically
+- ✅ Sets up shell completion (bash/zsh)
+- ✅ Installs VS Code extension (if VS Code detected)
+- ✅ Creates desktop shortcuts and menu entries
+- ✅ Provides clean uninstall option
+
 ### Manual Installation
-Download the appropriate binary from [releases](https://github.com/NaveenSingh9999/LAML/releases) and add to your PATH.
+Download the `laml` binary from [releases](https://github.com/NaveenSingh9999/LAML/releases) and add to your PATH.
 
 ### VS Code Extension
-The installers will automatically install the VS Code extension if VS Code is detected. You can also download `laml-3.3.0.vsix` from [releases](https://github.com/NaveenSingh9999/LAML/releases) and install manually:
+The installers automatically detect and install the VS Code extension. You can also download `laml-3.3.0.vsix` from the repository and install manually:
 ```bash
 code --install-extension laml-3.3.0.vsix
 ```
