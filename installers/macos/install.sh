@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# LAML Installer for Linux
+# LAML Installer for macOS
 # Downloads and installs LAML from GitHub (universal binary)
 
 set -e
@@ -16,7 +16,6 @@ NC='\033[0m' # No Color
 # Configuration
 INSTALL_DIR="/usr/local/bin"
 CONFIG_DIR="$HOME/.config/laml"
-DESKTOP_DIR="$HOME/.local/share/applications"
 
 # GitHub URL for the universal laml binary
 LAML_BINARY_URL="https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/laml"
@@ -28,8 +27,8 @@ print_colored() {
 }
 
 print_header() {
-    print_colored $CYAN "🚀 LAML Installer for Linux"
-    print_colored $CYAN "==========================="
+    print_colored $CYAN "🚀 LAML Installer for macOS"
+    print_colored $CYAN "=========================="
     print_colored $BLUE "📥 Downloads latest LAML from GitHub"
     echo
 }
@@ -51,9 +50,7 @@ check_dependencies() {
         done
         echo
         print_colored $YELLOW "Please install the missing dependencies and try again."
-        print_colored $YELLOW "On Ubuntu/Debian: sudo apt update && sudo apt install curl"
-        print_colored $YELLOW "On CentOS/RHEL: sudo yum install curl"
-        print_colored $YELLOW "On Arch: sudo pacman -S curl"
+        print_colored $YELLOW "You can install curl with Homebrew: brew install curl"
         exit 1
     fi
     
@@ -74,43 +71,15 @@ download_file() {
     fi
 }
 
-check_dependencies() {
-    print_colored $YELLOW "🔍 Checking dependencies..."
-    
-    # Check for required tools
-    local missing_deps=()
-    
-    if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
-        missing_deps+=("curl or wget")
-    fi
-    
-    if [ ${#missing_deps[@]} -ne 0 ]; then
-        print_colored $RED "❌ Missing required dependencies:"
-        for dep in "${missing_deps[@]}"; do
-            print_colored $RED "   - $dep"
-        done
-        echo
-        print_colored $YELLOW "Please install the missing dependencies and try again."
-        print_colored $YELLOW "On Ubuntu/Debian: sudo apt update && sudo apt install curl"
-        print_colored $YELLOW "On CentOS/RHEL: sudo yum install curl"  
-        print_colored $YELLOW "On Arch: sudo pacman -S curl"
-        exit 1
-    fi
-    
-    print_colored $GREEN "✅ All dependencies found"
-}
-}
-
 install_laml() {
     print_colored $YELLOW "📦 Downloading and installing LAML from GitHub..."
     
     # Create directories
     sudo mkdir -p "$INSTALL_DIR"
     mkdir -p "$CONFIG_DIR"
-    mkdir -p "$DESKTOP_DIR"
     
     # Download LAML binary
-    print_colored $YELLOW "� Downloading LAML binary..."
+    print_colored $YELLOW "📥 Downloading LAML binary..."
     local temp_file="/tmp/laml_download"
     
     if download_file "$LAML_BINARY_URL" "$temp_file"; then
@@ -136,48 +105,41 @@ install_laml() {
     fi
 }
 
-create_desktop_entry() {
-    print_colored $YELLOW "🖥️  Creating desktop entry..."
-    
-    cat > "$DESKTOP_DIR/laml-terminal.desktop" << EOF
-[Desktop Entry]
-Name=LAML Terminal
-Comment=LAML Development Environment
-Exec=gnome-terminal --title="LAML Terminal" -- bash -c "echo 'LAML Development Environment'; echo 'Type laml --help for usage'; bash"
-Icon=terminal
-Type=Application
-Categories=Development;Programming;
-Keywords=LAML;Programming;Compiler;
-StartupNotify=true
-EOF
-    
-    chmod +x "$DESKTOP_DIR/laml-terminal.desktop"
-    print_colored $GREEN "✅ Desktop entry created"
-}
-
 install_vscode_extension() {
     if command -v code >/dev/null 2>&1; then
-        print_colored $YELLOW "📝 Installing VS Code extension..."
+        print_colored $YELLOW "📝 Checking for VS Code extension..."
         
-        # Look for VSIX file
-        local vsix_file=$(find "$(dirname "$0")/.." -name "laml-*.vsix" | head -1)
+        # Try to find the extension in common locations
+        local vsix_locations=(
+            "$(dirname "$0")/../laml-*.vsix"
+            "$(dirname "$0")/../../vscode-extension/laml-*.vsix"
+            "$(dirname "$0")/../../installers/laml-*.vsix"
+        )
+        
+        local vsix_file=""
+        for location in "${vsix_locations[@]}"; do
+            if ls $location 1> /dev/null 2>&1; then
+                vsix_file=$(ls $location | head -1)
+                break
+            fi
+        done
         
         if [ -n "$vsix_file" ] && [ -f "$vsix_file" ]; then
             code --install-extension "$vsix_file"
             print_colored $GREEN "✅ VS Code extension installed"
         else
-            print_colored $YELLOW "⚠️  VS Code extension not found. You can install it manually later."
+            print_colored $BLUE "ℹ️  VS Code extension not found in installer package"
         fi
     else
-        print_colored $YELLOW "ℹ️  VS Code not found. Extension installation skipped."
+        print_colored $BLUE "ℹ️  VS Code not found - extension installation skipped"
     fi
 }
 
 setup_shell_completion() {
     print_colored $YELLOW "🔧 Setting up shell completion..."
     
-    # Bash completion
-    if [ -n "$BASH_VERSION" ]; then
+    # Bash completion (if bash is available)
+    if command -v bash >/dev/null 2>&1; then
         local bash_completion_dir="$HOME/.local/share/bash-completion/completions"
         mkdir -p "$bash_completion_dir"
         
@@ -201,6 +163,36 @@ complete -F _laml_completion laml
 EOF
         print_colored $GREEN "✅ Bash completion installed"
     fi
+    
+    # Zsh completion (if zsh is available and oh-my-zsh is installed)
+    if command -v zsh >/dev/null 2>&1 && [ -d "$HOME/.oh-my-zsh" ]; then
+        local zsh_completion_dir="$HOME/.oh-my-zsh/custom"
+        mkdir -p "$zsh_completion_dir"
+        
+        cat > "$zsh_completion_dir/_laml" << 'EOF'
+#compdef laml
+
+_laml() {
+    local context state line
+    _arguments \
+        '1:command:(run compile version help)' \
+        '*::arg:->args'
+    
+    case $state in
+        args)
+            case $words[1] in
+                run|compile)
+                    _files -g "*.lm"
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+_laml "$@"
+EOF
+        print_colored $GREEN "✅ Zsh completion installed"
+    fi
 }
 
 uninstall_laml() {
@@ -218,16 +210,16 @@ uninstall_laml() {
         print_colored $GREEN "✅ Configuration directory removed"
     fi
     
-    # Remove desktop entry
-    if [ -f "$DESKTOP_DIR/laml-terminal.desktop" ]; then
-        rm "$DESKTOP_DIR/laml-terminal.desktop"
-        print_colored $GREEN "✅ Desktop entry removed"
-    fi
-    
     # Remove bash completion
     if [ -f "$HOME/.local/share/bash-completion/completions/laml" ]; then
         rm "$HOME/.local/share/bash-completion/completions/laml"
-        print_colored $GREEN "✅ Shell completion removed"
+        print_colored $GREEN "✅ Bash completion removed"
+    fi
+    
+    # Remove zsh completion
+    if [ -f "$HOME/.oh-my-zsh/custom/_laml" ]; then
+        rm "$HOME/.oh-my-zsh/custom/_laml"
+        print_colored $GREEN "✅ Zsh completion removed"
     fi
     
     print_colored $GREEN "🎉 LAML uninstalled successfully!"
@@ -249,7 +241,7 @@ main() {
         exit 1
     fi
     
-    print_colored $BLUE " Install directory: $INSTALL_DIR"
+    print_colored $BLUE "📁 Install directory: $INSTALL_DIR"
     print_colored $BLUE "⚙️  Config directory: $CONFIG_DIR"
     
     echo ""
@@ -263,7 +255,6 @@ main() {
     
     check_dependencies
     install_laml
-    create_desktop_entry
     install_vscode_extension
     setup_shell_completion
     
@@ -271,7 +262,7 @@ main() {
     print_colored $GREEN "🎉 LAML installation completed successfully!"
     echo ""
     print_colored $CYAN "📋 Next steps:"
-    print_colored $NC "1. Restart your terminal or run: source ~/.bashrc"
+    print_colored $NC "1. Restart your terminal or run: source ~/.bashrc (or ~/.zshrc)"
     print_colored $NC "2. Type 'laml --version' to verify installation"
     print_colored $NC "3. Type 'laml --help' to see available commands"
     print_colored $NC "4. Create your first .lm file and run with 'laml run file.lm'"

@@ -24,20 +24,35 @@ LAML (Low Abstraction Machine Language) is a **sentence-like, general-purpose co
 
 ## 🔧 Installation
 
-### Windows
-Download `laml-windows-x86_64.exe` from [releases](https://github.com/NaveenSingh9999/LAML/releases)
+### Quick Install (Recommended)
 
-### Linux
-```bash
-wget https://github.com/NaveenSingh9999/LAML/releases/download/v3.3.0/laml-linux-x86_64
-chmod +x laml-linux-x86_64
-sudo mv laml-linux-x86_64 /usr/local/bin/laml
+**Windows (PowerShell as Administrator):**
+```powershell
+iwr -useb https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/windows/install.ps1 | iex
 ```
 
-### VS Code Extension
-Download `laml-vscode-extension-3.3.0.vsix` from [releases](https://github.com/NaveenSingh9999/LAML/releases) and install:
+**Linux:**
 ```bash
-code --install-extension laml-vscode-extension-3.3.0.vsix
+curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/linux/install.sh | bash
+```
+
+**macOS:**
+```bash
+curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/macos/install.sh | bash
+```
+
+**Termux (Android):**
+```bash
+curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/termux/install.sh | bash
+```
+
+### Manual Installation
+Download the appropriate binary from [releases](https://github.com/NaveenSingh9999/LAML/releases) and add to your PATH.
+
+### VS Code Extension
+The installers will automatically install the VS Code extension if VS Code is detected. You can also download `laml-3.3.0.vsix` from [releases](https://github.com/NaveenSingh9999/LAML/releases) and install manually:
+```bash
+code --install-extension laml-3.3.0.vsix
 ```
 
 ## 🎯 Quick Start

@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 # LAML Installer for Termux (Android)
-# Specialized installer for Termux environment
+# Downloads and installs LAML from GitHub
 
 set -e
 
@@ -16,7 +16,9 @@ NC='\033[0m' # No Color
 # Termux-specific paths
 INSTALL_DIR="$PREFIX/bin"
 CONFIG_DIR="$HOME/.config/laml"
-DESKTOP_DIR="$HOME/.local/share/applications"
+
+# GitHub URL for the universal laml binary
+LAML_BINARY_URL="https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/laml"
 
 print_colored() {
     local color=$1
@@ -27,6 +29,8 @@ print_colored() {
 print_header() {
     print_colored $CYAN "🚀 LAML Installer for Termux"
     print_colored $CYAN "============================"
+    print_colored $BLUE "📥 Downloads latest LAML from GitHub"
+    echo
 }
 
 check_termux() {
@@ -39,179 +43,133 @@ check_termux() {
     print_colored $GREEN "✅ Termux environment detected"
 }
 
-detect_android_arch() {
-    local arch=$(uname -m)
-    case $arch in
-        aarch64|arm64)
-            echo "arm64"
-            ;;
-        armv7l|armv8l)
-            echo "arm"
-            ;;
-        x86_64)
-            echo "x86_64"
-            ;;
-        i686)
-            echo "x86"
-            ;;
-        *)
-            print_colored $RED "❌ Unsupported architecture: $arch"
-            exit 1
-            ;;
-    esac
+check_dependencies() {
+    print_colored $YELLOW "🔍 Checking dependencies..."
+    
+    local missing_deps=()
+    
+    if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
+        missing_deps+=("curl")
+    fi
+    
+    if [ ${#missing_deps[@]} -ne 0 ]; then
+        print_colored $YELLOW "📦 Installing missing dependencies..."
+        
+        for dep in "${missing_deps[@]}"; do
+            print_colored $YELLOW "Installing $dep..."
+            pkg install -y "$dep"
+        done
+    fi
+    
+    print_colored $GREEN "✅ All dependencies ready"
 }
 
-install_dependencies() {
-    print_colored $YELLOW "📦 Installing dependencies..."
+download_file() {
+    local url=$1
+    local output=$2
     
-    # Update package list
-    pkg update -y
-    
-    # Install required packages
-    local packages=(
-        "golang"          # For building Go-based LAML compiler
-        "git"            # For version control
-        "curl"           # For downloading
-        "unzip"          # For extracting
-        "termux-tools"   # Termux utilities
-        "file"           # File type detection
-    )
-    
-    for package in "${packages[@]}"; do
-        if ! pkg list-installed | grep -q "^$package/"; then
-            print_colored $YELLOW "Installing $package..."
-            pkg install -y "$package"
-        else
-            print_colored $GREEN "✅ $package already installed"
-        fi
-    done
+    if command -v curl >/dev/null 2>&1; then
+        curl -L -o "$output" "$url"
+    elif command -v wget >/dev/null 2>&1; then
+        wget -O "$output" "$url"
+    else
+        print_colored $RED "❌ Neither curl nor wget found"
+        return 1
+    fi
 }
 
 install_laml() {
-    local arch=$(detect_android_arch)
-    print_colored $YELLOW "📦 Installing LAML for Termux ($arch)..."
+    print_colored $YELLOW "📦 Downloading and installing LAML from GitHub..."
     
     # Create directories
+    mkdir -p "$INSTALL_DIR"
     mkdir -p "$CONFIG_DIR"
     
-    # Get script directory to find the binary
-    local script_dir="$(dirname "$(readlink -f "$0")")"
+    # Download LAML binary
+    print_colored $YELLOW "📥 Downloading LAML binary..."
+    local temp_file="/tmp/laml_download"
     
-    # Install the REAL ARM binary
-    if [ -f "${script_dir}/laml" ]; then
-        cp "${script_dir}/laml" "$INSTALL_DIR/laml"
-        chmod +x "$INSTALL_DIR/laml"
-        print_colored $GREEN "✅ LAML ARM binary installed for Termux"
-    else
-        print_colored $RED "❌ LAML ARM binary not found in package!"
-        exit 1
-    fi
-    
-    print_colored $GREEN "✅ LAML binary installed to $INSTALL_DIR"
-}
-
-setup_termux_integration() {
-    print_colored $YELLOW "🔧 Setting up Termux integration..."
-    
-    # Create shortcut in Termux home
-    cat > "$HOME/laml-dev" << 'EOF'
-#!/data/data/com.termux/files/usr/bin/bash
-echo "🚀 LAML Development Environment"
-echo "==============================="
-echo "Welcome to LAML on Termux!"
-echo ""
-echo "Quick commands:"
-echo "  laml version      - Check LAML version"
-echo "  laml help         - Show help"
-echo "  cd ~/storage      - Access Android storage"
-echo "  termux-setup-storage - Enable storage access"
-echo ""
-exec bash
-EOF
-    
-    chmod +x "$HOME/laml-dev"
-    
-    # Create sample LAML file
-    mkdir -p "$HOME/laml-examples"
-    cat > "$HOME/laml-examples/hello-termux.lm" << 'EOF'
-~ LAML Hello World for Termux
-bring xcs.class34;
-
-func main() {
-    say "Hello from LAML on Termux!";
-    say "Running on Android device";
-    
-    val device = "Android";
-    val environment = "Termux";
-    
-    say "Device: " + device;
-    say "Environment: " + environment;
-    
-    ~ Loop example
-    loop i in 1 to 3 {
-        say "Count: " + i;
-    }
-}
-EOF
-    
-    print_colored $GREEN "✅ Termux integration complete"
-    print_colored $BLUE "📁 Sample file created: ~/laml-examples/hello-termux.lm"
-}
-
-setup_android_storage() {
-    print_colored $YELLOW "📱 Setting up Android storage access..."
-    
-    if command -v termux-setup-storage >/dev/null 2>&1; then
-        echo "This will request storage permission for Termux."
-        echo "Please allow storage access when prompted."
-        read -p "Continue? (y/N): " -n 1 -r
-        echo ""
+    if download_file "$LAML_BINARY_URL" "$temp_file"; then
+        print_colored $GREEN "✅ LAML binary downloaded successfully"
         
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            termux-setup-storage
-            print_colored $GREEN "✅ Storage access configured"
-            
-            # Create shortcut to storage
-            if [ -d "$HOME/storage" ]; then
-                ln -sf "$HOME/storage/shared" "$HOME/android-storage" 2>/dev/null || true
-                print_colored $GREEN "✅ Android storage accessible at ~/android-storage"
-            fi
+        # Install binary
+        cp "$temp_file" "$INSTALL_DIR/laml"
+        chmod +x "$INSTALL_DIR/laml"
+        rm -f "$temp_file"
+        
+        print_colored $GREEN "✅ LAML binary installed as 'laml' to $INSTALL_DIR"
+        
+        # Test installation
+        if "$INSTALL_DIR/laml" --version >/dev/null 2>&1; then
+            print_colored $GREEN "✅ LAML is working correctly"
         else
-            print_colored $YELLOW "⚠️  Storage access skipped. You can run 'termux-setup-storage' later."
+            print_colored $YELLOW "⚠️  LAML installed but may need configuration"
         fi
     else
-        print_colored $YELLOW "⚠️  termux-setup-storage not available"
+        print_colored $RED "❌ Failed to download LAML binary"
+        print_colored $YELLOW "Please check your internet connection and try again."
+        exit 1
     fi
 }
 
-create_termux_shortcuts() {
-    print_colored $YELLOW "⚡ Creating Termux shortcuts..."
+setup_termux_shortcuts() {
+    print_colored $YELLOW "📱 Setting up Termux shortcuts..."
     
-    # Create shortcut directory
-    mkdir -p "$HOME/.shortcuts"
+    local shortcuts_dir="$HOME/.shortcuts"
+    mkdir -p "$shortcuts_dir"
     
-    # LAML development shortcut
-    cat > "$HOME/.shortcuts/LAML-Dev" << 'EOF'
+    # Create LAML shortcut
+    cat > "$shortcuts_dir/laml" << 'EOF'
 #!/data/data/com.termux/files/usr/bin/bash
-cd ~/laml-examples
-echo "🚀 LAML Development Mode"
-echo "========================"
-echo "Current directory: $(pwd)"
-echo "Available examples:"
-ls *.lm 2>/dev/null || echo "No .lm files found"
+echo "LAML Development Environment"
+echo "Type 'laml --help' for usage"
 echo ""
-echo "Try: laml run hello-termux.lm"
+cd "$HOME"
 exec bash
 EOF
     
-    chmod +x "$HOME/.shortcuts/LAML-Dev"
-    
+    chmod +x "$shortcuts_dir/laml"
     print_colored $GREEN "✅ Termux shortcuts created"
-    print_colored $BLUE "💡 You can now access 'LAML-Dev' from Termux widgets"
+}
+
+setup_shell_completion() {
+    print_colored $YELLOW "🔧 Setting up shell completion..."
+    
+    # Bash completion
+    local bash_completion_dir="$HOME/.local/share/bash-completion/completions"
+    mkdir -p "$bash_completion_dir"
+    
+    cat > "$bash_completion_dir/laml" << 'EOF'
+_laml_completion() {
+    local cur prev commands
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    commands="run compile version help"
+    
+    if [[ ${cur} == -* ]]; then
+        COMPREPLY=($(compgen -W "--help --version" -- ${cur}))
+    elif [[ ${COMP_CWORD} -eq 1 ]]; then
+        COMPREPLY=($(compgen -W "${commands}" -- ${cur}))
+    elif [[ ${prev} == "run" || ${prev} == "compile" ]]; then
+        COMPREPLY=($(compgen -f -X "!*.lm" -- ${cur}))
+    fi
+}
+complete -F _laml_completion laml
+EOF
+    
+    # Add to bashrc
+    if ! grep -q "laml completion" "$HOME/.bashrc" 2>/dev/null; then
+        echo "" >> "$HOME/.bashrc"
+        echo "# LAML completion" >> "$HOME/.bashrc"
+        echo "[ -f $bash_completion_dir/laml ] && source $bash_completion_dir/laml" >> "$HOME/.bashrc"
+    fi
+    
+    print_colored $GREEN "✅ Shell completion installed"
 }
 
 uninstall_laml() {
-    print_colored $YELLOW "🗑️  Uninstalling LAML from Termux..."
+    print_colored $YELLOW "🗑️  Uninstalling LAML..."
     
     # Remove binary
     if [ -f "$INSTALL_DIR/laml" ]; then
@@ -225,19 +183,16 @@ uninstall_laml() {
         print_colored $GREEN "✅ Configuration directory removed"
     fi
     
-    # Remove shortcuts and examples
-    if [ -f "$HOME/laml-dev" ]; then
-        rm "$HOME/laml-dev"
-    fi
-    
-    if [ -d "$HOME/laml-examples" ]; then
-        rm -rf "$HOME/laml-examples"
-        print_colored $GREEN "✅ Examples directory removed"
-    fi
-    
-    if [ -f "$HOME/.shortcuts/LAML-Dev" ]; then
-        rm "$HOME/.shortcuts/LAML-Dev"
+    # Remove shortcuts
+    if [ -f "$HOME/.shortcuts/laml" ]; then
+        rm "$HOME/.shortcuts/laml"
         print_colored $GREEN "✅ Termux shortcuts removed"
+    fi
+    
+    # Remove bash completion
+    if [ -f "$HOME/.local/share/bash-completion/completions/laml" ]; then
+        rm "$HOME/.local/share/bash-completion/completions/laml"
+        print_colored $GREEN "✅ Shell completion removed"
     fi
     
     print_colored $GREEN "🎉 LAML uninstalled successfully!"
@@ -253,18 +208,10 @@ main() {
     print_header
     check_termux
     
-    print_colored $BLUE "📱 Android architecture: $(detect_android_arch)"
     print_colored $BLUE "📁 Install directory: $INSTALL_DIR"
     print_colored $BLUE "⚙️  Config directory: $CONFIG_DIR"
     
     echo ""
-    print_colored $YELLOW "This installer will:"
-    print_colored $NC "• Install LAML compiler for Termux"
-    print_colored $NC "• Set up Android storage access"
-    print_colored $NC "• Create development shortcuts"
-    print_colored $NC "• Install example files"
-    echo ""
-    
     read -p "Continue with installation? (y/N): " -n 1 -r
     echo ""
     
@@ -273,23 +220,25 @@ main() {
         exit 0
     fi
     
-    install_dependencies
+    check_dependencies
     install_laml
-    setup_termux_integration
-    setup_android_storage
-    create_termux_shortcuts
+    setup_termux_shortcuts
+    setup_shell_completion
     
     echo ""
-    print_colored $GREEN "🎉 LAML installation on Termux completed successfully!"
+    print_colored $GREEN "🎉 LAML installation completed successfully!"
     echo ""
     print_colored $CYAN "📋 Next steps:"
-    print_colored $NC "1. Type 'laml version' to verify installation"
-    print_colored $NC "2. Run 'cd ~/laml-examples && laml run hello-termux.lm'"
-    print_colored $NC "3. Use 'LAML-Dev' shortcut for quick development"
-    print_colored $NC "4. Access Android files via ~/android-storage"
+    print_colored $NC "1. Restart Termux or run: source ~/.bashrc"
+    print_colored $NC "2. Type 'laml --version' to verify installation"
+    print_colored $NC "3. Type 'laml --help' to see available commands"
+    print_colored $NC "4. Create your first .lm file and run with 'laml run file.lm'"
     echo ""
     print_colored $BLUE "📚 Documentation: https://github.com/NaveenSingh9999/LAML"
-    print_colored $BLUE "💬 Termux community: https://termux.com"
+    print_colored $BLUE "🐛 Issues: https://github.com/NaveenSingh9999/LAML/issues"
+    echo ""
+    print_colored $CYAN "💡 You can now use 'laml' from anywhere in Termux!"
+    print_colored $CYAN "💡 Check the Termux shortcuts widget for quick access!"
 }
 
 # Run main function
