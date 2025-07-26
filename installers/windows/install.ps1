@@ -8,8 +8,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-# GitHub URL for the universal laml binary
-$LAML_BINARY_URL = "https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml"
+# GitHub URL for the Windows laml binary
+$LAML_BINARY_URL = "https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-windows-x86_64.exe"
 $LAML_VERSION_URL = "https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/README.md"
 
 function Write-ColorText {

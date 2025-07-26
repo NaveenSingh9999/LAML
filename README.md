@@ -24,25 +24,52 @@ LAML (Low Abstraction Machine Language) is a **sentence-like, general-purpose co
 
 ## 🔧 Installation
 
-### Quick Install for Termux (Android)
+### Quick Install (One-Line Installers)
+
+**Windows (PowerShell as Administrator):**
+```powershell
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/windows/install.ps1'))
+```
+
+**macOS:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/macos/install.sh | bash
+```
 
 **Termux (Android):**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/installers/termux/install.sh | bash
 ```
 
-### What the Installer Does
-- ✅ Downloads the ARM-optimized LAML binary from GitHub
+### What the Installers Do
+
+**Windows:**
+- ✅ Downloads the Windows executable from GitHub
+- ✅ Installs to Program Files with `laml` command
+- ✅ Adds to system PATH automatically
+- ✅ Creates desktop shortcut and Start Menu entry
+- ✅ Installs VS Code extension (if VS Code detected)
+
+**macOS:**
+- ✅ Downloads architecture-appropriate binary (Intel/Apple Silicon)
+- ✅ Installs to `/usr/local/bin` with `laml` command
+- ✅ Creates LAML.app bundle in Applications
+- ✅ Sets up shell completion (bash/zsh)
+- ✅ Includes automatic architecture detection
+
+**Termux (Android):**
+- ✅ Downloads ARM-optimized binary for Android devices
 - ✅ Installs as `laml` command in Termux
-- ✅ Creates config directory for LAML settings
-- ✅ Sets up Termux shortcuts for quick access
-- ✅ Verifies installation with version check
-- ✅ Provides clear success confirmation
+- ✅ Creates Termux shortcuts for quick access
+- ✅ Verifies installation with comprehensive testing
 
 ### Alternative Installation
-For other platforms, download the appropriate binary from [Releases](https://github.com/NaveenSingh9999/LAML/releases):
-- `laml-linux-x86_64` - Linux 64-bit
-- `laml-linux-arm64` - Linux ARM64
+For manual installation, download the appropriate binary from [Releases](https://github.com/NaveenSingh9999/LAML/releases):
+- `laml-windows-x86_64.exe` - Windows 64-bit
+- `laml-linux-x86_64` - Linux 64-bit (Intel/AMD)
+- `laml-linux-arm64` - Linux ARM64 (Apple Silicon, Raspberry Pi)
+- `laml-linux-armv7` - Linux ARMv7 (Raspberry Pi, older ARM)
+- `laml-termux` - Android/Termux ARM
 - `laml-linux-armv7` - Linux ARMv7
 - `laml-windows-x86_64.exe` - Windows 64-bit
 - `laml-termux` - Android/Termux ARM
