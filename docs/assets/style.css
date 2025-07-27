@@ -280,10 +280,12 @@ pre code {
     margin-bottom: 1rem;
     line-height: 1.1;
     letter-spacing: -1px;
+    color: white;
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
+    color: white;
     margin-bottom: 2.5rem;
     opacity: 0.9;
     font-weight: 300;
