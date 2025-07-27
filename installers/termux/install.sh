@@ -18,7 +18,7 @@ INSTALL_DIR="$PREFIX/bin"
 CONFIG_DIR="$HOME/.config/laml"
 
 # GitHub URL for the ARM laml binary for Termux
-LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-termux"
+LAML_BINARY_URL="https://raw.githubusercontent.com/NaveenSingh9999/LAML/refs/heads/main/laml-linux-arm64"
 
 print_colored() {
     local color=$1
