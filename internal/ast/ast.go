@@ -364,18 +364,31 @@ func (ls *LoopStatement) String() string {
 
 // SayStatement represents print statements
 type SayStatement struct {
-	Token lexer.Token // the 'say' token
-	Value Expression
+	Token     lexer.Token  // the 'say' token
+	Value     Expression   // For backward compatibility: say "string"
+	Format    Expression   // For new format style: say("format", args...)
+	Arguments []Expression // Arguments for format specifiers
 }
 
 func (ss *SayStatement) statementNode()       {}
 func (ss *SayStatement) TokenLiteral() string { return ss.Token.Literal }
 func (ss *SayStatement) String() string {
 	var out bytes.Buffer
-	out.WriteString(ss.TokenLiteral() + " ")
-	if ss.Value != nil {
+	out.WriteString(ss.TokenLiteral())
+
+	if ss.Format != nil {
+		out.WriteString("(")
+		out.WriteString(ss.Format.String())
+		for _, arg := range ss.Arguments {
+			out.WriteString(", ")
+			out.WriteString(arg.String())
+		}
+		out.WriteString(")")
+	} else if ss.Value != nil {
+		out.WriteString(" ")
 		out.WriteString(ss.Value.String())
 	}
+
 	out.WriteString(";")
 	return out.String()
 }

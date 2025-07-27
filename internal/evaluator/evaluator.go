@@ -95,11 +95,50 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 		return &object.ReturnValue{Value: val}
 
 	case *ast.SayStatement:
-		val := Eval(node.Value, env)
-		if isError(val) {
-			return val
+		if node.Format != nil {
+			// New format style: say("format %s %d", name, age)
+			formatVal := Eval(node.Format, env)
+			if isError(formatVal) {
+				return formatVal
+			}
+
+			formatStr, ok := formatVal.(*object.String)
+			if !ok {
+				return newError("format must be a string, got %T", formatVal)
+			}
+
+			// Evaluate arguments
+			args := make([]interface{}, len(node.Arguments))
+			for i, arg := range node.Arguments {
+				val := Eval(arg, env)
+				if isError(val) {
+					return val
+				}
+				args[i] = objectToGoValue(val)
+			}
+
+			// Apply format specifiers and escape sequences
+			result, err := FormatWithSpecifiers(formatStr.Value, args)
+			if err != nil {
+				return newError("format error: %s", err.Error())
+			}
+
+			fmt.Print(result)
+		} else {
+			// Old style: say "string"
+			val := Eval(node.Value, env)
+			if isError(val) {
+				return val
+			}
+
+			// Process escape sequences even for old syntax
+			if strVal, ok := val.(*object.String); ok {
+				processed := ProcessEscapeSequences(strVal.Value)
+				fmt.Println(processed)
+			} else {
+				fmt.Println(val.Inspect())
+			}
 		}
-		fmt.Println(val.Inspect())
 		return NULL
 
 	case *ast.ImportStatement:
@@ -716,4 +755,26 @@ func isError(obj object.Object) bool {
 		return obj.Type() == object.ERROR_OBJ
 	}
 	return false
+}
+
+// objectToGoValue converts LAML objects to Go interface{} values for formatting
+func objectToGoValue(obj object.Object) interface{} {
+	switch o := obj.(type) {
+	case *object.Integer:
+		return o.Value
+	case *object.Float:
+		return o.Value
+	case *object.String:
+		return o.Value
+	case *object.Boolean:
+		return o.Value
+	case *object.Array:
+		values := make([]interface{}, len(o.Elements))
+		for i, elem := range o.Elements {
+			values[i] = objectToGoValue(elem)
+		}
+		return values
+	default:
+		return obj.Inspect()
+	}
 }

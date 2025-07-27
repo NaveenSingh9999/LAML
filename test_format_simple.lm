@@ -1,0 +1,7 @@
+~ Simple format test
+bring xcs.class34;
+
+func main() {
+    say "Testing basic say";
+    say("Testing format: %s", "hello");
+}

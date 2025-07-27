@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn LAML - Interactive Tutorials</title>
+    <title>Learn LAML - In    s                                           <p>LAML v3.4.0 introduces a comprehensive type system wit                    <p>Arrays in LAML v3.4.0 are powerful and flexible, supporting various operations:</p> five core data types:</p>    <pre>Hello, LAML v3.4.0!</pre>y "Hello, LAML v3.4.0!"; Interactive Tutorials</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/learn.css">
-    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-    <meta name="description" content="Learn LAML v3.3.0 - Interactive tutorials covering enhanced data types, arrays, and new compiler features">
+    <link rel="icon" type                    <p>LAML v3.4.0 features sma                    <p>LAML v3                    <p>Let's build a complete program that demonstrates multiple LAML v3.4.0 features:</p>4.0                    <p>Congratulations! You've learned the fundamentals of LAML v3.4.0. Here's what you can do next:</p>includes enhanced compiler features for better development experience:</p>t type inference, allowing you to omit type annotations in many cases:</p>"image/svg+xml" href="assets/logo.svg">
+    <meta name="description" content="Learn LAML v3.4.0 - Interactive tutorials covering enhanced data types, arrays, and new compiler features">
 </head>
 <body>
     <!-- Navigation -->
@@ -43,7 +43,7 @@
         <!-- Hero Section -->
         <section class="learn-hero">
             <div class="container">
-                <h1 class="hero-title">Learn LAML v3.3.0</h1>
+                <h1 class="hero-title">Learn LAML v3.4.0</h1>
                 <p class="hero-description">
                     Master the enhanced LAML language with comprehensive data types, array support, and powerful new features. 
                     From basics to advanced concepts, this interactive guide has everything you need.
@@ -105,6 +105,7 @@
                             <li><a href="#functions">Functions</a></li>
                             <li><a href="#control-flow">Control Flow</a></li>
                             <li><a href="#loops">Loops</a></li>
+                            <li><a href="#format-specifiers">Format Specifiers</a></li>
                         </ul>
                     </div>
                     <div class="toc-column">
@@ -127,7 +128,7 @@
                 <!-- Installation -->
                 <div class="lesson" id="installation">
                     <h2>🚀 Installation & Setup</h2>
-                    <p>Get LAML v3.3.0 installed on your system with our one-click installers:</p>
+                    <p>Get LAML v3.4.0 installed on your system with our one-click installers:</p>
                     
                     <div class="install-grid">
                         <div class="install-card">
@@ -618,10 +619,305 @@ Highest score: 96</pre>
                     </div>
                 </div>
 
+                <!-- Format Specifiers -->
+                <div class="lesson" id="format-specifiers">
+                    <h2>🧩 Format Specifiers & Escape Sequences</h2>
+                    <p>LAML v3.4.0 introduces C-style format specifiers and escape sequences for powerful string formatting and output control:</p>
+                    
+                    <div class="feature-highlight">
+                        <h3>📝 Format Specifier Syntax</h3>
+                        <div class="code-snippet">
+                            <code>say("Hello %s, your score is %d", name, score);</code>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">format_basics.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">~ LAML Format Specifiers Demo
+bring xcs.class34;
+
+func main() {
+    ~ Basic format specifiers
+    let name = "Naveen";
+    let age = 25;
+    let score = 98.7654;
+    let isActive = true;
+    
+    say("Hello %s, you are %d years old", name, age);
+    say("Your score is %f (default precision)", score);
+    say("Your score is %.2f (2 decimal places)", score);
+    say("Status: %b", isActive);
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>Hello Naveen, you are 25 years old
+Your score is 98.765400 (default precision)
+Your score is 98.77 (2 decimal places)
+Status: true</pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h3>📊 Format Specifiers Table</h3>
+                            <table class="format-table">
+                                <thead>
+                                    <tr>
+                                        <th>Specifier</th>
+                                        <th>Type</th>
+                                        <th>Example Input</th>
+                                        <th>Example Output</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>%s</code></td>
+                                        <td>String</td>
+                                        <td><code>"naveen"</code></td>
+                                        <td><code>naveen</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%d</code></td>
+                                        <td>Integer</td>
+                                        <td><code>69</code></td>
+                                        <td><code>69</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%f</code></td>
+                                        <td>Float (6dp)</td>
+                                        <td><code>98.7654</code></td>
+                                        <td><code>98.765400</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%.2f</code></td>
+                                        <td>Float (2dp)</td>
+                                        <td><code>98.7654</code></td>
+                                        <td><code>98.77</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%c</code></td>
+                                        <td>Character</td>
+                                        <td><code>'N'</code></td>
+                                        <td><code>N</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>%b</code></td>
+                                        <td>Boolean</td>
+                                        <td><code>true</code></td>
+                                        <td><code>true</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">escape_sequences.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">~ Escape Sequences Demo
+bring xcs.class34;
+
+func main() {
+    say "=== Escape Sequences Demo ===";
+    
+    ~ Line breaks and tabs
+    say("Line 1\nLine 2\nLine 3");
+    say("Tabbed\ttext\there");
+    
+    ~ Quotes and special characters
+    say("Quote: \"Hello World\"");
+    say("Apostrophe: \'LAML\'");
+    say("Backslash: \\path\\to\\file");
+    
+    ~ Control characters
+    say("Bell sound: \a(if supported)");
+    say("Carriage return:\rOverwritten text");
+    say("Backspace: ABC\b\b123");
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>=== Escape Sequences Demo ===
+Line 1
+Line 2
+Line 3
+Tabbed	text	here
+Quote: "Hello World"
+Apostrophe: 'LAML'
+Backslash: \path\to\file
+Bell sound: (if supported)
+Overwritten text
+Backspace: A123</pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h3>🔥 Escape Sequences Table</h3>
+                            <table class="format-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sequence</th>
+                                        <th>Meaning</th>
+                                        <th>Output Effect</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>\n</code></td>
+                                        <td>New Line</td>
+                                        <td>Moves to next line</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>\t</code></td>
+                                        <td>Tab Space</td>
+                                        <td>Inserts tab space</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>\\</code></td>
+                                        <td>Backslash</td>
+                                        <td>Prints \</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>\'</code></td>
+                                        <td>Single Quote</td>
+                                        <td>Prints '</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>\"</code></td>
+                                        <td>Double Quote</td>
+                                        <td>Prints "</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>\a</code></td>
+                                        <td>Bell</td>
+                                        <td>Beep sound (if supported)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>\b</code></td>
+                                        <td>Backspace</td>
+                                        <td>Deletes previous char</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>\r</code></td>
+                                        <td>Carriage Return</td>
+                                        <td>Returns to line start</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">advanced_formatting.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">~ Advanced Formatting Examples
+bring xcs.class34;
+
+func main() {
+    say "=== Advanced Formatting Examples ===";
+    
+    {~ 
+       Combining format specifiers with escape sequences
+    ~}
+    let player = "Lamgerr";
+    let marks = 97.45;
+    say("Player: %s\nScore: %.2f\nResult: %s", player, marks, "PASS");
+    
+    say "";
+    
+    ~ Precision control with floats
+    let pi = 3.14159265359;
+    say("Pi with different precisions:");
+    say("Default: %f", pi);
+    say("2 decimal: %.2f", pi);
+    say("4 decimal: %.4f", pi);
+    
+    say "";
+    
+    ~ Character and boolean formatting
+    let firstChar = 'L';
+    let isComplete = true;
+    say("First letter: %c, Complete: %b", firstChar, isComplete);
+    
+    ~ Arrays and mixed types
+    let numbers = [1, 2, 3, 4, 5];
+    say("Numbers array: %s", numbers);
+    
+    ~ Backward compatibility - old syntax still works
+    say "Old syntax: This still works with escape sequences!\nSee the newline?";
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>=== Advanced Formatting Examples ===
+Player: Lamgerr
+Score: 97.45
+Result: PASS
+
+Pi with different precisions:
+Default: 3.141593
+2 decimal: 3.14
+4 decimal: 3.1416
+
+First letter: L, Complete: true
+Numbers array: [1, 2, 3, 4, 5]
+Old syntax: This still works with escape sequences!
+See the newline?</pre>
+                        </div>
+                    </div>
+
+                    <div class="feature-highlight">
+                        <h3>⚠️ Error Handling & Validation</h3>
+                        <p>LAML automatically validates that the number of format specifiers matches the number of arguments:</p>
+                        <div class="code-snippet">
+                            <code>say("Hello %s %d", "World"); // Error: Missing argument for %d</code>
+                        </div>
+                        <div class="code-snippet">
+                            <code>say("Hello %s", "World", 42); // Error: Too many arguments</code>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4>💡 Best Practices</h4>
+                        <ul>
+                            <li><strong>Precision Control:</strong> Use <code>%.nf</code> for precise float formatting</li>
+                            <li><strong>Type Safety:</strong> LAML automatically converts compatible types</li>
+                            <li><strong>Backward Compatibility:</strong> Old <code>say "string"</code> syntax still works</li>
+                            <li><strong>Escape Sequences:</strong> Work in both new and old syntax styles</li>
+                            <li><strong>Array Formatting:</strong> Arrays are automatically converted to readable strings</li>
+                        </ul>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>🎯 Try It Yourself</h4>
+                        <p>Create a program that displays a formatted report with:</p>
+                        <ul>
+                            <li>Student name using <code>%s</code></li>
+                            <li>Age using <code>%d</code></li>
+                            <li>GPA using <code>%.2f</code></li>
+                            <li>Enrollment status using <code>%b</code></li>
+                            <li>Tab-separated columns using <code>\t</code></li>
+                            <li>Multiple lines using <code>\n</code></li>
+                        </ul>
+                    </div>
+                </div>
+
                 <!-- Type Inference -->
-                <div class="lesson" id="type-inference">
+                                <div class="lesson" id="type-inference">
                     <h2>🧠 Type Inference</h2>
-                    <p>LAML v3.3.0 features smart type inference, allowing you to omit type annotations in many cases:</p>
+                    <p>LAML v3.4.0 features smart type inference, allowing you to omit type annotations in many cases:</p>
                     
                     <div class="code-example">
                         <div class="code-header">
@@ -668,7 +964,7 @@ Total age: 55</pre>
                 <!-- Compiler Features -->
                 <div class="lesson" id="compiler-features">
                     <h2>🎨 Enhanced Compiler Features</h2>
-                    <p>LAML v3.3.0 includes enhanced compiler features for better development experience:</p>
+                    <p>LAML v3.4.0 includes enhanced compiler features for better development experience:</p>
                     
                     <div class="feature-grid">
                         <div class="feature-item">

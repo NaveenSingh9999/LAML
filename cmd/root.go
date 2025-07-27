@@ -88,7 +88,7 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print LAML version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("LAML v3.3.0 - Enhanced Data Types, Arrays & Tiger UI Design System")
+		fmt.Println("LAML v3.4.0 - Enhanced Data Types, Arrays & Tiger UI Design System")
 		fmt.Println("Low Abstraction Machine Language - Advanced Type System & Developer Experience")
 	},
 }

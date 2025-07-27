@@ -497,3 +497,109 @@
 .language-laml .type {
     color: #f92672;
 }
+
+/* Format Specifiers Table Styles */
+.format-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.format-table thead {
+    background: var(--primary-blue);
+    color: var(--text-inverse);
+}
+
+.format-table th,
+.format-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.format-table th {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.format-table tbody tr:hover {
+    background: var(--bg-hover);
+}
+
+.format-table code {
+    background: var(--code-bg);
+    color: var(--primary-blue);
+    padding: 0.2rem 0.4rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.format-table tbody tr:nth-child(even) {
+    background: var(--bg-tertiary);
+}
+
+.format-table tbody tr:nth-child(even):hover {
+    background: var(--bg-hover);
+}
+
+/* Enhanced Feature Grid */
+.feature-grid .feature-item table {
+    margin-top: 1rem;
+}
+
+/* Exercise Section Styling */
+.exercise {
+    background: linear-gradient(135deg, var(--accent-blue) 5%, var(--bg-secondary) 100%);
+    border: 1px solid var(--accent-blue);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.exercise h4 {
+    color: var(--primary-blue);
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+}
+
+.exercise ul {
+    margin: 1rem 0 0 0;
+    padding-left: 1.5rem;
+}
+
+.exercise li {
+    margin: 0.5rem 0;
+    color: var(--text-secondary);
+}
+
+.exercise li code {
+    background: var(--code-bg);
+    color: var(--primary-blue);
+    padding: 0.1rem 0.3rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+}
+
+/* Enhanced Feature Highlight for Format Specifiers */
+.feature-highlight .code-snippet {
+    background: var(--code-bg);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: var(--font-mono);
+}
+
+.feature-highlight .code-snippet code {
+    color: var(--primary-blue);
+    font-size: 1rem;
+    font-weight: 600;
+}

@@ -1,0 +1,6 @@
+~ Test basic functionality
+bring xcs.class34;
+
+func main() {
+    say "Testing basic functionality";
+}

@@ -1,4 +1,4 @@
-~ LAML v3.3.0 Array Operations Demo
+~ LA    say "=== LAML v3.4.0 - Array Operations Demo ===";L v3.4.0 Array Operations Demo LAML v3.3.0 Array Operations Demo
 ~ Advanced array operations and algorithms
 
 func main() {

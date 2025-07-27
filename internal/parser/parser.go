@@ -356,16 +356,46 @@ func (p *Parser) parseSayStatement() *ast.SayStatement {
 	stmt := &ast.SayStatement{Token: p.curToken}
 
 	p.nextToken()
-	stmt.Value = p.parseExpression(LOWEST)
+
+	// Check if this is the new function-style syntax: say("format", args...)
+	if p.curTokenIs(lexer.LPAREN) {
+		// Parse as function call syntax
+		p.nextToken() // consume '('
+
+		// Parse format string
+		stmt.Format = p.parseExpression(LOWEST)
+
+		// Parse arguments
+		if p.peekTokenIs(lexer.COMMA) {
+			p.nextToken() // consume ','
+			p.nextToken() // move to first argument
+
+			args := []ast.Expression{}
+			args = append(args, p.parseExpression(LOWEST))
+
+			for p.peekTokenIs(lexer.COMMA) {
+				p.nextToken() // consume ','
+				p.nextToken() // move to next argument
+				args = append(args, p.parseExpression(LOWEST))
+			}
+
+			stmt.Arguments = args
+		}
+
+		if !p.expectPeek(lexer.RPAREN) {
+			return nil
+		}
+	} else {
+		// Parse as old syntax: say "string"
+		stmt.Value = p.parseExpression(LOWEST)
+	}
 
 	if p.peekTokenIs(lexer.SEMICOLON) {
 		p.nextToken()
 	}
 
 	return stmt
-}
-
-// parseExpressionStatement parses expression statements
+} // parseExpressionStatement parses expression statements
 func (p *Parser) parseExpressionStatement() *ast.ExpressionStatement {
 	stmt := &ast.ExpressionStatement{Token: p.curToken}
 	stmt.Expression = p.parseExpression(LOWEST)

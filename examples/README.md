@@ -1,6 +1,6 @@
 # LAML Examples Directory
 
-This directory contains comprehensive examples demonstrating all features of the LAML programming language v3.3.0.
+This directory contains comprehensive examples demonstrating all features of the LAML programming language v3.4.0.
 
 ## 🎯 New Examples (Recommended)
 
@@ -8,6 +8,7 @@ This directory contains comprehensive examples demonstrating all features of the
 - **`hello.lm`** - Simple "Hello, World!" program
 - **`data_types.lm`** - Complete guide to variables, strings, numbers, booleans, and arrays
 - **`interactive_input.lm`** - User input with the `input()` function
+- **`format_demo.lm`** - C-style format specifiers and escape sequences
 
 ### Intermediate Examples  
 - **`control_flow.lm`** - If/else statements, loops, and conditional logic
@@ -17,6 +18,35 @@ This directory contains comprehensive examples demonstrating all features of the
 ### Advanced Examples
 - **`objects_advanced.lm`** - Object-oriented programming with properties and methods
 - **`tutorial_complete.lm`** - Comprehensive tutorial covering ALL language features
+
+## 🚀 Format Specifiers & Escape Sequences
+
+The new `format_demo.lm` example demonstrates:
+
+### Format Specifiers
+- `%s` - String formatting
+- `%d` - Integer formatting  
+- `%f` - Float formatting (default 6 decimal places)
+- `%.2f` - Float with 2 decimal places
+- `%c` - Character formatting
+- `%b` - Boolean formatting
+
+### Escape Sequences
+- `\n` - New line
+- `\t` - Tab space
+- `\\` - Backslash
+- `\'` - Single quote
+- `\"` - Double quote
+- `\a` - Bell sound
+- `\b` - Backspace
+- `\r` - Carriage return
+
+### Example Usage
+```laml
+let name = "Naveen";
+let score = 98.7654;
+say("Hello %s!\nYour score is %.2f", name, score);
+```
 
 ## 📚 Legacy Examples
 

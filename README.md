@@ -1,10 +1,13 @@
-# LAML v3.3.0 - Enhanced Data Types, Arrays & Tiger UI Design System
+# LAML v3.4.0 - Format Specifiers, Input Handler And Escape Sequences
 
-LAML (Low Abstraction Machine Language) is a **sentence-like, general-purpose compiled language** designed for speed, flexibility, and direct kernel interaction. LAML v3.3.0 introduces comprehensive data types, array support, enhanced syntax highlighting, and a beautiful Tiger UI design system.
+LAML (Low Abstraction Machine Language) is a **general-purpose intrepreter/compiler based language** designed for speed, flexibility, and direct kernel interaction. LAML v3.4.0 introduces format specifiers, input handler and escape sequences.
 
-## 🚀 What's New in v3.3.0
+## 🚀 What's New in v3.4.0
 
 ### 🎯 Core Language Enhancements
+- **C-Style Format Specifiers**: Full support for `%s`, `%d`, `%f`, `%.2f`, `%c`, `%b` format specifiers
+- **Escape Sequences**: Complete escape sequence support including `\n`, `\t`, `\\`, `\'`, `\"`, `\a`, `\b`, `\r`
+- **Enhanced Say Statement**: New function-style syntax `say("format", args...)` with backward compatibility
 - **Enhanced Data Types**: Full support for `int`, `float`, `string`, `bool`, and `array` types
 - **Advanced Operators**: Comprehensive operator set including arithmetic, comparison, logical, and bitwise operations
 - **Array Support**: Complete array functionality with indexing, operations, and type inference
@@ -20,7 +23,7 @@ LAML (Low Abstraction Machine Language) is a **sentence-like, general-purpose co
 - **Comprehensive Learn Section**: Interactive tutorials covering all LAML features
 - **Tiger-Styled Interface**: Authentic Mac OS X Tiger design with Lucida Grande typography
 - **Fixed Installation Links**: Direct GitHub release downloads for all platforms
-- **Enhanced Examples**: New v3.3.0 demo files showcasing latest features
+- **Enhanced Examples**: New v3.4.0 demo files showcasing latest features
 
 ## 🔧 Installation
 
@@ -94,9 +97,9 @@ For manual installation, download the appropriate binary from [Releases](https:/
 - `laml-termux` - Android/Termux ARM
 
 ### VS Code Extension
-The installers automatically detect and install the VS Code extension. You can also download `laml-3.3.0.vsix` from the repository and install manually:
+The installers automatically detect and install the VS Code extension. You can also download `laml-3.4.0.vsix` from the repository and install manually:
 ```bash
-code --install-extension laml-3.3.0.vsix
+code --install-extension laml-3.4.0.vsix
 ```
 
 ## 🎯 Quick Start
@@ -106,26 +109,29 @@ code --install-extension laml-3.3.0.vsix
 bring xcs.class34;
 
 func main() {
-    say "Hello, LAML v3.3.0!";
+    say "Hello, LAML v3.4.0!";
 }
 ```
 
-### Data Types & Arrays
+### Format Specifiers & Data Types
 ```laml
 bring xcs.class34;
 
 func main() {
-    ~ Data types with inference
-    val name = "LAML";
-    val version = 3.3;
-    val isStable = true;
+    ~ Using new format specifiers
+    let name = "LAML";
+    let version = 3.4;
+    let isStable = true;
+    
+    say("Welcome to %s v%.1f!", name, version);
+    say("Status: %b", isStable);
+    say("Line 1\nLine 2\tTabbed text");
     
     ~ Arrays
-    val numbers = [10, 20, 30, 40, 50];
-    val first = numbers[0];
+    let numbers = [10, 20, 30, 40, 50];
+    let first = numbers[0];
     
-    say "Welcome to " + name + " v" + version;
-    say "First number: " + first;
+    say("First number: %d", first);
 }
 ```
 
@@ -147,6 +153,7 @@ laml version
 Visit our [comprehensive documentation](https://naveensingh9999.github.io/LAML/learn.html) with the new Tiger UI design system to explore:
 
 - **Getting Started**: Basic syntax and concepts
+- **Format Specifiers**: C-style formatting with `%s`, `%d`, `%f`, `%c`, `%b` and escape sequences
 - **Data Types**: Complete type system guide
 - **Operators**: All available operators and usage
 - **Arrays**: Array operations and examples
@@ -154,7 +161,10 @@ Visit our [comprehensive documentation](https://naveensingh9999.github.io/LAML/l
 
 ## 🌟 Features
 
-### v3.3.0 Core Features
+### v3.4.0 Core Features
+- ✅ **C-Style Format Specifiers**: Full printf-style formatting support
+- ✅ **Escape Sequences**: Complete escape sequence processing
+- ✅ **Enhanced Say Statement**: Function-style syntax with backward compatibility
 - ✅ **Enhanced Type System**: Full support for all primary data types
 - ✅ **Array Operations**: Complete array functionality with indexing
 - ✅ **Advanced Operators**: Arithmetic, comparison, logical, and bitwise
@@ -170,7 +180,7 @@ Visit our [comprehensive documentation](https://naveensingh9999.github.io/LAML/l
 
 ## 🎨 Tiger UI Design System
 
-LAML v3.3.0 introduces the Tiger UI design system, inspired by Mac OS X Tiger's iconic interface:
+LAML v3.4.0 introduces the Tiger UI design system, inspired by Mac OS X Tiger's iconic interface:
 
 - **Authentic Typography**: Lucida Grande fonts with proper kerning
 - **Classic Color Palette**: Tiger blue (#4A90E2) and refined gradients

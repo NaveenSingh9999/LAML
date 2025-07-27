@@ -73,7 +73,7 @@ create_release_directory() {
     print_colored $YELLOW "📁 Creating release directory..."
     
     rm -rf release
-    mkdir -p "release/laml-v3.3.0"/{windows,linux,termux,vscode-extension,docs}
+    mkdir -p "release/laml-v3.4.0"/{windows,linux,termux,vscode-extension,docs}
     
     print_colored $GREEN "✅ Release directory created"
 }
@@ -333,7 +333,7 @@ build_vscode_extension() {
         cp icons/laml-icon.svg icons/laml-icon.png
         
         # Package extension
-        vsce package --no-yarn --out "../$release_dir/vscode-extension/laml-3.2.0.vsix"
+        vsce package --no-yarn --out "../$release_dir/vscode-extension/laml-3.4.0.vsix"
         
         cd ..
         
@@ -353,7 +353,7 @@ build_vscode_extension() {
 1. Open VS Code
 2. Go to Extensions (Ctrl+Shift+X)
 3. Click the "..." menu and select "Install from VSIX..."
-4. Select the `laml-3.2.0.vsix` file
+4. Select the `laml-3.4.0.vsix` file
 
 ### Method 2: Manual Installation
 1. Copy the extension folder to your VS Code extensions directory:
@@ -479,7 +479,7 @@ create_documentation() {
     print_colored $YELLOW "📚 Creating documentation..."
     
     cat > "$release_dir/README.md" << 'EOF'
-# LAML v3.3.0 - Release Package
+# LAML v3.4.0 - Release Package
 
 Welcome to LAML (Low Abstraction Machine Language) - a modern compiled language with enhanced developer experience.
 
@@ -507,12 +507,12 @@ bash termux/install.sh
 ```
 
 #### VS Code Extension
-- Install `vscode-extension/laml-3.2.0.vsix` via VS Code
+- Install `vscode-extension/laml-3.4.0.vsix` via VS Code
 
 ## 📦 Package Contents
 
 ```
-laml-v3.2.0/
+laml-v3.4.0/
 ├── install.sh              # Universal installer
 ├── windows/                 # Windows installer and binaries
 ├── linux/                   # Linux installer and binaries
@@ -521,7 +521,7 @@ laml-v3.2.0/
 └── README.md               # This file
 ```
 
-## 🎯 What's New in v3.3.0
+## 🎯 What's New in v3.4.0
 
 ### Enhanced Data Types & Arrays
 - ✅ Complete support for int, float, string, bool, and array types
@@ -548,7 +548,7 @@ laml-v3.2.0/
 - ✅ Professional typography with Lucida Grande
 - ✅ Consistent design language across all pages
 
-### Previous Features (v3.2.0)
+### Previous Features (v3.3.0)
 - ✅ Comments system (~ and {~ ~})
 - ✅ Styled console output with emojis
 - ✅ VS Code syntax highlighting
@@ -619,7 +619,7 @@ If you encounter any issues:
 
 ---
 
-**LAML v3.3.0 - Enhanced Data Types, Arrays & Tiger UI Design System!** 🎉
+**LAML v3.4.0 - Enhanced Data Types, Arrays & Tiger UI Design System!** 🎉
 EOF
     
     print_colored $GREEN "✅ Documentation created"
@@ -636,7 +636,7 @@ main() {
     
     # Create release structure
     create_release_directory
-    local release_dir="release/laml-v3.3.0"
+    local release_dir="release/laml-v3.4.0"
     print_colored $GREEN "📁 Using release directory: $release_dir"
     
     # Package for each platform
@@ -652,17 +652,17 @@ main() {
     # Create archive
     print_colored $YELLOW "📦 Creating release archive..."
     cd release
-    tar -czf "laml-v3.3.0.tar.gz" "laml-v3.3.0/"
-    zip -r "laml-v3.3.0.zip" "laml-v3.3.0/"
+    tar -czf "laml-v3.4.0.tar.gz" "laml-v3.4.0/"
+    zip -r "laml-v3.4.0.zip" "laml-v3.4.0/"
     cd ..
     
     echo ""
-    print_colored $GREEN "🎉 LAML v3.3.0 build completed successfully!"
+    print_colored $GREEN "🎉 LAML v3.4.0 build completed successfully!"
     echo ""
     print_colored $CYAN "📦 Release packages:"
     print_colored $NC "• $release_dir/ - Complete installer package"
-    print_colored $NC "• release/laml-v3.3.0.tar.gz - Linux/macOS archive"
-    print_colored $NC "• release/laml-v3.3.0.zip - Windows archive"
+    print_colored $NC "• release/laml-v3.4.0.tar.gz - Linux/macOS archive"
+    print_colored $NC "• release/laml-v3.4.0.zip - Windows archive"
     echo ""
     print_colored $CYAN "🚀 Ready for distribution!"
     print_colored $BLUE "Upload to GitHub Releases or distribute directly"

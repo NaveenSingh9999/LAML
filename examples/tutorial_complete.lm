@@ -1,16 +1,16 @@
-~ LAML Complete Language Tutorial
+~ LAML Compl    say "=== Welcome to LAML v3.4.0 ===";te Language Tutorial
 ~ Comprehensive example covering all major language features
 bring xcs.class34;
 
 {~
    Complete LAML Tutorial
-   This example demonstrates every major feature of the LAML language
+   This example demonstrates every major fea    let version = "3.4.0";ure of the LAML language
    including variables, functions, objects, arrays, control flow, and I/O
 ~}
 
 ~ Global function demonstrating basic syntax
 func welcomeMessage() {
-    say "=== Welcome to LAML v3.3.0 ===";
+    say "=== Welcome to LAML v3.4.0 ===";
     say "This tutorial covers all language features!";
     say "";
 }
@@ -226,7 +226,7 @@ func main() {
     
     ~ String manipulation
     let message = "LAML";
-    let version = "3.3.0";
+    let version = "3.4.0";
     let fullMessage = message + " version " + version + " is awesome!";
     
     say "";

@@ -1,0 +1,55 @@
+bring xcs.class34;
+
+func main() {
+    say "=== LAML v3.4.0 Format Specifiers Demo ===";
+    say "";
+    
+    ~ Basic format specifiers
+    let name = "Naveen";
+    let age = 25;
+    let score = 98.7654;
+    let isActive = true;
+    
+    say("Hello %s, you are %d years old", name, age);
+    say("Your score is %f (default precision)", score);
+    say("Your score is %.2f (2 decimal places)", score);
+    say("Status: %b", isActive);
+    
+    say "";
+    say "=== Escape Sequences Demo ===";
+    
+    ~ Testing escape sequences
+    say("Line 1\nLine 2\nLine 3");
+    say("Tabbed\ttext\there");
+    say("Quote: \"Hello World\"");
+    say("Apostrophe: \'LAML\'");
+    say("Backslash: \\path\\to\\file");
+    say("Bell sound: \a(if supported)");
+    say("Carriage return:\rOverwritten text");
+    
+    say "";
+    say "=== Combined Examples ===";
+    
+    ~ Combining format specifiers with escape sequences
+    let player = "Lamgerr";
+    let marks = 97.45;
+    say("Player: %s\nScore: %.2f\nResult: %s", player, marks, "PASS");
+    
+    ~ Testing with arrays and mixed types
+    let numbers = [1, 2, 3, 4, 5];
+    say("Numbers: %s", numbers);
+    
+    ~ Character formatting
+    let firstChar = 'L';
+    say("First character: %c", firstChar);
+    
+    say "";
+    say "=== Error Handling Demo ===";
+    
+    ~ This should work fine
+    say("Valid format: %s %d", "test", 42);
+    
+    ~ Backward compatibility - old syntax still works
+    say "Old syntax: This still works!";
+    say "Old syntax with escape: Line 1\nLine 2";
+}
