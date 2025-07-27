@@ -3,7 +3,7 @@
 /* Hero Section */
 .learn-hero {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
-    color: var(--text-inverse);
+    color: #FFFFFF;
     padding: 4rem 0;
     text-align: center;
 }
@@ -16,7 +16,6 @@
 }
 
 .learn-hero .hero-description {
-    font-color: #FFFFFF;
     font-size: 1.2rem;
     opacity: 0.9;
     max-width: 800px;
