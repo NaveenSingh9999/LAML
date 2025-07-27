@@ -1,0 +1,7 @@
+bring xcs.class34;
+
+func main() {
+    say "Testing input() function";
+    let userInput = input("Enter something: ");
+    say "You entered: " + userInput;
+}

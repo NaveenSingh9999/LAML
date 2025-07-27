@@ -1,0 +1,104 @@
+~ LAML Functions and Scope
+~ Demonstrates function definitions, parameters, and return values
+bring xcs.class34;
+
+{~
+   Function Examples
+   Shows different types of functions and their usage
+~}
+
+~ Simple function with no parameters
+func sayHello() {
+    say "Hello from a function!";
+}
+
+~ Function with parameters
+func greet(name, title) {
+    say "Hello, " + title + " " + name + "!";
+}
+
+~ Function with return value
+func add(x, y) {
+    return x + y;
+}
+
+~ Function with multiple operations
+func calculate(a, b, operation) {
+    if operation == "add" {
+        return a + b;
+    } else {
+        if operation == "subtract" {
+            return a - b;
+        } else {
+            if operation == "multiply" {
+                return a * b;
+            } else {
+                return 0; ~ Default case
+            }
+        }
+    }
+}
+
+~ Function that processes arrays
+func findMax(numbers) {
+    let max = numbers[0];
+    let i = 1;
+    
+    while i < 5 { ~ Assuming 5 elements for demo
+        if numbers[i] > max {
+            max = numbers[i];
+        }
+        i++;
+    }
+    
+    return max;
+}
+
+~ Recursive function example
+func factorial(n) {
+    if n <= 1 {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+func main() {
+    say "=== LAML Functions Demo ===";
+    say "";
+    
+    ~ Call simple function
+    sayHello();
+    
+    ~ Call function with parameters
+    greet("Alice", "Dr.");
+    greet("Bob", "Mr.");
+    
+    ~ Use function with return value
+    let sum = add(15, 25);
+    say "15 + 25 = " + sum;
+    
+    ~ Test calculator function
+    say "";
+    say "=== Calculator Functions ===";
+    let result1 = calculate(10, 5, "add");
+    let result2 = calculate(10, 5, "subtract");
+    let result3 = calculate(10, 5, "multiply");
+    
+    say "10 + 5 = " + result1;
+    say "10 - 5 = " + result2;
+    say "10 * 5 = " + result3;
+    
+    ~ Test array processing
+    say "";
+    say "=== Array Processing ===";
+    let scores = [88, 92, 76, 95, 81];
+    let highest = findMax(scores);
+    say "Highest score: " + highest;
+    
+    ~ Test recursive function
+    say "";
+    say "=== Recursive Functions ===";
+    let fact5 = factorial(5);
+    say "5! = " + fact5;
+}

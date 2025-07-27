@@ -1,17 +1,17 @@
-// LAML v3.3.0 Array Operations Demo
-// Advanced array operations and algorithms
+~ LAML v3.3.0 Array Operations Demo
+~ Advanced array operations and algorithms
 
 func main() {
     say "=== LAML v3.3.0 - Array Operations Demo ===";
     
-    // === Array Initialization ===
+    ~ === Array Initialization ===
     val numbers = [15, 8, 23, 4, 16, 42, 12, 9, 33, 7];
     val names = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
     val temperatures = [22.5, 18.3, 25.7, 19.8, 21.2];
     
     say "Working with arrays...";
     
-    // === Array Access Examples ===
+    ~ === Array Access Examples ===
     val firstNumber = numbers[0];
     val lastNumber = numbers[9];
     val middleName = names[2];
@@ -20,18 +20,18 @@ func main() {
     say "Last number: " + lastNumber;
     say "Middle name: " + middleName;
     
-    // === Basic Array Operations ===
+    ~ === Basic Array Operations ===
     say "";
     say "=== Basic Operations ===";
     
-    // Simple sum calculation
+    ~ Simple sum calculation
     val sum1 = numbers[0] + numbers[1] + numbers[2];
     val sum2 = numbers[3] + numbers[4] + numbers[5];
     val totalSum = sum1 + sum2;
     
     say "Sum of first 6 numbers: " + totalSum;
     
-    // Array element comparison
+    ~ Array element comparison
     val max = numbers[0];
     if numbers[1] > max {
         max = numbers[1];
@@ -42,7 +42,7 @@ func main() {
     
     say "Maximum of first 3: " + max;
     
-    // === Temperature Analysis ===
+    ~ === Temperature Analysis ===
     say "";
     say "=== Temperature Analysis ===";
     
@@ -53,7 +53,7 @@ func main() {
     
     say "Average temperature (first 3): " + avgTemp + "°C";
     
-    // === String Array Operations ===
+    ~ === String Array Operations ===
     say "";
     say "=== String Operations ===";
     
@@ -65,7 +65,7 @@ func main() {
     say greeting2;
     say greeting3;
     
-    // === Array Modification ===
+    ~ === Array Modification ===
     say "";
     say "=== Array Modification ===";
     
@@ -75,7 +75,7 @@ func main() {
     
     say "Changed first element from " + originalFirst + " to " + newFirst;
     
-    // === Boolean Logic with Arrays ===
+    ~ === Boolean Logic with Arrays ===
     say "";
     say "=== Boolean Logic ===";
     
@@ -87,7 +87,7 @@ func main() {
     say "Has small number (<10): " + hasSmallNumber;
     say "Has both: " + hasBoth;
     
-    // === Simple Search ===
+    ~ === Simple Search ===
     say "";
     say "=== Simple Search ===";
     
@@ -95,7 +95,7 @@ func main() {
     val found = false;
     val position = -1;
     
-    // Check each position manually
+    ~ Check each position manually
     if numbers[0] == target {
         found = true;
         position = 0;

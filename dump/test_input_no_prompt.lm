@@ -1,0 +1,7 @@
+bring xcs.class34;
+
+func main() {
+    say "Testing input() with no prompt";
+    let userInput = input();
+    say "You entered: " + userInput;
+}

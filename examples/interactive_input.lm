@@ -1,0 +1,33 @@
+~ LAML Interactive Input Example
+~ Demonstrates the input() function for user interaction
+bring xcs.class34;
+
+func main() {
+    ~ Welcome message
+    say "=== LAML Interactive Demo ===";
+    say "";
+    
+    {~ 
+       Get user information
+       The input() function shows a prompt and waits for user input
+    ~}
+    let name = input("What's your name? ");
+    let age = input("How old are you? ");
+    let hobby = input("What's your favorite hobby? ");
+    
+    ~ Display personalized message
+    say "";
+    say "Nice to meet you, " + name + "!";
+    say "At " + age + " years old, you must have lots of experience with " + hobby + ".";
+    
+    ~ Interactive calculation
+    say "";
+    say "Let's do some quick math!";
+    let num1 = input("Enter first number: ");
+    let num2 = input("Enter second number: ");
+    
+    ~ Note: In a real application, you'd convert strings to numbers
+    ~ For demo purposes, we'll just show string concatenation
+    say "You entered: " + num1 + " and " + num2;
+    say "As text combined: " + num1 + num2;
+}

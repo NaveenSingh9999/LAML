@@ -1,0 +1,31 @@
+bring xcs.class34;
+
+func main() {
+    say "=== LAML input() Function Demo ===";
+    say "";
+    
+    
+    let name = input("Enter your name: ");
+    say "Hello, " + name + "!";
+    say "";
+    
+    
+    let hobby = input("What's your favorite hobby? ");
+    say "Cool! I also like " + hobby + ".";
+    say "";
+    
+    
+    say "Enter anything (no prompt):";
+    let anything = input();
+    say "You entered: '" + anything + "'";
+    say "";
+    
+    
+    say "Math time! Enter two numbers:";
+    let num1 = input("First number: ");
+    let num2 = input("Second number: ");
+    say "You entered " + num1 + " and " + num2;
+    say "";
+    
+    say "=== Demo complete! ===";
+}

@@ -1,0 +1,9 @@
+bring xcs.class34;
+
+func main() {
+    let name = input("What's your name? ");
+    say "Hello, " + name + "!";
+    
+    let age = input("How old are you? ");
+    say "You are " + age + " years old.";
+}

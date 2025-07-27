@@ -1,0 +1,275 @@
+~ LAML Complete Language Tutorial
+~ Comprehensive example covering all major language features
+bring xcs.class34;
+
+{~
+   Complete LAML Tutorial
+   This example demonstrates every major feature of the LAML language
+   including variables, functions, objects, arrays, control flow, and I/O
+~}
+
+~ Global function demonstrating basic syntax
+func welcomeMessage() {
+    say "=== Welcome to LAML v3.3.0 ===";
+    say "This tutorial covers all language features!";
+    say "";
+}
+
+~ Function with parameters and return value
+func calculateArea(length, width) {
+    let area = length * width;
+    say "Calculating area: " + length + " x " + width + " = " + area;
+    return area;
+}
+
+~ Object definition for demonstration
+obj Student {
+    name = "Unknown";
+    id = 0;
+    grades = [0, 0, 0, 0, 0];
+    gpa = 0.0;
+    
+    func addGrade(grade, index) {
+        if index >= 0 && index < 5 {
+            grades[index] = grade;
+            say "Added grade " + grade + " for " + name;
+        }
+    }
+    
+    func calculateGPA() {
+        let sum = grades[0] + grades[1] + grades[2] + grades[3] + grades[4];
+        gpa = sum / 5;
+        say name + "'s GPA: " + gpa;
+        return gpa;
+    }
+    
+    func displayRecord() {
+        say "Student Record:";
+        say "  Name: " + name;
+        say "  ID: " + id;
+        say "  Grades: [" + grades[0] + ", " + grades[1] + ", " + grades[2] + ", " + grades[3] + ", " + grades[4] + "]";
+        say "  GPA: " + gpa;
+    }
+}
+
+func main() {
+    welcomeMessage();
+    
+    {~
+       Part 1: Variables and Data Types
+       Demonstrating all supported data types
+    ~}
+    say "=== Part 1: Variables and Data Types ===";
+    
+    ~ Numeric types
+    let age = 25;
+    let height = 5.9;
+    let temperature = -10;
+    
+    ~ String types
+    let firstName = "John";
+    let lastName = "Doe";
+    let fullName = firstName + " " + lastName;
+    
+    ~ Boolean types
+    let isStudent = true;
+    let isGraduated = false;
+    
+    ~ Arrays
+    let scores = [85, 92, 78, 96, 88];
+    let subjects = ["Math", "Science", "English", "History", "Art"];
+    
+    say "Name: " + fullName;
+    say "Age: " + age + ", Height: " + height;
+    say "Is Student: " + isStudent;
+    say "First Score: " + scores[0];
+    say "First Subject: " + subjects[0];
+    say "";
+    
+    {~
+       Part 2: Control Flow Structures
+       If/else, loops, and conditional logic
+    ~}
+    say "=== Part 2: Control Flow ===";
+    
+    ~ Conditional statements
+    if age >= 18 {
+        say fullName + " is an adult";
+        
+        if isStudent {
+            say "And is currently studying";
+        } else {
+            say "And is not currently studying";
+        }
+    } else {
+        say fullName + " is a minor";
+    }
+    
+    ~ For loop demonstration
+    say "";
+    say "Counting to 5:";
+    for let i = 1; i <= 5; i++ {
+        say "Count: " + i;
+    }
+    
+    ~ While loop demonstration
+    say "";
+    say "Processing scores:";
+    let index = 0;
+    while index < 5 {
+        if scores[index] >= 90 {
+            say subjects[index] + ": " + scores[index] + " (Excellent!)";
+        } else {
+            if scores[index] >= 80 {
+                say subjects[index] + ": " + scores[index] + " (Good)";
+            } else {
+                say subjects[index] + ": " + scores[index] + " (Needs improvement)";
+            }
+        }
+        index++;
+    }
+    
+    {~
+       Part 3: Functions
+       Function definitions and calls with different parameters
+    ~}
+    say "";
+    say "=== Part 3: Functions ===";
+    
+    ~ Function calls
+    let roomArea = calculateArea(12, 15);
+    let gardenArea = calculateArea(8, 10);
+    let totalArea = roomArea + gardenArea;
+    say "Total area: " + totalArea + " square units";
+    
+    {~
+       Part 4: Objects and Methods
+       Object-oriented programming demonstration
+    ~}
+    say "";
+    say "=== Part 4: Objects and Methods ===";
+    
+    ~ Create student objects
+    let student1 = Student();
+    student1.name = "Alice Johnson";
+    student1.id = 12345;
+    
+    let student2 = Student();
+    student2.name = "Bob Smith";
+    student2.id = 54321;
+    
+    ~ Add grades to students
+    student1.addGrade(95, 0); ~ Math
+    student1.addGrade(88, 1); ~ Science
+    student1.addGrade(92, 2); ~ English
+    student1.addGrade(87, 3); ~ History
+    student1.addGrade(90, 4); ~ Art
+    
+    student2.addGrade(78, 0);
+    student2.addGrade(85, 1);
+    student2.addGrade(82, 2);
+    student2.addGrade(79, 3);
+    student2.addGrade(88, 4);
+    
+    ~ Calculate GPAs
+    say "";
+    student1.calculateGPA();
+    student2.calculateGPA();
+    
+    say "";
+    student1.displayRecord();
+    say "";
+    student2.displayRecord();
+    
+    {~
+       Part 5: Interactive Input (Commented for automated testing)
+       This section would demonstrate user input in an interactive environment
+    ~}
+    say "";
+    say "=== Part 5: Interactive Features ===";
+    say "~ In an interactive session, you could use:";
+    say "~ let userName = input('Enter your name: ');";
+    say "~ let userAge = input('Enter your age: ');";
+    say "~ This allows dynamic user interaction!";
+    
+    {~
+       Part 6: Advanced Features
+       Complex operations and algorithms
+    ~}
+    say "";
+    say "=== Part 6: Advanced Operations ===";
+    
+    ~ Array processing
+    let numbers = [64, 34, 25, 12, 22];
+    let max = numbers[0];
+    let min = numbers[0];
+    let sum = 0;
+    
+    let i = 0;
+    while i < 5 {
+        if numbers[i] > max {
+            max = numbers[i];
+        }
+        if numbers[i] < min {
+            min = numbers[i];
+        }
+        sum = sum + numbers[i];
+        i++;
+    }
+    
+    say "Array analysis:";
+    say "  Numbers: [64, 34, 25, 12, 22]";
+    say "  Maximum: " + max;
+    say "  Minimum: " + min;
+    say "  Sum: " + sum;
+    say "  Average: " + (sum / 5);
+    
+    ~ String manipulation
+    let message = "LAML";
+    let version = "3.3.0";
+    let fullMessage = message + " version " + version + " is awesome!";
+    
+    say "";
+    say "String operations:";
+    say fullMessage;
+    
+    {~
+       Part 7: Error Handling and Edge Cases
+       Demonstrating robust programming practices
+    ~}
+    say "";
+    say "=== Part 7: Best Practices ===";
+    
+    ~ Safe array access
+    let testArray = [10, 20, 30];
+    let safeIndex = 1;
+    let unsafeIndex = 5;
+    
+    if safeIndex >= 0 && safeIndex < 3 {
+        say "Safe access: testArray[" + safeIndex + "] = " + testArray[safeIndex];
+    }
+    
+    ~ Conditional operations
+    let denominator = 5;
+    if denominator != 0 {
+        let result = 100 / denominator;
+        say "100 / " + denominator + " = " + result;
+    } else {
+        say "Cannot divide by zero!";
+    }
+    
+    say "";
+    say "=== Tutorial Complete! ===";
+    say "You've seen all major LAML features:";
+    say "✓ Variables and data types";
+    say "✓ Control flow (if/else, loops)";
+    say "✓ Functions with parameters and returns";
+    say "✓ Objects with properties and methods";
+    say "✓ Arrays and array operations";
+    say "✓ Interactive input capabilities";
+    say "✓ String operations and manipulation";
+    say "✓ Mathematical operations";
+    say "✓ Best practices and error handling";
+    say "";
+    say "Happy coding with LAML! 🚀";
+}

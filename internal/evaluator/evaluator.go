@@ -1,9 +1,12 @@
 package evaluator
 
 import (
+	"bufio"
 	"fmt"
 	"laml/internal/ast"
 	"laml/internal/object"
+	"os"
+	"strings"
 )
 
 var (
@@ -11,6 +14,41 @@ var (
 	TRUE  = &object.Boolean{Value: true}
 	FALSE = &object.Boolean{Value: false}
 )
+
+// builtins map contains all built-in functions
+var builtins map[string]*object.Builtin
+
+func init() {
+	builtins = map[string]*object.Builtin{
+		"input": {
+			Fn: func(args ...object.Object) object.Object {
+				if len(args) > 1 {
+					return &object.Error{Message: fmt.Sprintf("wrong number of arguments. got=%d, want=0 or 1", len(args))}
+				}
+
+				var prompt string
+				if len(args) == 1 {
+					prompt = args[0].Inspect()
+				}
+
+				// Print prompt directly to stdout without newline
+				fmt.Print(prompt)
+
+				// Read input from stdin
+				reader := bufio.NewReader(os.Stdin)
+				input, err := reader.ReadString('\n')
+				if err != nil {
+					return &object.Error{Message: fmt.Sprintf("failed to read input: %s", err.Error())}
+				}
+
+				// Remove the trailing newline
+				input = strings.TrimRight(input, "\n\r")
+
+				return &object.String{Value: input}
+			},
+		},
+	}
+}
 
 // Eval evaluates AST nodes and returns objects
 func Eval(node ast.Node, env *object.Environment) object.Object {
@@ -546,6 +584,12 @@ func evalLoopStatement(ls *ast.LoopStatement, env *object.Environment) object.Ob
 
 // evalIdentifier evaluates identifiers
 func evalIdentifier(node *ast.Identifier, env *object.Environment) object.Object {
+	// Check builtins first
+	if builtin, ok := builtins[node.Value]; ok {
+		return builtin
+	}
+
+	// Then check environment
 	val, ok := env.Get(node.Value)
 	if !ok {
 		return newError("identifier not found: " + node.Value)

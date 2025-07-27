@@ -1,0 +1,154 @@
+~ LAML Object-Oriented Programming
+~ Demonstrates objects, properties, and methods
+bring xcs.class34;
+
+{~
+   Object Definition
+   Creating a class-like structure with properties and methods
+~}
+
+obj Person {
+    name = "Unknown";
+    age = 0;
+    email = "";
+    
+    ~ Method to display person information
+    func introduce() {
+        say "Hi, I'm " + name + " and I'm " + age + " years old.";
+        if email != "" {
+            say "You can reach me at: " + email;
+        }
+    }
+    
+    ~ Method to update age
+    func birthday() {
+        age = age + 1;
+        say name + " is now " + age + " years old. Happy birthday!";
+    }
+    
+    ~ Method to set contact info
+    func setContact(newEmail) {
+        email = newEmail;
+        say "Contact updated for " + name;
+    }
+}
+
+obj BankAccount {
+    accountNumber = "000000";
+    balance = 0;
+    accountType = "Checking";
+    
+    ~ Method to deposit money
+    func deposit(amount) {
+        balance = balance + amount;
+        say "Deposited $" + amount + ". New balance: $" + balance;
+    }
+    
+    ~ Method to withdraw money
+    func withdraw(amount) {
+        if amount <= balance {
+            balance = balance - amount;
+            say "Withdrew $" + amount + ". New balance: $" + balance;
+        } else {
+            say "Insufficient funds! Current balance: $" + balance;
+        }
+    }
+    
+    ~ Method to check balance
+    func checkBalance() {
+        say "Account " + accountNumber + " (" + accountType + "): $" + balance;
+    }
+}
+
+obj Calculator {
+    lastResult = 0;
+    
+    func add(a, b) {
+        lastResult = a + b;
+        say a + " + " + b + " = " + lastResult;
+        return lastResult;
+    }
+    
+    func subtract(a, b) {
+        lastResult = a - b;
+        say a + " - " + b + " = " + lastResult;
+        return lastResult;
+    }
+    
+    func multiply(a, b) {
+        lastResult = a * b;
+        say a + " * " + b + " = " + lastResult;
+        return lastResult;
+    }
+    
+    func getLastResult() {
+        say "Last calculation result: " + lastResult;
+        return lastResult;
+    }
+}
+
+func main() {
+    say "=== LAML Object-Oriented Programming Demo ===";
+    say "";
+    
+    {~
+       Creating and Using Person Objects
+       Demonstrating object instantiation and method calls
+    ~}
+    say "=== Person Objects ===";
+    
+    ~ Create first person
+    let person1 = Person();
+    person1.name = "Alice Johnson";
+    person1.age = 28;
+    person1.introduce();
+    person1.setContact("alice@example.com");
+    person1.birthday();
+    
+    say "";
+    
+    ~ Create second person
+    let person2 = Person();
+    person2.name = "Bob Smith";
+    person2.age = 35;
+    person2.email = "bob@company.com";
+    person2.introduce();
+    
+    {~
+       Banking System Demo
+       Showing more complex object interactions
+    ~}
+    say "";
+    say "=== Banking System ===";
+    
+    let account = BankAccount();
+    account.accountNumber = "12345678";
+    account.accountType = "Savings";
+    
+    account.checkBalance();
+    account.deposit(1000);
+    account.deposit(250);
+    account.withdraw(150);
+    account.withdraw(2000); ~ This should fail
+    account.checkBalance();
+    
+    {~
+       Calculator Object
+       Demonstrating stateful objects
+    ~}
+    say "";
+    say "=== Calculator Demo ===";
+    
+    let calc = Calculator();
+    calc.add(15, 25);
+    calc.multiply(5, 8);
+    calc.subtract(100, 30);
+    calc.getLastResult();
+    
+    say "";
+    say "=== Object Properties ===";
+    say "Person 1 name: " + person1.name;
+    say "Person 1 age: " + person1.age;
+    say "Account number: " + account.accountNumber;
+    say "Account balance: " + account.balance;
+}

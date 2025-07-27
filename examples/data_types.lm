@@ -1,0 +1,125 @@
+~ LAML Data Types and Variables
+~ Comprehensive demonstration of LAML's type system
+bring xcs.class34;
+
+func main() {
+    say "=== LAML Data Types Demo ===";
+    say "";
+    
+    {~
+       Variable Declarations
+       Different ways to declare and initialize variables
+    ~}
+    say "=== Variable Declarations ===";
+    
+    ~ Integer types
+    let age = 25;
+    val score = 100;        ~ val creates mutable variables
+    const PI = 3;           ~ const creates immutable variables
+    
+    ~ Float/decimal types
+    let temperature = 23.5;
+    let price = 19.99;
+    
+    ~ String types
+    let name = "LAML";
+    let message = "Hello, World!";
+    let path = "/usr/local/bin";
+    
+    ~ Boolean types
+    let isActive = true;
+    let isComplete = false;
+    
+    say "Age: " + age;
+    say "Temperature: " + temperature;
+    say "Name: " + name;
+    say "Active: " + isActive;
+    
+    {~
+       String Operations
+       Working with string data
+    ~}
+    say "";
+    say "=== String Operations ===";
+    
+    let firstName = "John";
+    let lastName = "Doe";
+    let fullName = firstName + " " + lastName;
+    
+    say "First Name: " + firstName;
+    say "Last Name: " + lastName;
+    say "Full Name: " + fullName;
+    
+    ~ String with numbers
+    let version = "LAML v" + "3.3";
+    say "Version: " + version;
+    
+    {~
+       Array Types
+       Working with collections of data
+    ~}
+    say "";
+    say "=== Arrays ===";
+    
+    ~ Array of integers
+    let numbers = [1, 2, 3, 4, 5];
+    
+    ~ Array of strings
+    let languages = ["LAML", "Go", "Python", "JavaScript"];
+    
+    ~ Array of mixed types (if supported)
+    let mixed = [42, "hello", true];
+    
+    say "First number: " + numbers[0];
+    say "Last number: " + numbers[4];
+    say "First language: " + languages[0];
+    say "Mixed array first item: " + mixed[0];
+    
+    {~
+       Variable Modification
+       Changing values and operations
+    ~}
+    say "";
+    say "=== Variable Operations ===";
+    
+    let counter = 0;
+    say "Initial counter: " + counter;
+    
+    counter = counter + 1;  ~ Increment
+    say "After increment: " + counter;
+    
+    counter = counter * 2;  ~ Multiply
+    say "After multiply by 2: " + counter;
+    
+    ~ Working with array elements
+    numbers[0] = 10;        ~ Modify array element
+    say "Modified first number: " + numbers[0];
+    
+    {~
+       Type Demonstrations
+       Showing different data type behaviors
+    ~}
+    say "";
+    say "=== Type Behaviors ===";
+    
+    ~ Numeric operations
+    let x = 10;
+    let y = 3;
+    let sum = x + y;
+    let diff = x - y;
+    let product = x * y;
+    
+    say "x = " + x + ", y = " + y;
+    say "Sum: " + sum;
+    say "Difference: " + diff;
+    say "Product: " + product;
+    
+    ~ Boolean operations
+    let result1 = true && false;   ~ AND
+    let result2 = true || false;   ~ OR
+    let result3 = !true;           ~ NOT
+    
+    say "true && false = " + result1;
+    say "true || false = " + result2;
+    say "!true = " + result3;
+}

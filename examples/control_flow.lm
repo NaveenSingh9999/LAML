@@ -1,0 +1,81 @@
+~ LAML Control Flow Structures
+~ Demonstrates if/else, loops, and conditional logic
+bring xcs.class34;
+
+func main() {
+    say "=== LAML Control Flow Demo ===";
+    say "";
+    
+    {~ 
+       If/Else Conditional Logic
+       Testing different conditions and responses
+    ~}
+    say "=== Conditional Logic ===";
+    
+    let score = 85;
+    let grade = "";
+    
+    ~ Multiple if-else conditions
+    if score >= 90 {
+        grade = "A";
+    } else {
+        if score >= 80 {
+            grade = "B";
+        } else {
+            if score >= 70 {
+                grade = "C";
+            } else {
+                if score >= 60 {
+                    grade = "D";
+                } else {
+                    grade = "F";
+                }
+            }
+        }
+    }
+    
+    say "Score: " + score + " - Grade: " + grade;
+    
+    ~ Boolean logic
+    let isValid = true;
+    let isActive = false;
+    
+    if isValid && !isActive {
+        say "System is valid but inactive";
+    }
+    
+    {~ 
+       Loop Structures
+       Different types of loops for iteration
+    ~}
+    say "";
+    say "=== Loop Structures ===";
+    
+    ~ C-style for loop
+    say "Counting from 1 to 5:";
+    for val i = 1; i <= 5; i++ {
+        say "Count: " + i;
+    }
+    
+    ~ While loop
+    say "";
+    say "Countdown from 3:";
+    let countdown = 3;
+    while countdown > 0 {
+        say "T-minus " + countdown;
+        countdown--;
+    }
+    say "Blast off! 🚀";
+    
+    ~ Array iteration (manual indexing)
+    say "";
+    say "=== Array Processing ===";
+    let fruits = ["apple", "banana", "orange", "grape"];
+    let i = 0;
+    
+    say "Fruits in our basket:";
+    while i < 4 {
+        say "- " + fruits[i];
+        i++;
+    }
+}

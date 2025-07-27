@@ -1,0 +1,218 @@
+~ LAML Array Operations and Algorithms
+~ Advanced array manipulation and common algorithms
+bring xcs.class34;
+
+{~
+   Array Helper Functions
+   Utility functions for common array operations
+~}
+
+func printArray(arr, size, label) {
+    say label + ":";
+    let i = 0;
+    while i < size {
+        say "  [" + i + "] = " + arr[i];
+        i++;
+    }
+    say "";
+}
+
+func findSum(arr, size) {
+    let sum = 0;
+    let i = 0;
+    
+    while i < size {
+        sum = sum + arr[i];
+        i++;
+    }
+    
+    return sum;
+}
+
+func findMax(arr, size) {
+    let max = arr[0];
+    let i = 1;
+    
+    while i < size {
+        if arr[i] > max {
+            max = arr[i];
+        }
+        i++;
+    }
+    
+    return max;
+}
+
+func findMin(arr, size) {
+    let min = arr[0];
+    let i = 1;
+    
+    while i < size {
+        if arr[i] < min {
+            min = arr[i];
+        }
+        i++;
+    }
+    
+    return min;
+}
+
+~ Simple bubble sort implementation
+func bubbleSort(arr, size) {
+    let i = 0;
+    
+    while i < size - 1 {
+        let j = 0;
+        while j < size - i - 1 {
+            if arr[j] > arr[j + 1] {
+                ~ Swap elements
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
+~ Linear search function
+func linearSearch(arr, size, target) {
+    let i = 0;
+    
+    while i < size {
+        if arr[i] == target {
+            return i; ~ Return index if found
+        }
+        i++;
+    }
+    
+    return -1; ~ Return -1 if not found
+}
+
+func main() {
+    say "=== LAML Array Operations Demo ===";
+    say "";
+    
+    {~
+       Basic Array Operations
+       Creating and manipulating arrays
+    ~}
+    say "=== Basic Array Operations ===";
+    
+    ~ Initialize arrays
+    let numbers = [64, 34, 25, 12, 22, 11, 90, 88, 76, 50];
+    let grades = [85, 92, 78, 96, 88, 91, 79, 84, 93, 87];
+    let temperatures = [22, 25, 19, 28, 24, 26, 21, 23, 27, 20];
+    
+    let size = 10; ~ Array size
+    
+    printArray(numbers, size, "Original Numbers");
+    
+    ~ Basic statistics
+    let sum = findSum(numbers, size);
+    let max = findMax(numbers, size);
+    let min = findMin(numbers, size);
+    
+    say "=== Array Statistics ===";
+    say "Sum: " + sum;
+    say "Maximum: " + max;
+    say "Minimum: " + min;
+    say "Average: " + (sum / size);
+    say "";
+    
+    {~
+       Array Sorting
+       Demonstrating sorting algorithms
+    ~}
+    say "=== Sorting Demo ===";
+    
+    ~ Create a copy for sorting (modify original)
+    let sortedNumbers = [64, 34, 25, 12, 22, 11, 90, 88, 76, 50];
+    
+    say "Before sorting:";
+    printArray(sortedNumbers, size, "Unsorted Array");
+    
+    bubbleSort(sortedNumbers, size);
+    
+    say "After bubble sort:";
+    printArray(sortedNumbers, size, "Sorted Array");
+    
+    {~
+       Searching Algorithms
+       Finding elements in arrays
+    ~}
+    say "=== Search Operations ===";
+    
+    let target1 = 25;
+    let target2 = 100;
+    
+    let index1 = linearSearch(numbers, size, target1);
+    let index2 = linearSearch(numbers, size, target2);
+    
+    if index1 != -1 {
+        say "Found " + target1 + " at index " + index1;
+    } else {
+        say target1 + " not found in array";
+    }
+    
+    if index2 != -1 {
+        say "Found " + target2 + " at index " + index2;
+    } else {
+        say target2 + " not found in array";
+    }
+    
+    {~
+       Grade Analysis Example
+       Practical application with grades
+    ~}
+    say "";
+    say "=== Grade Analysis ===";
+    
+    printArray(grades, size, "Student Grades");
+    
+    let gradeSum = findSum(grades, size);
+    let highestGrade = findMax(grades, size);
+    let lowestGrade = findMin(grades, size);
+    let average = gradeSum / size;
+    
+    say "Class Statistics:";
+    say "  Total Points: " + gradeSum;
+    say "  Highest Grade: " + highestGrade;
+    say "  Lowest Grade: " + lowestGrade;
+    say "  Class Average: " + average;
+    
+    ~ Count grades above average
+    let aboveAverage = 0;
+    let i = 0;
+    
+    while i < size {
+        if grades[i] > average {
+            aboveAverage++;
+        }
+        i++;
+    }
+    
+    say "  Students above average: " + aboveAverage;
+    
+    {~
+       Multi-dimensional Arrays (simulation)
+       Working with arrays of arrays concept
+    ~}
+    say "";
+    say "=== Matrix Operations (Simulated) ===";
+    
+    ~ Simulate a 3x3 matrix using separate arrays
+    let row1 = [1, 2, 3];
+    let row2 = [4, 5, 6];
+    let row3 = [7, 8, 9];
+    
+    say "Matrix representation:";
+    printArray(row1, 3, "Row 1");
+    printArray(row2, 3, "Row 2");
+    printArray(row3, 3, "Row 3");
+    
+    ~ Calculate diagonal sum
+    let diagonalSum = row1[0] + row2[1] + row3[2];
+    say "Main diagonal sum: " + diagonalSum;
+}
