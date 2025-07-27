@@ -17,6 +17,7 @@
 
 .hero-description {
     font-size: 18px;
+    color: white;
     max-width: 600px;
     margin: 0 auto 2rem;
     opacity: 0.9;
@@ -47,6 +48,7 @@
 
 .platform-info p {
     opacity: 0.8;
+    color: white;
     margin: 0;
     font-size: 14px;
     font-weight: 300;
