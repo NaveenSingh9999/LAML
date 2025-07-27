@@ -205,10 +205,10 @@ LAML/
 
 ## 🔄 Version History
 
-- **v3.3.0** (2024) - Enhanced Data Types, Arrays & Tiger UI Design System
-- **v3.2.0** (2024) - Enhanced User Experience & VS Code Integration  
-- **v3.1.0** (2024) - Multi-line Comments & Language Improvements
-- **v3.0.0** (2024) - Complete Rewrite with Advanced Features
+- **v3.4.0** (2025) - Format Specifiers, Input Handler And Escape Sequences
+- **v3.3.0** (2025) - Enhanced User Experience & VS Code Integration  
+- **v3.2.0** (2025) - Multi-line Comments & Language Improvements
+- **v3.1.0** (2025) - Complete Rewrite with Advanced Features
 
 ## 🤝 Contributing
 
@@ -218,18 +218,4 @@ LAML/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Tiger UI Design**: Inspired by Apple's Mac OS X Tiger interface design
-- **Go Community**: For the excellent tooling and ecosystem
-- **VS Code Team**: For the extensible editor platform
-- **LAML Community**: For feedback and contributions to v3.3.0
-
 ---
-
-**LAML v3.3.0** - Enhanced Data Types, Arrays & Tiger UI Design System  
-*Low Abstraction Machine Language with Advanced Developer Experience*
