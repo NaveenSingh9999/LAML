@@ -319,111 +319,244 @@ Last name: Charlie</pre>
                 <!-- Control Flow -->
                 <div class="lesson" id="control-flow">
                     <h2>🔀 Control Flow</h2>
-                    <p>LAML provides intuitive conditional statements for program logic:</p>
+                    <p>LAML provides intuitive conditional statements and loops for program logic control:</p>
                     
                     <div class="code-example">
                         <div class="code-header">
-                            <span class="filename">conditions.lm</span>
+                            <span class="filename">control_flow.lm</span>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">bring xcs.class34;
+                            <pre><code class="language-laml">~ LAML Control Flow Structures
+bring xcs.class34;
 
 func main() {
-    let score: int = 85;
-    let isPassingGrade: bool = score >= 60;
+    say "=== LAML Control Flow Demo ===";
     
-    // Basic if statement
-    if isPassingGrade {
-        say "Congratulations! You passed!";
-    }
+    {~ 
+       If/Else Conditional Logic
+       Testing different conditions and responses
+    ~}
+    say "=== Conditional Logic ===";
     
-    // If-else statement
+    let score = 85;
+    let grade = "";
+    
+    ~ Multiple if-else conditions (nested structure)
     if score >= 90 {
-        say "Grade: A";
-    } else if score >= 80 {
-        say "Grade: B";
-    } else if score >= 70 {
-        say "Grade: C";
-    } else if score >= 60 {
-        say "Grade: D";
+        grade = "A";
     } else {
-        say "Grade: F";
+        if score >= 80 {
+            grade = "B";
+        } else {
+            if score >= 70 {
+                grade = "C";
+            } else {
+                if score >= 60 {
+                    grade = "D";
+                } else {
+                    grade = "F";
+                }
+            }
+        }
     }
     
-    // Combining conditions
-    let age: int = 20;
-    if age >= 18 && score >= 80 {
-        say "Eligible for scholarship!";
+    say "Score: " + score + " - Grade: " + grade;
+    
+    ~ Boolean logic
+    let isValid = true;
+    let isActive = false;
+    
+    if isValid && !isActive {
+        say "System is valid but inactive";
     }
-}</code></pre>
-                        </div>
-                        <div class="code-output">
-                            <strong>Output:</strong>
-                            <pre>Congratulations! You passed!
-Grade: B
-Eligible for scholarship!</pre>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Loops -->
-                <div class="lesson" id="loops">
-                    <h2>🔄 Loops</h2>
-                    <p>LAML provides powerful loop constructs for iteration:</p>
-                    
-                    <div class="code-example">
-                        <div class="code-header">
-                            <span class="filename">loops_demo.lm</span>
-                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
-                        </div>
-                        <div class="code-content">
-                            <pre><code class="language-laml">bring xcs.class34;
-
-func main() {
-    // Range loop
+    
+    {~ 
+       Loop Structures
+       Different types of loops for iteration
+    ~}
+    say "";
+    say "=== Loop Structures ===";
+    
+    ~ C-style for loop
     say "Counting from 1 to 5:";
-    loop i in 1 to 5 {
+    for val i = 1; i <= 5; i++ {
         say "Count: " + i;
     }
     
-    // Array iteration
-    let fruits: array = ["apple", "banana", "orange"];
-    say "\nFruits in basket:";
-    loop fruit in fruits {
-        say "- " + fruit;
+    ~ While loop
+    say "";
+    say "Countdown from 3:";
+    let countdown = 3;
+    while countdown > 0 {
+        say "T-minus " + countdown;
+        countdown--;
     }
+    say "Blast off! 🚀";
     
-    // Nested loops for patterns
-    say "\nPattern:";
-    loop row in 1 to 3 {
-        let line: string = "";
-        loop col in 1 to row {
-            line = line + "* ";
-        }
-        say line;
+    ~ Array iteration (manual indexing)
+    say "";
+    say "=== Array Processing ===";
+    let fruits = ["apple", "banana", "orange", "grape"];
+    let i = 0;
+    
+    say "Fruits in our basket:";
+    while i < 4 {
+        say "- " + fruits[i];
+        i++;
     }
 }</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
-                            <pre>Counting from 1 to 5:
+                            <pre>=== LAML Control Flow Demo ===
+=== Conditional Logic ===
+Score: 85 - Grade: B
+System is valid but inactive
+
+=== Loop Structures ===
+Counting from 1 to 5:
 Count: 1
 Count: 2
 Count: 3
 Count: 4
 Count: 5
 
-Fruits in basket:
+Countdown from 3:
+T-minus 3
+T-minus 2
+T-minus 1
+Blast off! 🚀
+
+=== Array Processing ===
+Fruits in our basket:
 - apple
 - banana
 - orange
+- grape</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-highlight">
+                        <h3>🎯 Key Control Flow Features</h3>
+                        <ul>
+                            <li><strong>Nested If-Else:</strong> LAML uses nested structure instead of "else if"</li>
+                            <li><strong>Boolean Operators:</strong> Use && (AND), || (OR), ! (NOT) for complex conditions</li>
+                            <li><strong>For Loops:</strong> C-style loops with initialization, condition, and increment</li>
+                            <li><strong>While Loops:</strong> Condition-based iteration for dynamic control</li>
+                            <li><strong>Array Iteration:</strong> Manual indexing with bounds checking for arrays</li>
+                        </ul>
+                    </div>
+                </div>
 
-Pattern:
+                <!-- Loops -->
+                <div class="lesson" id="loops">
+                    <h2>🔄 Advanced Loop Patterns</h2>
+                    <p>LAML supports various loop patterns for different iteration needs:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">advanced_loops.lm</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">~ Advanced Loop Patterns in LAML
+bring xcs.class34;
+
+func main() {
+    say "=== Advanced Loop Patterns ===";
+    
+    {~ 
+       Nested loops for patterns and matrices
+    ~}
+    say "Pattern Generation:";
+    for val row = 1; row <= 4; row++ {
+        let line = "";
+        for val col = 1; col <= row; col++ {
+            line = line + "* ";
+        }
+        say line;
+    }
+    
+    say "";
+    say "Multiplication Table (3x3):";
+    for val i = 1; i <= 3; i++ {
+        for val j = 1; j <= 3; j++ {
+            let result = i * j;
+            say i + " x " + j + " = " + result;
+        }
+        say "---";
+    }
+    
+    {~ 
+       Array processing with conditions
+    ~}
+    say "";
+    say "=== Conditional Array Processing ===";
+    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let i = 0;
+    
+    say "Even numbers:";
+    while i < 10 {
+        if numbers[i] % 2 == 0 {
+            say "- " + numbers[i];
+        }
+        i++;
+    }
+    
+    ~ Finding maximum in array
+    say "";
+    say "Finding maximum:";
+    let max = numbers[0];
+    let idx = 1;
+    while idx < 10 {
+        if numbers[idx] > max {
+            max = numbers[idx];
+        }
+        idx++;
+    }
+    say "Maximum value: " + max;
+}</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Output:</strong>
+                            <pre>=== Advanced Loop Patterns ===
+Pattern Generation:
 * 
 * * 
-* * *</pre>
+* * * 
+* * * * 
+
+Multiplication Table (3x3):
+1 x 1 = 1
+1 x 2 = 2
+1 x 3 = 3
+---
+2 x 1 = 2
+2 x 2 = 4
+2 x 3 = 6
+---
+3 x 1 = 3
+3 x 2 = 6
+3 x 3 = 9
+---
+
+=== Conditional Array Processing ===
+Even numbers:
+- 2
+- 4
+- 6
+- 8
+- 10
+
+Finding maximum:
+Maximum value: 10</pre>
                         </div>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h4>💡 Loop Best Practices</h4>
+                        <p>Remember that LAML uses C-style for loops and while loops. Always ensure your loop conditions will eventually become false to avoid infinite loops!</p>
                     </div>
                 </div>
 
