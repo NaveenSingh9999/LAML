@@ -44,7 +44,7 @@ subtitle()  { echo -e "  ${BOLD}${CYAN}▸ ${*}${RESET}"; }
 # Spinner (async)
 # ---------------------------------------------------------------------------
 _spin_pid=""
-_spin_chars=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
+_spin_chars=('|' '/' '-' '\')
 
 spinner_start() {
   local msg="${1:-Working...}"
@@ -57,7 +57,7 @@ spinner_start() {
     while true; do
       for c in "${_spin_chars[@]}"; do
         printf "\b%s" "$c"
-        sleep 0.08
+        sleep 0.12
       done
     done
   ) &
