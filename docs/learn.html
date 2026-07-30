@@ -132,18 +132,12 @@
                     
                     <div class="install-grid">
                         <div class="install-card">
-                            <h3>Windows</h3>
+                            <h3>Universal (Linux, macOS, Termux)</h3>
                             <div class="code-block">
-                                <code>iwr -useb https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/windows/install.ps1 | iex</code>
+                                <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/install.sh | bash</code>
                                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                             </div>
-                        </div>
-                        <div class="install-card">
-                            <h3>Linux/macOS</h3>
-                            <div class="code-block">
-                                <code>curl -fsSL https://github.com/NaveenSingh9999/LAML/raw/refs/heads/main/installers/linux/install.sh | bash</code>
-                                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                            </div>
+                            <p style="margin-top: 10px; color: #888;">Clones source, installs dependencies, builds native binary, and installs it. Auto-detects your platform.</p>
                         </div>
                     </div>
 
