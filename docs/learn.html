@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/learn.css">
     <link rel="icon" type"image/svg+xml" href="assets/logo.svg">
-    <meta name="description" content="Learn LAML v3.4.0 - Interactive tutorials covering enhanced data types, arrays, and new compiler features">
+    <meta name="description" content="Learn LAML v4.0.0 - Interactive tutorials covering the C++20 next-generation runtime, data types, functions, and concurrency">
 </head>
 <body>
     <!-- Navigation -->
@@ -43,7 +43,7 @@
         <!-- Hero Section -->
         <section class="learn-hero">
             <div class="container">
-                <h1 class="hero-title">Learn LAML v3.4.0</h1>
+                <h1 class="hero-title">Learn LAML v4.0.0</h1>
                 <p class="hero-description">
                     Master the enhanced LAML language with comprehensive data types, array support, and powerful new features. 
                     From basics to advanced concepts, this interactive guide has everything you need.
@@ -79,7 +79,7 @@
                 <h2>Table of Contents</h2>
                 <div class="toc-grid">
                     <div class="toc-column">
-                        <h3>🚀 Getting Started</h3>
+                        <h3>Getting Started</h3>
                         <ul>
                             <li><a href="#installation">Installation & Setup</a></li>
                             <li><a href="#hello-world">Your First Program</a></li>
@@ -87,7 +87,7 @@
                         </ul>
                     </div>
                     <div class="toc-column">
-                        <h3>📊 Data Types</h3>
+                        <h3>Data Types</h3>
                         <ul>
                             <li><a href="#data-types">Type System Overview</a></li>
                             <li><a href="#integers">Integers (int)</a></li>
@@ -98,7 +98,7 @@
                         </ul>
                     </div>
                     <div class="toc-column">
-                        <h3>⚡ Language Features</h3>
+                        <h3>Language Features</h3>
                         <ul>
                             <li><a href="#variables">Variables & Constants</a></li>
                             <li><a href="#operators">Operators</a></li>
@@ -109,7 +109,7 @@
                         </ul>
                     </div>
                     <div class="toc-column">
-                        <h3>🔧 Advanced Topics</h3>
+                        <h3>Advanced Topics</h3>
                         <ul>
                             <li><a href="#type-inference">Type Inference</a></li>
                             <li><a href="#error-handling">Error Handling</a></li>
@@ -127,8 +127,8 @@
                 
                 <!-- Installation -->
                 <div class="lesson" id="installation">
-                    <h2>🚀 Installation & Setup</h2>
-                    <p>Get LAML v3.4.0 installed on your system with our one-click installers:</p>
+                    <h2>Installation & Setup</h2>
+                    <p>Get LAML v4.0.0 installed on your system with the next-generation C++20 runtime:</p>
                     
                     <div class="install-grid">
                         <div class="install-card">
@@ -148,14 +148,14 @@
                     </div>
 
                     <div class="tip-box">
-                        <h4>💡 Tip</h4>
+                        <h4>Tip</h4>
                         <p>After installation, verify everything works by running <code>laml --version</code> in your terminal.</p>
                     </div>
                 </div>
 
                 <!-- Hello World -->
                 <div class="lesson" id="hello-world">
-                    <h2>👋 Your First Program</h2>
+                    <h2>Your First Program</h2>
                     <p>Let's start with the classic "Hello, World!" program in LAML:</p>
                     
                     <div class="code-example">
@@ -164,29 +164,23 @@
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">bring xcs.class34;
-
-func main() {
-    say "Hello, LAML v3.3.0!";
-}</code></pre>
+                            <pre><code class="language-laml">say "Hello, LAML v4.0.0!";</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
-                            <pre>Hello, LAML v3.3.0!</pre>
+                            <pre>Hello, LAML v4.0.0!</pre>
                         </div>
                     </div>
 
                     <div class="explanation">
                         <h4>Code Breakdown:</h4>
                         <ul>
-                            <li><code>bring xcs.class34;</code> - Import the core LAML module</li>
-                            <li><code>func main() { ... }</code> - Define the main function (entry point)</li>
                             <li><code>say "text";</code> - Print text to the console</li>
                         </ul>
                     </div>
 
                     <div class="exercise">
-                        <h4>🎯 Try It Yourself</h4>
+                        <h4>Try It Yourself</h4>
                         <p>Modify the program to say hello to yourself. Save it as <code>greeting.lm</code> and run with:</p>
                         <code>laml run greeting.lm</code>
                     </div>
@@ -194,43 +188,43 @@ func main() {
 
                 <!-- Data Types -->
                 <div class="lesson" id="data-types">
-                    <h2>📊 Enhanced Data Types</h2>
-                    <p>LAML v3.3.0 introduces a comprehensive type system with five core data types:</p>
+                    <h2>Enhanced Data Types</h2>
+                    <p>LAML v4.0.0 provides five core data types:</p>
                     
                     <div class="type-showcase">
                         <div class="type-card">
                             <h3>int</h3>
                             <p>Whole numbers</p>
                             <div class="code-snippet">
-                                <code>let age: int = 25;</code>
+                                <code>let age = 25;</code>
                             </div>
                         </div>
                         <div class="type-card">
                             <h3>float</h3>
                             <p>Decimal numbers</p>
                             <div class="code-snippet">
-                                <code>let height: float = 5.9;</code>
+                                <code>let height = 5.9;</code>
                             </div>
                         </div>
                         <div class="type-card">
                             <h3>string</h3>
                             <p>Text data</p>
                             <div class="code-snippet">
-                                <code>let name: string = "Alice";</code>
+                                <code>let name = "Alice";</code>
                             </div>
                         </div>
                         <div class="type-card">
                             <h3>bool</h3>
                             <p>True/false values</p>
                             <div class="code-snippet">
-                                <code>let isActive: bool = true;</code>
+                                <code>let isActive = true;</code>
                             </div>
                         </div>
                         <div class="type-card">
                             <h3>array</h3>
                             <p>Collections of data</p>
                             <div class="code-snippet">
-                                <code>let scores: array = [95, 87, 92];</code>
+                                <code>let scores = [95, 87, 92];</code>
                             </div>
                         </div>
                     </div>
@@ -241,22 +235,17 @@ func main() {
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">bring xcs.class34;
+                            <pre><code class="language-laml">let age = 25;
+let height = 5.9;
+let name = "Alice";
+let isStudent = true;
+let grades = [95, 87, 92, 88];
 
-func main() {
-    // Explicit type declarations
-    let age: int = 25;
-    let height: float = 5.9;
-    let name: string = "Alice";
-    let isStudent: bool = true;
-    let grades: array = [95, 87, 92, 88];
-    
-    say "Name: " + name;
-    say "Age: " + age;
-    say "Height: " + height;
-    say "Is Student: " + isStudent;
-    say "Grades: " + grades;
-}</code></pre>
+say "Name: " + name;
+say "Age: " + age;
+say "Height: " + height;
+say "Is Student: " + isStudent;
+say "Grades: " + grades;</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
@@ -271,8 +260,8 @@ Grades: [95, 87, 92, 88]</pre>
 
                 <!-- Arrays -->
                 <div class="lesson" id="arrays">
-                    <h2>📋 Working with Arrays</h2>
-                    <p>Arrays in LAML v3.3.0 are powerful and flexible, supporting various operations:</p>
+                    <h2>Working with Arrays</h2>
+                    <p>Arrays in LAML v4.0.0 are flexible and support various operations:</p>
                     
                     <div class="code-example">
                         <div class="code-header">
@@ -280,46 +269,33 @@ Grades: [95, 87, 92, 88]</pre>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">bring xcs.class34;
+                            <pre><code class="language-laml">let numbers = [1, 2, 3, 4, 5];
+let names = ["Alice", "Bob", "Charlie"];
+let mixed = [1, "hello", true, 3.14];
 
-func main() {
-    // Creating arrays
-    let numbers: array = [1, 2, 3, 4, 5];
-    let names: array = ["Alice", "Bob", "Charlie"];
-    let mixed: array = [1, "hello", true, 3.14];
-    
-    say "Numbers: " + numbers;
-    say "Names: " + names;
-    say "Mixed: " + mixed;
-    
-    // Array operations
-    let doubled: array = [];
-    loop num in numbers {
-        doubled.push(num * 2);
-    }
-    
-    say "Doubled: " + doubled;
-    
-    // Array indexing
-    say "First number: " + numbers[0];
-    say "Last name: " + names[2];
-}</code></pre>
+say "Numbers: " + numbers;
+say "Names: " + names;
+say "Mixed: " + mixed;
+
+say "First number: " + numbers[0];
+say "Last name: " + names[2];
+say "Array length: " + len(numbers);</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
                             <pre>Numbers: [1, 2, 3, 4, 5]
 Names: ["Alice", "Bob", "Charlie"]
 Mixed: [1, "hello", true, 3.14]
-Doubled: [2, 4, 6, 8, 10]
 First number: 1
-Last name: Charlie</pre>
+Last name: Charlie
+Array length: 5</pre>
                         </div>
                     </div>
                 </div>
 
                 <!-- Control Flow -->
                 <div class="lesson" id="control-flow">
-                    <h2>🔀 Control Flow</h2>
+                    <h2>Control Flow</h2>
                     <p>LAML provides intuitive conditional statements and loops for program logic control:</p>
                     
                     <div class="code-example">
@@ -328,84 +304,81 @@ Last name: Charlie</pre>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">~ LAML Control Flow Structures
-bring xcs.class34;
+                            <pre><code class="language-laml">say "=== LAML Control Flow Demo ===";
 
-func main() {
-    say "=== LAML Control Flow Demo ===";
-    
-    {~ 
-       If/Else Conditional Logic
-       Testing different conditions and responses
-    ~}
-    say "=== Conditional Logic ===";
-    
-    let score = 85;
-    let grade = "";
-    
-    ~ Multiple if-else conditions (nested structure)
-    if score >= 90 {
-        grade = "A";
+{~ 
+   If/Else Conditional Logic
+   Testing different conditions and responses
+~}
+say "=== Conditional Logic ===";
+
+let score = 85;
+let grade = "";
+
+~ Multiple if-else conditions (nested structure)
+if score >= 90 {
+    grade = "A";
+} else {
+    if score >= 80 {
+        grade = "B";
     } else {
-        if score >= 80 {
-            grade = "B";
+        if score >= 70 {
+            grade = "C";
         } else {
-            if score >= 70 {
-                grade = "C";
+            if score >= 60 {
+                grade = "D";
             } else {
-                if score >= 60 {
-                    grade = "D";
-                } else {
-                    grade = "F";
-                }
+                grade = "F";
             }
         }
     }
-    
-    say "Score: " + score + " - Grade: " + grade;
-    
-    ~ Boolean logic
-    let isValid = true;
-    let isActive = false;
-    
-    if isValid && !isActive {
-        say "System is valid but inactive";
-    }
-    
-    {~ 
-       Loop Structures
-       Different types of loops for iteration
-    ~}
-    say "";
-    say "=== Loop Structures ===";
-    
-    ~ C-style for loop
-    say "Counting from 1 to 5:";
-    for val i = 1; i <= 5; i++ {
-        say "Count: " + i;
-    }
-    
-    ~ While loop
-    say "";
-    say "Countdown from 3:";
-    let countdown = 3;
-    while countdown > 0 {
-        say "T-minus " + countdown;
-        countdown--;
-    }
-    say "Blast off! 🚀";
-    
-    ~ Array iteration (manual indexing)
-    say "";
-    say "=== Array Processing ===";
-    let fruits = ["apple", "banana", "orange", "grape"];
-    let i = 0;
-    
-    say "Fruits in our basket:";
-    while i < 4 {
-        say "- " + fruits[i];
-        i++;
-    }
+}
+
+say "Score: " + score + " - Grade: " + grade;
+
+~ Boolean logic
+let isValid = true;
+let isActive = false;
+
+if isValid && !isActive {
+    say "System is valid but inactive";
+}
+
+{~ 
+   Loop Structures
+   Different types of loops for iteration
+~}
+say "";
+say "=== Loop Structures ===";
+
+~ Counting with while loop
+say "Counting from 1 to 5:";
+let i = 1;
+while i <= 5 {
+    say "Count: " + i;
+    i++;
+}
+
+~ Countdown with while loop
+say "";
+say "Countdown from 3:";
+let countdown = 3;
+while countdown > 0 {
+    say "T-minus " + countdown;
+    countdown--;
+}
+say "Blast off!";
+
+~ Array iteration with while loop
+say "";
+say "=== Array Processing ===";
+let fruits = ["apple", "banana", "orange", "grape"];
+let idx = 0;
+
+say "Fruits in our basket:";
+while idx < len(fruits) {
+    say "- " + fruits[idx];
+    idx++;
 }</code></pre>
                         </div>
                         <div class="code-output">
@@ -427,7 +400,7 @@ Countdown from 3:
 T-minus 3
 T-minus 2
 T-minus 1
-Blast off! 🚀
+Blast off!
 
 === Array Processing ===
 Fruits in our basket:
@@ -439,12 +412,12 @@ Fruits in our basket:
                     </div>
                     
                     <div class="feature-highlight">
-                        <h3>🎯 Key Control Flow Features</h3>
+                        <h3>Key Control Flow Features</h3>
                         <ul>
                             <li><strong>Nested If-Else:</strong> LAML uses nested structure instead of "else if"</li>
                             <li><strong>Boolean Operators:</strong> Use && (AND), || (OR), ! (NOT) for complex conditions</li>
-                            <li><strong>For Loops:</strong> C-style loops with initialization, condition, and increment</li>
-                            <li><strong>While Loops:</strong> Condition-based iteration for dynamic control</li>
+                            <li><strong>While Loops:</strong> Condition-based iteration with increment/decrement</li>
+                            <li><strong>For Range Loops:</strong> <code>for x in start to end { }</code> for bounded iteration</li>
                             <li><strong>Array Iteration:</strong> Manual indexing with bounds checking for arrays</li>
                         </ul>
                     </div>
@@ -452,7 +425,7 @@ Fruits in our basket:
 
                 <!-- Loops -->
                 <div class="lesson" id="loops">
-                    <h2>🔄 Advanced Loop Patterns</h2>
+                    <h2>Advanced Loop Patterns</h2>
                     <p>LAML supports various loop patterns for different iteration needs:</p>
                     
                     <div class="code-example">
@@ -461,63 +434,66 @@ Fruits in our basket:
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">~ Advanced Loop Patterns in LAML
-bring xcs.class34;
+                            <pre><code class="language-laml">say "=== Advanced Loop Patterns ===";
 
-func main() {
-    say "=== Advanced Loop Patterns ===";
-    
-    {~ 
-       Nested loops for patterns and matrices
-    ~}
-    say "Pattern Generation:";
-    for val row = 1; row <= 4; row++ {
-        let line = "";
-        for val col = 1; col <= row; col++ {
-            line = line + "* ";
-        }
-        say line;
+{~ 
+   Nested loops for patterns and matrices
+~}
+say "Pattern Generation:";
+let row = 1;
+while row <= 4 {
+    let line = "";
+    let col = 1;
+    while col <= row {
+        line = line + "* ";
+        col++;
     }
-    
-    say "";
-    say "Multiplication Table (3x3):";
-    for val i = 1; i <= 3; i++ {
-        for val j = 1; j <= 3; j++ {
-            let result = i * j;
-            say i + " x " + j + " = " + result;
-        }
-        say "---";
+    say line;
+    row++;
+}
+
+say "";
+say "Multiplication Table (3x3):";
+let i = 1;
+while i <= 3 {
+    let j = 1;
+    while j <= 3 {
+        let result = i * j;
+        say i + " x " + j + " = " + result;
+        j++;
     }
-    
-    {~ 
-       Array processing with conditions
-    ~}
-    say "";
-    say "=== Conditional Array Processing ===";
-    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    let i = 0;
-    
-    say "Even numbers:";
-    while i < 10 {
-        if numbers[i] % 2 == 0 {
-            say "- " + numbers[i];
-        }
-        i++;
+    say "---";
+    i++;
+}
+
+{~ 
+   Array processing with conditions
+~}
+say "";
+say "=== Conditional Array Processing ===";
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let k = 0;
+
+say "Even numbers:";
+while k < len(numbers) {
+    if numbers[k] % 2 == 0 {
+        say "- " + numbers[k];
     }
-    
-    ~ Finding maximum in array
-    say "";
-    say "Finding maximum:";
-    let max = numbers[0];
-    let idx = 1;
-    while idx < 10 {
-        if numbers[idx] > max {
-            max = numbers[idx];
-        }
-        idx++;
+    k++;
+}
+
+~ Finding maximum in array
+say "";
+say "Finding maximum:";
+let max = numbers[0];
+let idx = 1;
+while idx < len(numbers) {
+    if numbers[idx] > max {
+        max = numbers[idx];
     }
-    say "Maximum value: " + max;
-}</code></pre>
+    idx++;
+}
+say "Maximum value: " + max;</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
@@ -556,14 +532,14 @@ Maximum value: 10</pre>
                     </div>
                     
                     <div class="tip-box">
-                        <h4>💡 Loop Best Practices</h4>
-                        <p>Remember that LAML uses C-style for loops and while loops. Always ensure your loop conditions will eventually become false to avoid infinite loops!</p>
+                        <h4>Loop Best Practices</h4>
+                        <p>Remember that LAML uses while, loop, and for-range loops. Always ensure your loop conditions will eventually become false to avoid infinite loops!</p>
                     </div>
                 </div>
 
                 <!-- Functions -->
                 <div class="lesson" id="functions">
-                    <h2>⚙️ Functions</h2>
+                    <h2>Functions</h2>
                     <p>Functions in LAML help organize code and enable reusability:</p>
                     
                     <div class="code-example">
@@ -572,43 +548,40 @@ Maximum value: 10</pre>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">bring xcs.class34;
-
-// Function to calculate area of rectangle
-func calculateArea(length: float, width: float) {
-    let area: float = length * width;
+                            <pre><code class="language-laml">// Function to calculate area of rectangle
+func calculateArea(length, width) {
+    let area = length * width;
     return area;
 }
 
 // Function to greet a person
-func greet(name: string, age: int) {
+func greet(name, age) {
     say "Hello, " + name + "! You are " + age + " years old.";
 }
 
 // Function to find maximum in array
-func findMax(numbers: array) {
-    let max: int = numbers[0];
-    loop num in numbers {
-        if num > max {
-            max = num;
+func findMax(numbers) {
+    let max = numbers[0];
+    let i = 1;
+    while i < len(numbers) {
+        if numbers[i] > max {
+            max = numbers[i];
         }
+        i++;
     }
     return max;
 }
 
-func main() {
-    // Using functions
-    let length: float = 5.5;
-    let width: float = 3.2;
-    let area: float = calculateArea(length, width);
-    say "Area: " + area;
-    
-    greet("Alice", 25);
-    
-    let scores: array = [85, 92, 78, 96, 88];
-    let highest: int = findMax(scores);
-    say "Highest score: " + highest;
-}</code></pre>
+let length = 5.5;
+let width = 3.2;
+let area = calculateArea(length, width);
+say "Area: " + area;
+
+greet("Alice", 25);
+
+let scores = [85, 92, 78, 96, 88];
+let highest = findMax(scores);
+say "Highest score: " + highest;</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
@@ -621,11 +594,11 @@ Highest score: 96</pre>
 
                 <!-- Format Specifiers -->
                 <div class="lesson" id="format-specifiers">
-                    <h2>🧩 Format Specifiers & Escape Sequences</h2>
-                    <p>LAML v3.4.0 introduces C-style format specifiers and escape sequences for powerful string formatting and output control:</p>
+                    <h2>Format Specifiers & Escape Sequences</h2>
+                    <p>LAML v4.0.0 provides C-style format specifiers and escape sequences for powerful string formatting and output control:</p>
                     
                     <div class="feature-highlight">
-                        <h3>📝 Format Specifier Syntax</h3>
+                        <h3>Format Specifier Syntax</h3>
                         <div class="code-snippet">
                             <code>say("Hello %s, your score is %d", name, score);</code>
                         </div>
@@ -637,21 +610,16 @@ Highest score: 96</pre>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">~ LAML Format Specifiers Demo
-bring xcs.class34;
+                            <pre><code class="language-laml">~ Basic format specifiers
+let name = "Naveen";
+let age = 25;
+let score = 98.7654;
+let isActive = true;
 
-func main() {
-    ~ Basic format specifiers
-    let name = "Naveen";
-    let age = 25;
-    let score = 98.7654;
-    let isActive = true;
-    
-    say("Hello %s, you are %d years old", name, age);
-    say("Your score is %f (default precision)", score);
-    say("Your score is %.2f (2 decimal places)", score);
-    say("Status: %b", isActive);
-}</code></pre>
+say("Hello %s, you are %d years old", name, age);
+say("Your score is %f (default precision)", score);
+say("Your score is %.2f (2 decimal places)", score);
+say("Status: %b", isActive);</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
@@ -664,7 +632,7 @@ Status: true</pre>
 
                     <div class="feature-grid">
                         <div class="feature-item">
-                            <h3>📊 Format Specifiers Table</h3>
+                            <h3>Format Specifiers Table</h3>
                             <table class="format-table">
                                 <thead>
                                     <tr>
@@ -722,26 +690,19 @@ Status: true</pre>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">~ Escape Sequences Demo
-bring xcs.class34;
+                            <pre><code class="language-laml">say "=== Escape Sequences Demo ===";
 
-func main() {
-    say "=== Escape Sequences Demo ===";
-    
-    ~ Line breaks and tabs
-    say("Line 1\nLine 2\nLine 3");
-    say("Tabbed\ttext\there");
-    
-    ~ Quotes and special characters
-    say("Quote: \"Hello World\"");
-    say("Apostrophe: \'LAML\'");
-    say("Backslash: \\path\\to\\file");
-    
-    ~ Control characters
-    say("Bell sound: \a(if supported)");
-    say("Carriage return:\rOverwritten text");
-    say("Backspace: ABC\b\b123");
-}</code></pre>
+~ Line breaks and tabs
+say("Line 1\nLine 2\nLine 3");
+say("Tabbed\ttext\there");
+
+~ Quotes and special characters
+say("Quote: \"Hello World\"");
+say("Backslash: \\path\\to\\file");
+
+~ Carriage return and backspace
+say("Carriage return:\rOverwritten text");
+say("Backspace: ABC\b\b123");</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
@@ -751,9 +712,7 @@ Line 2
 Line 3
 Tabbed	text	here
 Quote: "Hello World"
-Apostrophe: 'LAML'
 Backslash: \path\to\file
-Bell sound: (if supported)
 Overwritten text
 Backspace: A123</pre>
                         </div>
@@ -761,7 +720,7 @@ Backspace: A123</pre>
 
                     <div class="feature-grid">
                         <div class="feature-item">
-                            <h3>🔥 Escape Sequences Table</h3>
+                            <h3>Escape Sequences Table</h3>
                             <table class="format-table">
                                 <thead>
                                     <tr>
@@ -822,42 +781,37 @@ Backspace: A123</pre>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">~ Advanced Formatting Examples
-bring xcs.class34;
+                            <pre><code class="language-laml">say "=== Advanced Formatting Examples ===";
 
-func main() {
-    say "=== Advanced Formatting Examples ===";
-    
-    {~ 
-       Combining format specifiers with escape sequences
-    ~}
-    let player = "Lamgerr";
-    let marks = 97.45;
-    say("Player: %s\nScore: %.2f\nResult: %s", player, marks, "PASS");
-    
-    say "";
-    
-    ~ Precision control with floats
-    let pi = 3.14159265359;
-    say("Pi with different precisions:");
-    say("Default: %f", pi);
-    say("2 decimal: %.2f", pi);
-    say("4 decimal: %.4f", pi);
-    
-    say "";
-    
-    ~ Character and boolean formatting
-    let firstChar = 'L';
-    let isComplete = true;
-    say("First letter: %c, Complete: %b", firstChar, isComplete);
-    
-    ~ Arrays and mixed types
-    let numbers = [1, 2, 3, 4, 5];
-    say("Numbers array: %s", numbers);
-    
-    ~ Backward compatibility - old syntax still works
-    say "Old syntax: This still works with escape sequences!\nSee the newline?";
-}</code></pre>
+{~ 
+   Combining format specifiers with escape sequences
+~}
+let player = "Lamgerr";
+let marks = 97.45;
+say("Player: %s\nScore: %.2f\nResult: %s", player, marks, "PASS");
+
+say "";
+
+~ Precision control with floats
+let pi = 3.14159265359;
+say("Pi with different precisions:");
+say("Default: %f", pi);
+say("2 decimal: %.2f", pi);
+say("4 decimal: %.4f", pi);
+
+say "";
+
+~ Character and boolean formatting
+let firstChar = 'L';
+let isComplete = true;
+say("First letter: %c, Complete: %b", firstChar, isComplete);
+
+~ Arrays and mixed types
+let nums = [1, 2, 3, 4, 5];
+say("Numbers array: %s", nums);
+
+~ Backward compatibility - old syntax still works
+say "Old syntax: This still works with escape sequences!\nSee the newline?";</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
@@ -879,7 +833,7 @@ See the newline?</pre>
                     </div>
 
                     <div class="feature-highlight">
-                        <h3>⚠️ Error Handling & Validation</h3>
+                        <h3>Error Handling & Validation</h3>
                         <p>LAML automatically validates that the number of format specifiers matches the number of arguments:</p>
                         <div class="code-snippet">
                             <code>say("Hello %s %d", "World"); // Error: Missing argument for %d</code>
@@ -890,7 +844,7 @@ See the newline?</pre>
                     </div>
 
                     <div class="tip-box">
-                        <h4>💡 Best Practices</h4>
+                        <h4>Best Practices</h4>
                         <ul>
                             <li><strong>Precision Control:</strong> Use <code>%.nf</code> for precise float formatting</li>
                             <li><strong>Type Safety:</strong> LAML automatically converts compatible types</li>
@@ -901,7 +855,7 @@ See the newline?</pre>
                     </div>
 
                     <div class="exercise">
-                        <h4>🎯 Try It Yourself</h4>
+                        <h4>Try It Yourself</h4>
                         <p>Create a program that displays a formatted report with:</p>
                         <ul>
                             <li>Student name using <code>%s</code></li>
@@ -916,8 +870,8 @@ See the newline?</pre>
 
                 <!-- Type Inference -->
                                 <div class="lesson" id="type-inference">
-                    <h2>🧠 Type Inference</h2>
-                    <p>LAML v3.4.0 features smart type inference, allowing you to omit type annotations in many cases:</p>
+                                <h2>Type Inference</h2>
+                    <p>LAML v4.0.0 features smart type inference:</p>
                     
                     <div class="code-example">
                         <div class="code-header">
@@ -925,76 +879,63 @@ See the newline?</pre>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">bring xcs.class34;
+                            <pre><code class="language-laml">let count = 42;
+let price = 19.99;
+let message = "Hello";
+let isReady = true;
+let items = [1, 2, 3];
 
-func main() {
-    // Type inference in action
-    let count = 42;           // inferred as int
-    let price = 19.99;        // inferred as float
-    let message = "Hello";    // inferred as string
-    let isReady = true;       // inferred as bool
-    let items = [1, 2, 3];    // inferred as array
-    
-    say "Count: " + count + " (type: int)";
-    say "Price: " + price + " (type: float)";
-    say "Message: " + message + " (type: string)";
-    say "Ready: " + isReady + " (type: bool)";
-    say "Items: " + items + " (type: array)";
-    
-    // Mixing explicit and inferred types
-    let explicitAge: int = 25;
-    let inferredAge = 30;
-    
-    let totalAge = explicitAge + inferredAge;  // inferred as int
-    say "Total age: " + totalAge;
-}</code></pre>
+say "Count: " + count;
+say "Price: " + price;
+say "Message: " + message;
+say "Ready: " + isReady;
+say "Items: " + items;</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
-                            <pre>Count: 42 (type: int)
-Price: 19.99 (type: float)
-Message: Hello (type: string)
-Ready: true (type: bool)
-Items: [1, 2, 3] (type: array)
-Total age: 55</pre>
+                            <pre>Count: 42
+Price: 19.99
+Message: Hello
+Ready: true
+Items: [1, 2, 3]</pre>
                         </div>
                     </div>
                 </div>
 
                 <!-- Compiler Features -->
                 <div class="lesson" id="compiler-features">
-                    <h2>🎨 Enhanced Compiler Features</h2>
-                    <p>LAML v3.4.0 includes enhanced compiler features for better development experience:</p>
+                    <h2>Enhanced Compiler Features</h2>
+                    <p>LAML v4.0.0 includes a next-generation compiler backed by C++20 and LLVM, providing significant performance improvements and better optimization:</p>
                     
                     <div class="feature-grid">
                         <div class="feature-item">
-                            <h3>🌈 Colored Output</h3>
+                            <h3>Colored Output</h3>
                             <p>The compiler provides color-coded feedback for errors, warnings, and success messages, making debugging easier and more intuitive.</p>
                         </div>
                         <div class="feature-item">
-                            <h3>🔍 Type Checking</h3>
+                            <h3>Type Checking</h3>
                             <p>Enhanced type checking catches errors at compile time, ensuring type safety and preventing runtime errors.</p>
                         </div>
                         <div class="feature-item">
-                            <h3>📝 Better Error Messages</h3>
+                            <h3>Better Error Messages</h3>
                             <p>Improved error messages with precise locations and helpful suggestions for fixing common mistakes.</p>
                         </div>
                         <div class="feature-item">
-                            <h3>⚡ Fast Compilation</h3>
-                            <p>Optimized compilation process generates efficient bytecode for fast execution across all platforms.</p>
+                            <h3>C++20 LLVM Backend</h3>
+                            <p>Rewritten in C++20 with LLVM backend for native code generation. Faster compilation, smaller binaries, and cross-platform support.</p>
                         </div>
                     </div>
 
                     <div class="tip-box">
-                        <h4>💡 Pro Tip</h4>
+                        <h4>Pro Tip</h4>
                         <p>Use <code>laml run filename.lm</code> to compile and run your programs in one command. The compiler will show colored output to help you identify any issues quickly.</p>
                     </div>
                 </div>
 
                 <!-- Real Examples -->
                 <div class="lesson" id="examples">
-                    <h2>🚀 Real-world Example</h2>
-                    <p>Let's build a complete program that demonstrates multiple LAML v3.3.0 features:</p>
+                    <h2>Real-world Example</h2>
+                    <p>Let's build a complete program that demonstrates multiple LAML v4.0.0 features:</p>
                     
                     <div class="code-example">
                         <div class="code-header">
@@ -1002,84 +943,90 @@ Total age: 55</pre>
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">bring xcs.class34;
+                            <pre><code class="language-laml">// Function to calculate average grade
+func calculateAverage(grades) {
+    let sum = 0.0;
+    let count = 0;
+    let i = 0;
 
-// Function to calculate average grade
-func calculateAverage(grades: array) {
-    let sum: float = 0.0;
-    let count: int = 0;
-    
-    loop grade in grades {
-        sum = sum + grade;
+    while i < len(grades) {
+        sum = sum + grades[i];
         count = count + 1;
+        i++;
     }
-    
+
     return sum / count;
 }
 
 // Function to determine letter grade
-func getLetterGrade(average: float) {
+func getLetterGrade(average) {
     if average >= 90.0 {
         return "A";
-    } else if average >= 80.0 {
-        return "B";
-    } else if average >= 70.0 {
-        return "C";
-    } else if average >= 60.0 {
-        return "D";
     } else {
-        return "F";
+        if average >= 80.0 {
+            return "B";
+        } else {
+            if average >= 70.0 {
+                return "C";
+            } else {
+                if average >= 60.0 {
+                    return "D";
+                } else {
+                    return "F";
+                }
+            }
+        }
     }
 }
 
 // Function to find highest and lowest grades
-func findExtremes(grades: array) {
+func findExtremes(grades) {
     let highest = grades[0];
     let lowest = grades[0];
-    
-    loop grade in grades {
-        if grade > highest {
-            highest = grade;
+    let i = 0;
+
+    while i < len(grades) {
+        if grades[i] > highest {
+            highest = grades[i];
         }
-        if grade < lowest {
-            lowest = grade;
+        if grades[i] < lowest {
+            lowest = grades[i];
         }
+        i++;
     }
-    
+
     return [highest, lowest];
 }
 
-func main() {
-    // Student data
-    let studentName = "Alice Johnson";
-    let grades: array = [88, 92, 85, 90, 87, 94, 89];
-    
-    say "Student Grade Report";
-    say "===================";
-    say "Student: " + studentName;
-    say "Grades: " + grades;
-    
-    // Calculate statistics
-    let average = calculateAverage(grades);
-    let letterGrade = getLetterGrade(average);
-    let extremes = findExtremes(grades);
-    let highest = extremes[0];
-    let lowest = extremes[1];
-    
-    // Display results
-    say "\nGrade Statistics:";
-    say "Average: " + average;
-    say "Letter Grade: " + letterGrade;
-    say "Highest Grade: " + highest;
-    say "Lowest Grade: " + lowest;
-    
-    // Determine if passing
-    let isPassing: bool = average >= 70.0;
-    if isPassing {
-        say "\n✅ Student is passing!";
-    } else {
-        say "\n❌ Student needs improvement.";
-    }
+// Student data
+let studentName = "Alice Johnson";
+let grades = [88, 92, 85, 90, 87, 94, 89];
+
+say "Student Grade Report";
+say "===================";
+say "Student: " + studentName;
+say "Grades: " + grades;
+
+// Calculate statistics
+let average = calculateAverage(grades);
+let letterGrade = getLetterGrade(average);
+let extremes = findExtremes(grades);
+let highest = extremes[0];
+let lowest = extremes[1];
+
+// Display results
+say "\nGrade Statistics:";
+say "Average: " + average;
+say "Letter Grade: " + letterGrade;
+say "Highest Grade: " + highest;
+say "Lowest Grade: " + lowest;
+
+// Determine if passing
+let isPassing = average >= 70.0;
+if isPassing {
+    say "\nStudent is passing!";
+} else {
+    say "\nStudent needs improvement.";
 }</code></pre>
                         </div>
                         <div class="code-output">
@@ -1095,34 +1042,34 @@ Letter Grade: B
 Highest Grade: 94
 Lowest Grade: 85
 
-✅ Student is passing!</pre>
+Student is passing!</pre>
                         </div>
                     </div>
                 </div>
 
                 <!-- Next Steps -->
                 <div class="lesson" id="next-steps">
-                    <h2>🎓 What's Next?</h2>
-                    <p>Congratulations! You've learned the fundamentals of LAML v3.3.0. Here's what you can do next:</p>
+                    <h2>What's Next?</h2>
+                    <p>Congratulations! You've learned the fundamentals of LAML v4.0.0. Here's what you can do next:</p>
                     
                     <div class="next-steps-grid">
                         <div class="next-step">
-                            <h3>📂 Explore Examples</h3>
+                            <h3>Explore Examples</h3>
                             <p>Check out the example files in the LAML repository to see more advanced usage patterns and techniques.</p>
                             <a href="https://github.com/NaveenSingh9999/LAML/tree/main/examples" class="btn btn-primary">View Examples</a>
                         </div>
                         <div class="next-step">
-                            <h3>🔧 Set Up VS Code</h3>
+                            <h3>Set Up VS Code</h3>
                             <p>Install the LAML VS Code extension for syntax highlighting and better development experience.</p>
                             <a href="setup.html#vscode-section" class="btn btn-primary">Setup VS Code</a>
                         </div>
                         <div class="next-step">
-                            <h3>🌟 Build Projects</h3>
+                            <h3>Build Projects</h3>
                             <p>Start building your own projects with LAML. The language is perfect for scripting, automation, and learning programming concepts.</p>
                             <a href="features.html" class="btn btn-primary">See Features</a>
                         </div>
                         <div class="next-step">
-                            <h3>🤝 Join Community</h3>
+                            <h3>Join Community</h3>
                             <p>Join the LAML community on GitHub to ask questions, share projects, and contribute to the language development.</p>
                             <a href="https://github.com/NaveenSingh9999/LAML" class="btn btn-primary">Join Community</a>
                         </div>

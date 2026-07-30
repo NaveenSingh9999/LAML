@@ -1,0 +1,13 @@
+LAML-NG Web Server — File Serving Demo
+========================================
+Served at: replace_me_with_timestamp
+
+This file is read from disk using the readFile() builtin
+and served with proper Content-Type headers.
+
+LAML features used by this server:
+  - readLine()    read HTTP request from stdin
+  - readFile()    read files from disk
+  - string ops    path parsing, header construction
+  - conditionals  routing, content-type dispatch
+  - functions     modular server code

@@ -1,0 +1,77 @@
+~ Test all features
+
+~ Comments work
+{~ block comment ~}
+
+~ Values
+val name = "laml"
+let count = 42
+let pi = 3.14
+let flag = true
+let nothing = nil
+let arr = [1, 2, 3]
+
+~ Output
+say "hello " + name
+say count
+say pi
+say flag
+
+~ Arithmetic
+val sum = 10 + 20
+val diff = 50 - 30
+val prod = 6 * 7
+val quot = 100 / 4
+val rem = 17 % 5
+say sum
+say diff
+say prod
+say quot
+say rem
+
+~ Comparison
+if 5 > 3 {
+    say "5 > 3"
+}
+if 2 == 2 {
+    say "2 == 2"
+}
+
+~ FizzBuzz
+let i = 1
+while i <= 15 {
+    if i % 15 == 0 {
+        say "FizzBuzz"
+    } else {
+        if i % 3 == 0 {
+            say "Fizz"
+        } else {
+            if i % 5 == 0 {
+                say "Buzz"
+            } else {
+                say i
+            }
+        }
+    }
+    i = i + 1
+}
+
+~ Functions
+func square(x) {
+    return x * x
+}
+say square(5)
+
+func makeAdder(x) {
+    func inner(y) {
+        return x + y
+    }
+    return inner
+}
+val add5 = makeAdder(5)
+say add5(3)
+
+~ Len
+say len("hello")
+say len(arr)
+say len(arr)

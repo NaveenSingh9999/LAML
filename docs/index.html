@@ -41,7 +41,7 @@
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">LAML - Low Abstraction Machine Language </h1>
-                <p class="hero-subtitle">v3.4.0</p>
+                <p class="hero-subtitle">v4.0.0 — C++20 Next-Generation Runtime</p>
                 
                 <div class="value-props">
                     <div class="prop-card">
@@ -105,12 +105,15 @@
                     </div>
                     <div class="demo-code">
 <pre><code><span class="comment">~ Simple LAML example</span>
-<span class="keyword">bring</span> <span class="module">xcs.class34</span>;
+<span class="keyword">val</span> <span class="variable">greeting</span> = <span class="string">"Hello, World!"</span>;
+<span class="function">say</span> <span class="variable">greeting</span>;
 
-<span class="keyword">func</span> <span class="function">main</span>() {
-    <span class="keyword">val</span> <span class="variable">greeting</span> = <span class="string">"Hello, World!"</span>;
-    <span class="function">say</span> <span class="variable">greeting</span>;
-}</code></pre>
+<span class="comment">~ Functions with closures</span>
+<span class="keyword">func</span> <span class="function">add</span>(<span class="variable">x</span>, <span class="variable">y</span>) {
+    <span class="keyword">return</span> <span class="variable">x</span> + <span class="variable">y</span>;
+}
+
+<span class="function">say</span> <span class="function">add</span>(<span class="number">3</span>, <span class="number">4</span>);</code></pre>
                     </div>
                     <div class="demo-output">
                         <div class="output-header">Output:</div>
@@ -171,7 +174,7 @@
                         </svg>
                     </div>
                     <h3>Unique Syntax</h3>
-                    <p>Intuitive <code>bring xcs.class34</code> imports, clean comment system with <code>~</code>, and readable low-level code.</p>
+                    <p>Clean syntax with <code>~</code> comments, closures, and readable low-level code.</p>
                 </div>
             </div>
         </div>
@@ -199,7 +202,7 @@
                     <div class="step-number">2</div>
                     <h3>Create Your First Program</h3>
                     <div class="code-block">
-                        <code>echo 'bring xcs.class34; func main() { say "Hello!"; }' > hello.lm</code>
+                        <code>echo 'say "Hello, World!";' > hello.lm</code>
                         <button class="copy-btn">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>

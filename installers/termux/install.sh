@@ -184,7 +184,7 @@ test_installation() {
     
     # Test simple program compilation (optional)
     local test_file="$HOME/.laml_test_$$"
-    echo 'bring xcs.class34; func main() { say "Test successful!"; }' > "$test_file.lm"
+    echo 'say "Test successful!";' > "$test_file.lm"
     
     if "$INSTALL_DIR/laml" run "$test_file.lm" >/dev/null 2>&1; then
         print_colored $GREEN "✅ Program execution test passed"

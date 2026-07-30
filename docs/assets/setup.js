@@ -244,7 +244,7 @@ function checkVSCodeExtension() {
                 <div class="status-success">
                     ✅ LAML extension is installed and active
                     <div class="status-details">
-                        <p>Version: 3.2.0</p>
+                        <p>Version: 4.0.0</p>
                         <p>Language support: Active</p>
                         <p>Syntax highlighting: Enabled</p>
                     </div>

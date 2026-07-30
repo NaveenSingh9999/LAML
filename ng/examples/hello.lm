@@ -1,0 +1,12 @@
+~ LAML-NG feature test
+
+say "hello world"
+
+val x = 42
+say x
+
+let name = "LAML-NG"
+say name
+
+val sum = 10 + 20
+say sum
