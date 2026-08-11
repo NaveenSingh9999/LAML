@@ -49,6 +49,8 @@ struct Value {
     std::unique_ptr<ObjData> objVal;
     std::string errMsg;
     bool returning = false;
+    bool breaking = false;
+    bool continuing = false;
 
     Value() : type(ValType::Nil) {}
     Value(const Value& other) { copyFrom(other); }
@@ -64,7 +66,9 @@ struct Value {
         strVal = other.strVal;
         errMsg = other.errMsg;
         returning = other.returning;
-        if (other.arrVal) arrVal = std::make_shared<std::vector<Value>>(*other.arrVal);
+        breaking = other.breaking;
+        continuing = other.continuing;
+        if (other.arrVal) arrVal = other.arrVal;
         else arrVal.reset();
         if (other.funcVal) funcVal = std::make_unique<FuncData>(*other.funcVal);
         else funcVal.reset();

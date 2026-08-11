@@ -196,7 +196,8 @@ Token Lexer::nextToken() {
                 {"func", Token::FUNC}, {"if", Token::IF}, {"else", Token::ELSE},
                 {"loop", Token::LOOP}, {"while", Token::WHILE}, {"in", Token::IN},
                 {"to", Token::TO}, {"return", Token::RETURN}, {"closc", Token::CLOSC},
-                {"true", Token::STRING}, {"false", Token::STRING}
+                {"for", Token::FOR}, {"break", Token::BREAK}, {"continue", Token::CONTINUE},
+                {"true", Token::BOOL}, {"false", Token::BOOL}
             };
             auto it = keywords.find(ident);
             if (it != keywords.end()) {

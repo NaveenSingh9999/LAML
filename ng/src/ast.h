@@ -9,7 +9,7 @@ struct Token {
         IDENT, INT, FLOAT, STRING,
         SAY, VAL, LET, FUNC, IF, ELSE,
         LOOP, WHILE, IN, TO, RETURN,
-        CLOSC,
+        CLOSC, FOR, BREAK, CONTINUE, BOOL,
         ASSIGN, PLUS, MINUS, STAR, SLASH, PERCENT,
         EQ, NEQ, LT, GT, LTE, GTE,
         AND, OR, NOT,
@@ -27,13 +27,13 @@ struct ASTNode {
     enum class Kind {
         Program, Ident, IntLit, FloatLit, StrLit, BoolLit,
         ValDecl, LetDecl, Assign,
-        Say, If, While, Loop, RangeLoop,
+        Say, If, While, Loop, RangeLoop, ForIn,
         FuncDecl, Return,
         Block, ExprStmt,
         Prefix, Infix, Postfix,
         Call, Index, Dot,
-        ArrayLit,
-        CloscDecl
+        ArrayLit, ObjLit,
+        CloscDecl, Break, Continue
     } kind;
     std::string strVal;
     int64_t intVal = 0;

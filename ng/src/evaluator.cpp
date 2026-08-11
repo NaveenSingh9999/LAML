@@ -12,6 +12,8 @@ static Value error(const std::string& msg) {
     return Value::makeError(msg);
 }
 
+Evaluator* Evaluator::current_ = nullptr;
+
 bool isError(const Value& v) { return v.type == ValType::Error; }
 
 Value Evaluator::eval(const ASTNode& node, std::shared_ptr<Env> env) {
@@ -24,13 +26,23 @@ Value Evaluator::eval(const ASTNode& node, std::shared_ptr<Env> env) {
         if (!node.children.empty())
             return eval(node.children[0], env);
         return NIL;
-    case ASTNode::Kind::ValDecl:
+    case ASTNode::Kind::ValDecl: {
+        Value val = NIL;
+        if (!node.children.empty()) {
+            val = eval(node.children[0], env);
+            if (val.type == ValType::Error) return val;
+        }
+        env->declare(node.strVal, val, true); // val bindings are read-only
+        return NIL;
+    }
     case ASTNode::Kind::LetDecl: {
         Value val = NIL;
-        if (!node.children.empty())
+        if (!node.children.empty()) {
             val = eval(node.children[0], env);
-        env->set(node.strVal, val);
-        return NIL; // always return NIL so blocks don't propagate stored errors
+            if (val.type == ValType::Error) return val;
+        }
+        env->declare(node.strVal, val, false);
+        return NIL;
     }
     case ASTNode::Kind::Say:
         return evalSay(node, env);
@@ -42,6 +54,18 @@ Value Evaluator::eval(const ASTNode& node, std::shared_ptr<Env> env) {
         return evalLoop(node, env);
     case ASTNode::Kind::RangeLoop:
         return evalLoop(node, env);
+    case ASTNode::Kind::ForIn:
+        return evalForIn(node, env);
+    case ASTNode::Kind::Break: {
+        Value v = NIL;
+        v.breaking = true;
+        return v;
+    }
+    case ASTNode::Kind::Continue: {
+        Value v = NIL;
+        v.continuing = true;
+        return v;
+    }
     case ASTNode::Kind::Return: {
         Value val = NIL;
         if (!node.children.empty())
@@ -61,6 +85,8 @@ Value Evaluator::eval(const ASTNode& node, std::shared_ptr<Env> env) {
         return Value::makeBool(node.boolVal);
     case ASTNode::Kind::Prefix:
         return evalPrefix(node, env);
+    case ASTNode::Kind::Postfix:
+        return evalPostfix(node, env);
     case ASTNode::Kind::Infix:
         return evalInfix(node, env);
     case ASTNode::Kind::Call:
@@ -69,6 +95,8 @@ Value Evaluator::eval(const ASTNode& node, std::shared_ptr<Env> env) {
         return evalIndex(node, env);
     case ASTNode::Kind::Dot:
         return evalDot(node, env);
+    case ASTNode::Kind::ObjLit:
+        return evalObjLit(node, env);
     case ASTNode::Kind::ArrayLit: {
         std::vector<Value> elems;
         for (const auto& child : node.children) {
@@ -88,7 +116,7 @@ Value Evaluator::eval(const ASTNode& node, std::shared_ptr<Env> env) {
         fd.closure = env;
         Value fn = Value::makeFunc(std::move(fd));
         if (!node.strVal.empty())
-            env->set(node.strVal, fn);
+            env->declare(node.strVal, fn);
         return fn;
     }
     case ASTNode::Kind::Assign: {
@@ -226,6 +254,85 @@ Value Evaluator::evalLoop(const ASTNode& node, std::shared_ptr<Env> env) {
     return evalWhile(node, env);
 }
 
+Value Evaluator::evalForIn(const ASTNode& node, std::shared_ptr<Env> env) {
+    // for x in <start|collection> [to <end>] { body }
+    if (node.children.empty()) return NIL;
+    auto loopEnv = std::make_shared<Env>(env);
+    Value result = NIL;
+    size_t maxIters = 10'000'000;
+    size_t iter = 0;
+    // Returns false when the loop must stop (error, return, or break).
+    auto runBody = [&](Value item) -> bool {
+        if (iter++ >= maxIters) {
+            result = error("loop exceeded max iterations");
+            return false;
+        }
+        loopEnv->set(node.strVal, item);
+        result = eval(node.children.back(), loopEnv);
+        if (result.type == ValType::Error) return false;
+        if (result.returning) return false;
+        if (result.breaking) { result.breaking = false; result = NIL; return false; }
+        if (result.continuing) { result.continuing = false; result = NIL; return true; }
+        return true;
+    };
+
+    if (node.children.size() == 3) {
+        // for x in start to end { body }
+        Value start = eval(node.children[0], env);
+        if (isError(start)) return start;
+        Value end = eval(node.children[1], env);
+        if (isError(end)) return end;
+        if (start.type != ValType::Int || end.type != ValType::Int)
+            return error("for-in range requires integers");
+        for (int64_t i = start.intVal; i <= end.intVal; i++) {
+            if (!runBody(Value::makeInt(i))) break;
+        }
+        return result;
+    }
+
+    // for x in <array|string> { body }
+    Value coll = eval(node.children[0], env);
+    if (isError(coll)) return coll;
+    if (coll.type == ValType::Array && coll.arrVal) {
+        for (const auto& item : *coll.arrVal) {
+            if (!runBody(item)) break;
+        }
+        return result;
+    }
+    if (coll.type == ValType::String) {
+        for (unsigned char c : coll.strVal) {
+            if (!runBody(Value::makeInt(static_cast<int64_t>(c)))) break;
+        }
+        return result;
+    }
+    return error("for-in: expected array or string");
+}
+
+Value Evaluator::evalPostfix(const ASTNode& node, std::shared_ptr<Env> env) {
+    if (node.children.empty()) return error("postfix needs operand");
+    if (node.children[0].kind != ASTNode::Kind::Ident)
+        return error("++/-- requires a variable");
+    const std::string& name = node.children[0].strVal;
+    Value* cur = env->get(name);
+    if (!cur) return error("undefined: " + name);
+    if (cur->type != ValType::Int)
+        return error("++/-- requires an integer variable");
+    int64_t v = cur->intVal;
+    Value nv = Value::makeInt(node.strVal == "++" ? v + 1 : v - 1);
+    env->set(name, nv);
+    return nv;
+}
+
+Value Evaluator::evalObjLit(const ASTNode& node, std::shared_ptr<Env> env) {
+    auto objEnv = std::make_shared<Env>();
+    for (size_t i = 0; i + 1 < node.children.size(); i += 2) {
+        Value val = eval(node.children[i + 1], env);
+        if (isError(val)) return val;
+        objEnv->declare(node.children[i].strVal, val);
+    }
+    return Value::makeObj(objEnv);
+}
+
 Value Evaluator::evalInfix(const ASTNode& node, std::shared_ptr<Env> env) {
     if (node.children.size() < 2) return error("infix needs 2 operands");
     Value left = eval(node.children[0], env);
@@ -239,6 +346,22 @@ Value Evaluator::evalInfix(const ASTNode& node, std::shared_ptr<Env> env) {
     if (op == "=") {
         if (node.children[0].kind == ASTNode::Kind::Ident) {
             env->set(node.children[0].strVal, right);
+            return right;
+        }
+        if (node.children[0].kind == ASTNode::Kind::Index) {
+            const auto& idx = node.children[0];
+            if (idx.children.empty()) return error("invalid array index");
+            Value arr = eval(idx.children[0], env);
+            if (isError(arr)) return arr;
+            if (arr.type != ValType::Array || !arr.arrVal)
+                return error("cannot index non-array");
+            Value index = eval(idx.children[1], env);
+            if (isError(index)) return index;
+            if (index.type != ValType::Int)
+                return error("array index must be an integer");
+            if (index.intVal < 0 || (size_t)index.intVal >= arr.arrVal->size())
+                return error("index out of bounds");
+            (*arr.arrVal)[(size_t)index.intVal] = right;
             return right;
         }
         return error("cannot assign to non-identifier");

@@ -9,14 +9,25 @@ Parser::Parser(Lexer& lexer) : lexer(lexer) {
 
 void Parser::next() {
     cur = peek;
-    peek = lexer.nextToken();
-    // Skip past NEWLINE tokens between statements (but not inside expressions)
-    // Actually let's keep newlines - they're important for expression termination
+    if (hasThird) {
+        peek = third;
+        hasThird = false;
+    } else {
+        peek = lexer.nextToken();
+    }
+}
+
+Token Parser::getThird() {
+    if (!hasThird) {
+        third = lexer.nextToken();
+        hasThird = true;
+    }
+    return third;
 }
 
 bool Parser::curIs(Token::Type t) const { return cur.type == t; }
 bool Parser::peekIs(Token::Type t) const { return peek.type == t; }
-
+bool Parser::thirdIs(Token::Type t) { return getThird().type == t; }
 bool Parser::expectPeek(Token::Type t) {
     if (peekIs(t)) { next(); return true; }
     errors.push_back("expected " + std::to_string(t) + " but got " + peek.literal);
@@ -43,6 +54,15 @@ ASTNode Parser::parseStatement() {
     case Token::IF: return parseIf();
     case Token::WHILE: return parseWhile();
     case Token::LOOP: return parseLoop();
+    case Token::FOR: return parseFor();
+    case Token::BREAK: {
+        next();
+        return ASTNode::make(ASTNode::Kind::Break);
+    }
+    case Token::CONTINUE: {
+        next();
+        return ASTNode::make(ASTNode::Kind::Continue);
+    }
     case Token::RETURN: return parseReturn();
     case Token::FUNC: {
         next(); // skip 'func'
@@ -123,10 +143,12 @@ ASTNode Parser::parseIf() {
         // Single statement
         node.children.push_back(parseExprStmt());
     }
-    // optional else
+    // optional else (supports `else if` chains)
     if (curIs(Token::ELSE)) {
         next();
-        if (curIs(Token::LBRACE)) {
+        if (curIs(Token::IF)) {
+            node.children.push_back(parseIf());
+        } else if (curIs(Token::LBRACE)) {
             node.children.push_back(parseBlock());
         } else {
             node.children.push_back(parseExprStmt());
@@ -175,6 +197,27 @@ ASTNode Parser::parseLoop() {
         n.children.push_back(parseExprStmt());
     }
     return n;
+}
+
+ASTNode Parser::parseFor() {
+    next(); // skip 'for'
+    ASTNode node = ASTNode::make(ASTNode::Kind::ForIn);
+    if (curIs(Token::IDENT) && peekIs(Token::IN)) {
+        node.strVal = cur.literal;
+        next();
+        next(); // skip identifier and 'in'
+    }
+    node.children.push_back(parseExpression(0)); // collection / start
+    if (curIs(Token::TO)) {
+        next();
+        node.children.push_back(parseExpression(0)); // end
+    }
+    if (curIs(Token::LBRACE)) {
+        node.children.push_back(parseBlock());
+    } else {
+        node.children.push_back(parseExprStmt());
+    }
+    return node;
 }
 
 ASTNode Parser::parseReturn() {
@@ -246,9 +289,27 @@ ASTNode Parser::parseExpression(int prec) {
     ASTNode left = parsePrefix();
     if (left.kind == ASTNode::Kind::Program) return left;
 
-    while (prec < getPrec(cur.type)) {
+    while (true) {
+        // Postfix ++/-- binds tighter than any binary operator
+        int curPrec = (cur.type == Token::PLUS || cur.type == Token::MINUS) &&
+                              (cur.literal == "++" || cur.literal == "--")
+                          ? getPrec(Token::LPAREN)
+                          : getPrec(cur.type);
+        if (prec >= curPrec) break;
+
         switch (cur.type) {
         case Token::PLUS: case Token::MINUS:
+            if (cur.literal == "++" || cur.literal == "--") {
+                // postfix increment/decrement: left++
+                ASTNode post = ASTNode::make(ASTNode::Kind::Postfix);
+                post.strVal = cur.literal;
+                post.children.push_back(std::move(left));
+                next();
+                left = std::move(post);
+                break;
+            }
+            left = parseInfix(std::move(left), cur.literal, getPrec(cur.type));
+            break;
         case Token::STAR: case Token::SLASH: case Token::PERCENT:
         case Token::EQ: case Token::NEQ: case Token::LT:
         case Token::GT: case Token::LTE: case Token::GTE:
@@ -285,16 +346,37 @@ ASTNode Parser::parsePrefix() {
     case Token::INT: return parseIntLit();
     case Token::FLOAT: return parseFloatLit();
     case Token::STRING: return parseStrLit();
+    case Token::BOOL: return parseBoolLit();
+    case Token::PLUS:
+        if (cur.literal == "++") {
+            ASTNode node = ASTNode::make(ASTNode::Kind::Prefix);
+            node.strVal = "++";
+            next();
+            node.children.push_back(parseExpression(getPrec(Token::LPAREN)));
+            return node;
+        }
+        next();
+        return parsePrefix(); // unary plus: no-op
     case Token::MINUS:
     case Token::NOT: {
         ASTNode node = ASTNode::make(ASTNode::Kind::Prefix);
         node.strVal = cur.literal;
+        int p = precedence(Token::NOT);
+        if (cur.literal == "--") p = getPrec(Token::LPAREN);
         next();
-        node.children.push_back(parseExpression(precedence(Token::NOT)));
+        node.children.push_back(parseExpression(p));
         return node;
     }
     case Token::LPAREN: return parseGrouped();
     case Token::LBRACKET: return parseArray();
+    case Token::LBRACE: {
+        // `{ IDENT :`  or  `{ STRING :`  → object literal, otherwise a block
+        if ((peekIs(Token::IDENT) || peekIs(Token::STRING) || peekIs(Token::BOOL)) &&
+            thirdIs(Token::COLON)) {
+            return parseObjLit();
+        }
+        return parseBlock();
+    }
     case Token::FUNC:
         next();
         return parseFuncDecl();
@@ -366,18 +448,7 @@ ASTNode Parser::parseFloatLit() {
 }
 
 ASTNode Parser::parseStrLit() {
-    std::string s = cur.literal;
-    if (s == "true") {
-        ASTNode n = ASTNode::boolLit(true);
-        next();
-        return n;
-    }
-    if (s == "false") {
-        ASTNode n = ASTNode::boolLit(false);
-        next();
-        return n;
-    }
-    ASTNode n = ASTNode::strLit(s);
+    ASTNode n = ASTNode::strLit(cur.literal);
     next();
     return n;
 }
@@ -403,6 +474,30 @@ ASTNode Parser::parseArray() {
         if (curIs(Token::COMMA)) next();
     }
     if (curIs(Token::RBRACKET)) next();
+    return node;
+}
+
+ASTNode Parser::parseObjLit() {
+    ASTNode node = ASTNode::make(ASTNode::Kind::ObjLit);
+    next(); // skip '{'
+    while (!curIs(Token::RBRACE) && !curIs(Token::EOF_T)) {
+        std::string key;
+        if (curIs(Token::IDENT) || curIs(Token::STRING)) {
+            key = cur.literal;
+            next();
+        } else if (curIs(Token::BOOL)) {
+            key = cur.literal;
+            next();
+        } else {
+            next();
+            continue;
+        }
+        if (curIs(Token::COLON)) next();
+        node.children.push_back(ASTNode::ident(key));
+        node.children.push_back(parseExpression(0));
+        if (curIs(Token::COMMA)) next();
+    }
+    if (curIs(Token::RBRACE)) next();
     return node;
 }
 

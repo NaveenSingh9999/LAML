@@ -15,11 +15,15 @@ private:
     Lexer& lexer;
     Token cur;
     Token peek;
+    Token third;
+    bool hasThird = false;
     std::vector<std::string> errors;
 
     void next();
+    Token getThird();
     bool curIs(Token::Type t) const;
     bool peekIs(Token::Type t) const;
+    bool thirdIs(Token::Type t);
     bool expectPeek(Token::Type t);
 
     ASTNode parseStatement();
@@ -29,6 +33,7 @@ private:
     ASTNode parseIf();
     ASTNode parseWhile();
     ASTNode parseLoop();
+    ASTNode parseFor();
     ASTNode parseReturn();
     ASTNode parseBlock();
     ASTNode parseExprStmt();
@@ -48,6 +53,7 @@ private:
     ASTNode parseBoolLit();
     ASTNode parseGrouped();
     ASTNode parseArray();
+    ASTNode parseObjLit();
     ASTNode parseFuncDecl();
 
     int getPrec(Token::Type t) const;

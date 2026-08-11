@@ -1,4 +1,5 @@
 #include "builtins.h"
+#include "sys_builtins.h"
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -92,4 +93,6 @@ void registerBuiltins(std::shared_ptr<Env> env) {
     reg("clock", builtinClock);
     reg("readLine", builtinReadLine);
     reg("readFile", builtinReadFile);
+
+    registerSysBuiltins(env);
 }

@@ -1,6 +1,6 @@
-CXX := clang++
-CXXFLAGS := $(shell llvm-config --cxxflags) -std=c++20 -O2 -g -Wall -Wextra -Wno-unused-parameter
-LDFLAGS := $(shell llvm-config --ldflags) -lLLVM-21 -lpthread
+CXX ?= clang++
+CXXFLAGS ?= -std=c++20 -O2 -g -Wall -Wextra -Wno-unused-parameter
+LDFLAGS ?= -lpthread
 
 SRC := src
 BUILD := build

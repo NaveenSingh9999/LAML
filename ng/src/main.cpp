@@ -13,14 +13,15 @@
 #include "scheduler.h"
 #include "closc.h"
 #include "jit.h"
+#include "sys_builtins.h"
 
 static std::shared_ptr<Env> globalEnv;
 static Evaluator* gEval = nullptr;
 
 void handleSignal(int sig) {
-    std::cerr << "\n[SAFETY] Signal " << sig << " received. Cleaning up..." << std::endl;
-    CloscManager::instance().stopAll();
-    Scheduler::instance().stop();
+    // Direct _Exit: a closc blocked in a blocking socket call never joins,
+    // so graceful shutdown would hang. The OS reclaims fds on exit.
+    std::cerr << "\n[SAFETY] Signal " << sig << " received. Exiting..." << std::endl;
     std::_Exit(sig);
 }
 
@@ -108,6 +109,7 @@ int main(int argc, char* argv[]) {
 
     globalEnv = std::make_shared<Env>();
     registerBuiltins(globalEnv);
+    sysInit(argc, argv);
 
     if (argc < 2) {
         runRepl();
