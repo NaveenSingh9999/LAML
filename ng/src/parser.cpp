@@ -37,11 +37,16 @@ bool Parser::expectPeek(Token::Type t) {
 ASTNode Parser::parseProgram() {
     ASTNode prog = ASTNode::make(ASTNode::Kind::Program);
     while (!curIs(Token::EOF_T)) {
+        Token before = cur;
         ASTNode stmt = parseStatement();
         if (stmt.kind != ASTNode::Kind::Program) {
             prog.children.push_back(std::move(stmt));
         }
         while (curIs(Token::NEWLINE)) next();
+        if (cur.line == before.line && cur.col == before.col &&
+            !curIs(Token::EOF_T) && !curIs(Token::NEWLINE)) {
+            next();
+        }
     }
     return prog;
 }
@@ -233,11 +238,20 @@ ASTNode Parser::parseBlock() {
     ASTNode node = ASTNode::make(ASTNode::Kind::Block);
     next(); // skip '{'
     while (!curIs(Token::RBRACE) && !curIs(Token::EOF_T)) {
+        Token before = cur;
         ASTNode stmt = parseStatement();
         if (stmt.kind != ASTNode::Kind::Program) {
             node.children.push_back(std::move(stmt));
         }
         while (curIs(Token::NEWLINE)) next();
+        // A statement that consumed no tokens (stray token, failed parse)
+        // must not stall the block loop forever: consume one token to
+        // make progress.
+        if (cur.line == before.line && cur.col == before.col &&
+            !curIs(Token::RBRACE) && !curIs(Token::NEWLINE) &&
+            !curIs(Token::EOF_T)) {
+            next();
+        }
     }
     if (curIs(Token::RBRACE)) next();
     return node;

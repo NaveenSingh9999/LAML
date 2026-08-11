@@ -523,7 +523,7 @@ Value Evaluator::applyFunc(const Value& fn, const std::vector<Value>& args) {
         }
         return NIL;
     }
-    return error("not callable");
+    return error("not callable: " + fn.inspect());
 }
 
 // Checked arithmetic with overflow detection
