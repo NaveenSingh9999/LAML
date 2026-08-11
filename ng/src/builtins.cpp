@@ -1,6 +1,7 @@
 #include "builtins.h"
 #include "sys_builtins.h"
 #include "str_builtins.h"
+#include "net_builtins.h"
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -97,4 +98,5 @@ void registerBuiltins(std::shared_ptr<Env> env) {
 
     registerSysBuiltins(env);
     registerStrBuiltins(env);
+    registerNetBuiltins(env);
 }

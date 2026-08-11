@@ -138,15 +138,18 @@ Value Evaluator::eval(const ASTNode& node, std::shared_ptr<Env> env) {
         if (!node.children.empty())
             cd.body = const_cast<ASTNode*>(&node.children[0]);
         cd.closure = env;
+        auto closure = env;  // copy BEFORE makeClosc moves cd
+        const ASTNode* body = cd.body;
+        const std::string cname = cd.name;
         Value cv = Value::makeClosc(std::move(cd));
-        env->set(cd.name, cv);
+        env->set(cname, cv);
 
         CloscManager::instance().registerSection(
-            cd.name, cd.priority,
-            [this, cd]() {
-                auto localEnv = std::make_shared<Env>(cd.closure);
-                if (cd.body) {
-                    this->eval(*cd.body, localEnv);
+            cname, 5,
+            [this, closure, body]() {
+                auto localEnv = std::make_shared<Env>(closure);
+                if (body) {
+                    this->eval(*body, localEnv);
                 }
             }
         );
@@ -178,7 +181,7 @@ Value Evaluator::evalBlock(const ASTNode& node, std::shared_ptr<Env> env) {
 }
 
 Value Evaluator::evalIdent(const ASTNode& node, std::shared_ptr<Env> env) {
-    Value* val = env->get(node.strVal);
+    auto val = env->get(node.strVal);
     if (val) return *val;
     return error("undefined: " + node.strVal);
 }
@@ -313,7 +316,7 @@ Value Evaluator::evalPostfix(const ASTNode& node, std::shared_ptr<Env> env) {
     if (node.children[0].kind != ASTNode::Kind::Ident)
         return error("++/-- requires a variable");
     const std::string& name = node.children[0].strVal;
-    Value* cur = env->get(name);
+    auto cur = env->get(name);
     if (!cur) return error("undefined: " + name);
     if (cur->type != ValType::Int)
         return error("++/-- requires an integer variable");
@@ -493,7 +496,7 @@ Value Evaluator::evalDot(const ASTNode& node, std::shared_ptr<Env> env) {
     const std::string& prop = node.children[1].strVal;
 
     if (left.type == ValType::Obj && left.objVal) {
-        Value* val = left.objVal->env->get(prop);
+        auto val = left.objVal->env->get(prop);
         if (val) return *val;
         return error("no property: " + prop);
     }

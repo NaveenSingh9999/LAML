@@ -30,7 +30,7 @@ int CloscManager::registerSection(const std::string& name, int priority,
 
 void CloscManager::stopAll() {
     for (auto& t : tasks) {
-        if (t && t->running) {
+        if (t) {
             t->requestStop();
             t->join();
         }
@@ -40,8 +40,7 @@ void CloscManager::stopAll() {
 
 void CloscManager::waitAll() {
     for (auto& t : tasks) {
-        if (t && t->running && t->thread.joinable())
-            t->thread.join();
+        if (t && t->thread.joinable()) t->thread.join();
     }
 }
 
