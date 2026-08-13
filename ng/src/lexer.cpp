@@ -1,5 +1,6 @@
 #include "lexer.h"
 #include <cctype>
+#include <unordered_map>
 #include <unordered_set>
 
 Lexer::Lexer(std::string input) : input(std::move(input)) {

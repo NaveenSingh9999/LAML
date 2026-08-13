@@ -3,6 +3,8 @@
 #include "ast.h"
 #include "env.h"
 #include <memory>
+#include <string>
+#include <vector>
 
 // Lvalue handle: keeps the backing container (array/object) alive while the
 // slot pointer is in use, so it never dangles.

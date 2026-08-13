@@ -7,6 +7,8 @@
 #include <thread>
 #include <fstream>
 #include <sstream>
+#include <string>
+#include <vector>
 
 static Value builtinSay(const std::vector<Value>& args) {
     for (size_t i = 0; i < args.size(); i++) {

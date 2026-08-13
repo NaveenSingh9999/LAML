@@ -7,6 +7,8 @@
 #include <chrono>
 #include <thread>
 #include <limits>
+#include <string>
+#include <vector>
 
 static Value error(const std::string& msg) {
     return Value::makeError(msg);

@@ -4,6 +4,7 @@
 #include <thread>
 #include <atomic>
 #include <memory>
+#include <vector>
 
 struct CloscTask {
     std::string name;

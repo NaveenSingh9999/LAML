@@ -7,6 +7,8 @@
 #include <condition_variable>
 #include <queue>
 #include <atomic>
+#include <string>
+#include <unordered_map>
 #include "value.h"
 #include "ast.h"
 #include "env.h"

@@ -6,9 +6,11 @@
 #include <cstring>
 #include <fcntl.h>
 #include <netinet/in.h>
+#include <string>
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <vector>
 
 static Value err(const std::string& m) { return Value::makeError(m); }
 
