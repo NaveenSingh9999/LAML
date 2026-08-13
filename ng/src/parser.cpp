@@ -322,7 +322,12 @@ ASTNode Parser::parseExpression(int prec) {
                 left = std::move(post);
                 break;
             }
-            left = parseInfix(std::move(left), cur.literal, getPrec(cur.type));
+            { // binary +/- operator: consume it, then parse the rhs
+                std::string op = cur.literal;
+                int opPrec = getPrec(cur.type);
+                next();
+                left = parseInfix(std::move(left), op, opPrec);
+            }
             break;
         case Token::STAR: case Token::SLASH: case Token::PERCENT:
         case Token::EQ: case Token::NEQ: case Token::LT:
