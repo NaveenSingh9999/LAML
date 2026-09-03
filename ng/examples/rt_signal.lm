@@ -1,0 +1,16 @@
+~ LAML v4.1 canonical: signaling relay (WebRTC-style offer/answer/ice + presence).
+~ Run: ./laml run examples/rt_signal.lm   (port 18098)
+on("connect", func(fd, path) {
+  joinRoom(fd, "hall")
+  send(fd, jsonStringify({hello: fd, peers: members("hall")}))
+})
+on("message", func(fd, msg) {
+  val m = jsonParse(msg)
+  if type(m) == "error" { return }
+  if type(m["to"]) == "int" { send(m["to"], msg) return }
+  if type(m["to"]) == "string" { send(toInt(m["to"]), msg) return }
+  broadcast("hall", msg, fd)
+})
+on("close", func(fd) { leaveAll(fd) })
+serve(18098, {ws: true, stats: true, workers: 4})
+say("rt_signal on 18098")

@@ -8,6 +8,7 @@
 #include <queue>
 #include <atomic>
 #include <string>
+#include <optional>
 #include <unordered_map>
 #include "value.h"
 #include "ast.h"
@@ -34,6 +35,7 @@ public:
     Value runAndWait(std::shared_ptr<Task> task);
     void waitFor(const std::string& name);
     void markDone(const std::string& name, Value result);
+    std::optional<Value> getResult(const std::string& name);
 
     void start();
     void stop();

@@ -1,0 +1,9 @@
+~ Bench chat relay. Usage: BENCH_PORT=18091 ./laml run bench/bench_chat.lm
+let port = 18091
+if env("BENCH_PORT") != "" { port = toInt(env("BENCH_PORT")) }
+on("connect", func(fd, path) { joinRoom(fd, "room") })
+on("message", func(fd, msg) { broadcast("room", msg, fd) })
+on("close", func(fd) { leaveAll(fd) })
+on("request", func(req) { return jsonStringify(stats()) })
+serve(port, {ws: true, http: true, stats: true, workers: 4})
+say("bench-chat on " + port)

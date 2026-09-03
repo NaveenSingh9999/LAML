@@ -1,6 +1,7 @@
 #include "str_builtins.h"
 #include "env.h"
 #include "value.h"
+#include <algorithm>
 #include <cctype>
 #include <cstdint>
 #include <cstring>
@@ -11,8 +12,26 @@
 static std::string hexAlphabet = "0123456789abcdef";
 
 static Value builtinSlice(const std::vector<Value>& args) {
-    if (args.size() < 2 || args[0].type != ValType::String || args[1].type != ValType::Int)
-        return Value::makeError("slice: expected (string, start[, n])");
+    if (args.size() < 2 || args[1].type != ValType::Int)
+        return Value::makeError("slice: expected (string|array, start[, n])");
+    int64_t n3 = -1;
+    if (args.size() >= 3) {
+        if (args[2].type != ValType::Int) return Value::makeError("slice: n must be int");
+        n3 = args[2].intVal;
+        if (n3 < 0) return Value::makeError("slice: n must be >= 0");
+    }
+    if (args[0].type == ValType::Array && args[0].arrVal) {
+        const auto& v = *args[0].arrVal;
+        int64_t start = args[1].intVal;
+        if (start < 0 || start > (int64_t)v.size())
+            return Value::makeError("slice: start out of bounds");
+        int64_t n = (int64_t)v.size() - start;
+        if (n3 >= 0) n = std::min(n3, n);
+        return Value::makeArray(std::vector<Value>(v.begin() + (size_t)start,
+                                                   v.begin() + (size_t)(start + n)));
+    }
+    if (args[0].type != ValType::String)
+        return Value::makeError("slice: expected (string|array, start[, n])");
     const std::string& s = args[0].strVal;
     int64_t start = args[1].intVal;
     if (start < 0 || start > (int64_t)s.size())

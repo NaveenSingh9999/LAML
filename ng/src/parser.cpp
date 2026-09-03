@@ -266,10 +266,19 @@ ASTNode Parser::parseExprStmt() {
 
 ASTNode Parser::parseClosc() {
     ASTNode node = ASTNode::make(ASTNode::Kind::CloscDecl);
+    node.intVal = 5; // default priority
     next(); // skip 'closc'
-    // optional priority name
+    // optional name
     if (curIs(Token::IDENT)) {
         node.strVal = cur.literal; // name
+        next();
+    }
+    // optional priority: closc name : 8 { ... }
+    if (curIs(Token::COLON) && peekIs(Token::INT)) {
+        next(); // skip ':'
+        node.intVal = strtoll(cur.literal.c_str(), nullptr, 10);
+        if (node.intVal < 0) node.intVal = 0;
+        if (node.intVal > 10) node.intVal = 10;
         next();
     }
     if (curIs(Token::LBRACE)) {
@@ -445,6 +454,7 @@ ASTNode Parser::parseDot(ASTNode left) {
 }
 
 ASTNode Parser::parseIdent() {
+    if (cur.literal == "nil") { next(); return ASTNode(); } // nil literal (no NIL token in v4 lexer)
     ASTNode n = ASTNode::ident(cur.literal);
     next();
     return n;

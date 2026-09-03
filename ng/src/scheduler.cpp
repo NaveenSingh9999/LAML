@@ -45,6 +45,13 @@ void Scheduler::waitFor(const std::string& name) {
     resultsCv.wait(lock, [&] { return results.find(name) != results.end(); });
 }
 
+std::optional<Value> Scheduler::getResult(const std::string& name) {
+    std::lock_guard<std::mutex> lock(resultsMtx);
+    auto it = results.find(name);
+    if (it == results.end()) return std::nullopt;
+    return it->second;
+}
+
 void Scheduler::workerLoop() {
     while (running) {
         std::shared_ptr<Task> task;

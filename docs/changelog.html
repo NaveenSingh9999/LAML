@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - LAML Language</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <meta name="description" content="LAML changelog - what changed in each release.">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-text">LAML</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="setup.html" class="nav-link">Setup</a>
+                <a href="features.html" class="nav-link">Features</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="container">
+            <h1>Changelog</h1>
+
+            <h2>v4.1.0 — Realtime language</h2>
+            <ul>
+                <li><strong>Realtime servers:</strong> <code>serve/on/send/broadcast/joinRoom/members</code>, WebSocket (RFC6455) + HTTP/1.1 keep-alive + SSE on one port</li>
+                <li><strong>Rooms &amp; timers:</strong> sharded room bus, <code>setTimeout/setInterval/cancelTimer</code>, 54s heartbeat, 256KB per-connection backpressure (drop, don't OOM)</li>
+                <li><strong>Dynamic DX:</strong> <code>jsonParse/jsonStringify</code>, <code>async/waitFor</code>, <code>reload()</code> hot-swaps handlers without dropping connections, <code>stats()</code> + <code>/__stats</code></li>
+                <li><strong>General stdlib:</strong> math (<code>abs/min/max/floor/ceil/sqrt/pow/randInt</code>), arrays (<code>pop/remove/sort/reverse/join/slice</code>), strings (<code>upper/lower/replace/startsWith/endsWith/repeat</code>), <code>keys/has/string/fileExists/fileDelete/appendFile/assert</code></li>
+                <li><strong>Core:</strong> float <code>&lt;=</code>/<code>&gt;=</code>/<code>%</code>, full mixed int/float comparisons, <code>obj["key"]</code> indexing, <code>nil</code> literal, <code>closc :priority</code>, thread-safe supervised concurrency</li>
+                <li><strong>CLI:</strong> <code>laml --help</code>, <code>laml --version</code>, graceful SIGTERM drain</li>
+                <li><strong>Measured:</strong> 7350/7350 WS fan-out delivered, 2000 idle WS at 13MB, 1000-connection churn +100KB — see <code>ng/BENCH.md</code></li>
+            </ul>
+
+            <h2>v4.0.0 — C++20 runtime</h2>
+            <ul>
+                <li>Pure C++20 implementation, checked arithmetic, bounds-checked arrays</li>
+                <li>OS-thread <code>closc</code> system, dataflow scheduler</li>
+                <li>Core builtins: I/O, type introspection, file ops, strings, crypto, TCP/UDP</li>
+                <li>Error-as-values model with <code>try()</code></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 LAML Project. Where developer experience meets machine performance.</p>
+        </div>
+    </footer>
+</body>
+</html>

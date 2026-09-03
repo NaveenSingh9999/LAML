@@ -1,0 +1,13 @@
+~ LAML v4.1 canonical: game room relay with safe JSON routing.
+~ Run: ./laml run examples/rt_game.lm   (port 18097)
+on("connect", func(fd, path) { joinRoom(fd, "lobby") })
+on("message", func(fd, msg) {
+  val m = jsonParse(msg)
+  if type(m) == "error" { send(fd, jsonStringify({error: "bad json"})) return }
+  if type(m["room"]) == "nil" { send(fd, jsonStringify({error: "missing room"})) return }
+  if m["join"] != nil { joinRoom(fd, m["room"]) return }
+  broadcast(m["room"], msg, fd)
+})
+on("close", func(fd) { leaveAll(fd) })
+serve(18097, {ws: true, stats: true, workers: 4})
+say("rt_game on 18097")

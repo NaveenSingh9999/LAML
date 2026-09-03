@@ -1,0 +1,8 @@
+let pos = -1
+let valid = false
+while !valid {
+    say "loop"
+    valid = true
+    pos = 0
+}
+say pos

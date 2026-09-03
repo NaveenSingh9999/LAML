@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/learn.css">
     <link rel="icon" type"image/svg+xml" href="assets/logo.svg">
-    <meta name="description" content="Learn LAML v4.0.0 - Interactive tutorials covering the C++20 next-generation runtime, data types, functions, and concurrency">
+    <meta name="description" content="Learn LAML v4.1.0 - Interactive tutorials covering the C++20 next-generation runtime, data types, functions, and concurrency">
 </head>
 <body>
     <!-- Navigation -->
@@ -43,7 +43,7 @@
         <!-- Hero Section -->
         <section class="learn-hero">
             <div class="container">
-                <h1 class="hero-title">Learn LAML v4.0.0</h1>
+                <h1 class="hero-title">Learn LAML v4.1.0</h1>
                 <p class="hero-description">
                     Master the enhanced LAML language with comprehensive data types, array support, and powerful new features. 
                     From basics to advanced concepts, this interactive guide has everything you need.
@@ -113,6 +113,8 @@
                         <ul>
                             <li><a href="#type-inference">Type Inference</a></li>
                             <li><a href="#error-handling">Error Handling</a></li>
+                            <li><a href="#realtime-servers">Realtime Servers (v4.1)</a></li>
+                            <li><a href="#stdlib">Standard Library (v4.1)</a></li>
                             <li><a href="#compiler-features">Compiler Features</a></li>
                             <li><a href="#examples">Real-world Examples</a></li>
                         </ul>
@@ -128,7 +130,7 @@
                 <!-- Installation -->
                 <div class="lesson" id="installation">
                     <h2>Installation & Setup</h2>
-                    <p>Get LAML v4.0.0 installed on your system with the next-generation C++20 runtime:</p>
+                    <p>Get LAML v4.1.0 installed on your system with the next-generation C++20 runtime:</p>
                     
                     <div class="install-grid">
                         <div class="install-card">
@@ -158,11 +160,11 @@
                             <button class="run-btn" onclick="runCode(this)">Run Code</button>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-laml">say "Hello, LAML v4.0.0!";</code></pre>
+                            <pre><code class="language-laml">say "Hello, LAML v4.1.0!";</code></pre>
                         </div>
                         <div class="code-output">
                             <strong>Output:</strong>
-                            <pre>Hello, LAML v4.0.0!</pre>
+                            <pre>Hello, LAML v4.1.0!</pre>
                         </div>
                     </div>
 
@@ -183,7 +185,7 @@
                 <!-- Data Types -->
                 <div class="lesson" id="data-types">
                     <h2>Enhanced Data Types</h2>
-                    <p>LAML v4.0.0 provides five core data types:</p>
+                    <p>LAML v4.1.0 provides five core data types:</p>
                     
                     <div class="type-showcase">
                         <div class="type-card">
@@ -255,7 +257,7 @@ Grades: [95, 87, 92, 88]</pre>
                 <!-- Arrays -->
                 <div class="lesson" id="arrays">
                     <h2>Working with Arrays</h2>
-                    <p>Arrays in LAML v4.0.0 are flexible and support various operations:</p>
+                    <p>Arrays in LAML v4.1.0 are flexible and support various operations:</p>
                     
                     <div class="code-example">
                         <div class="code-header">
@@ -589,7 +591,7 @@ Highest score: 96</pre>
                 <!-- Format Specifiers -->
                 <div class="lesson" id="format-specifiers">
                     <h2>Format Specifiers & Escape Sequences</h2>
-                    <p>LAML v4.0.0 provides C-style format specifiers and escape sequences for powerful string formatting and output control:</p>
+                    <p>LAML v4.1.0 provides C-style format specifiers and escape sequences for powerful string formatting and output control:</p>
                     
                     <div class="feature-highlight">
                         <h3>Format Specifier Syntax</h3>
@@ -865,7 +867,7 @@ See the newline?</pre>
                 <!-- Type Inference -->
                                 <div class="lesson" id="type-inference">
                                 <h2>Type Inference</h2>
-                    <p>LAML v4.0.0 features smart type inference:</p>
+                    <p>LAML v4.1.0 features smart type inference:</p>
                     
                     <div class="code-example">
                         <div class="code-header">
@@ -899,7 +901,7 @@ Items: [1, 2, 3]</pre>
                 <!-- Compiler Features -->
                 <div class="lesson" id="compiler-features">
                     <h2>Enhanced Compiler Features</h2>
-                    <p>LAML v4.0.0 includes a next-generation compiler backed by C++20 and LLVM, providing significant performance improvements and better optimization:</p>
+                    <p>LAML v4.1.0 includes a next-generation compiler backed by C++20 and LLVM, providing significant performance improvements and better optimization:</p>
                     
                     <div class="feature-grid">
                         <div class="feature-item">
@@ -927,9 +929,117 @@ Items: [1, 2, 3]</pre>
                 </div>
 
                 <!-- Real Examples -->
+                <div class="lesson" id="realtime-servers">
+                    <h2>Realtime Servers (v4.1)</h2>
+                    <p>LAML v4.1.0 is a language for writing realtime servers: WebSocket, SSE, relay, pub/sub, game rooms and signaling — all in a few lines. You declare handlers; the C++ runtime moves the bytes.</p>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">chat.lm — 10-line relay</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">on("connect", func(fd, path) { joinRoom(fd, "lobby") })
+on("message", func(fd, msg) { broadcast("lobby", msg, fd) })
+on("close", func(fd) { leaveAll(fd) })
+serve(8080, {ws: true, stats: true})</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Ideas:</strong>
+                            <pre>fd = connection id (int), msg = string|object
+broadcast(room, msg) fans out in C++ — one call reaches 5000 clients
+GET /__stats shows conns, p50/p99, drops (Prometheus text)</pre>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">sse.lm — live feed + timers</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">on("request", func(req) {
+  if req["path"] == "/tick" {
+    joinRoom(req["fd"], "tickers")
+    return {sse: true}
+  }
+  return "open /tick for SSE"
+})
+setInterval(func() { broadcast("tickers", "t=" + clock()) }, 1000)
+serve(8080, {http: true})</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">supervisors.lm — closc background services</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">val ROOM = "lobby"              ~ shared, read-only
+
+closc keeper : 8 {              ~ isolated thread, priority 8
+  while true {
+    broadcast(ROOM, jsonStringify({t: clock()}))
+    sleep(5000)
+  }
+}
+serve(8080, {ws: true})</code></pre>
+                        </div>
+                        <div class="code-output">
+                            <strong>Rules:</strong>
+                            <pre>closc = supervisors (keepers, janitors), never per-connection
+async(func)/waitFor(id) runs work on the pool without blocking handlers
+try(func) isolates failures: every remote event is wrapped automatically</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson" id="stdlib">
+                    <h2>Standard Library (v4.1)</h2>
+                    <p>Everything is a builtin — no imports needed. Errors come back as values: check them with <code>type(x) == "error"</code>.</p>
+
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="filename">stdlib.lm — tour</span>
+                            <button class="run-btn" onclick="runCode(this)">Run Code</button>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-laml">~ math
+say(sqrt(16) + pow(2, 10))      ~ 1028
+say(min(3, 9) + max(3, 9))      ~ 12
+say(randInt(1, 100))            ~ 1..100
+
+~ arrays (in place)
+let a = [3, 1, 2]
+sort(a)
+say(join(a, ","))               ~ 1,2,3
+say(pop(a))                     ~ 3
+say(slice([10, 20, 30], 1, 2))  ~ [20, 30]
+
+~ strings
+say(upper("hello"))             ~ HELLO
+say(replace("aaa", "a", "b"))   ~ bbb
+say(startsWith("foobar", "foo"))~ true
+
+~ objects + conversion + files
+val o = {name: "laml"}
+say(join(keys(o), ","))         ~ name
+say(string(42) + string(true))  ~ 42true
+writeFile("n.txt", "hi")
+say(fileExists("n.txt"))        ~ true
+
+~ JSON + assert
+val m = jsonParse("{\"a\": 1}")
+say(m["a"] + 1)                 ~ 2
+assert(1 + 1 == 2, "math broke")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="lesson" id="examples">
                     <h2>Real-world Example</h2>
-                    <p>Let's build a complete program that demonstrates multiple LAML v4.0.0 features:</p>
+                    <p>Let's build a complete program that demonstrates multiple LAML v4.1.0 features:</p>
                     
                     <div class="code-example">
                         <div class="code-header">
@@ -1044,7 +1154,7 @@ Student is passing!</pre>
                 <!-- Next Steps -->
                 <div class="lesson" id="next-steps">
                     <h2>What's Next?</h2>
-                    <p>Congratulations! You've learned the fundamentals of LAML v4.0.0. Here's what you can do next:</p>
+                    <p>Congratulations! You've learned the fundamentals of LAML v4.1.0. Here's what you can do next:</p>
                     
                     <div class="next-steps-grid">
                         <div class="next-step">

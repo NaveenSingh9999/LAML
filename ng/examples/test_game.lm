@@ -1,0 +1,29 @@
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+let gameOver = false
+let pos = -1
+
+say "Tic-Tac-Toe"
+say "Enter 1-9"
+
+while !gameOver {
+    let valid = false
+    while !valid {
+        pos = -1
+        say "Your move: "
+        let input = readLine()
+        if input == "5" { pos = 4 }
+        if pos >= 0 {
+            if board[pos] == " " {
+                board[pos] = "X"
+                valid = true
+                say "played"
+            } else {
+                say "taken"
+            }
+        } else {
+            say "invalid"
+        }
+    }
+    gameOver = true
+}
+say "done"

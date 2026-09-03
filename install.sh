@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-LAML_VERSION="4.0.0"
+LAML_VERSION="4.1.0"
 LAML_REPO="https://github.com/NaveenSingh9999/LAML.git"
+LAML_RELEASE="https://github.com/NaveenSingh9999/LAML/releases/download/v4.1.0"
 LAML_BRANCH="main"
 WORK_DIR="${TMPDIR:-/tmp}/laml-install-$$"
 INSTALL_DIR="/usr/local/bin"
@@ -217,7 +218,7 @@ check_deps() {
     lv="$($LLVM_CFG --version 2>/dev/null || echo "?")"
     ok "llvm-config found: $LLVM_CFG (LLVM $lv)"
   else
-    missing+=("llvm-config (install llvm-dev / llvm-devel)")
+    warn "llvm-config not found — optional (LAML builds without LLVM)"
   fi
 
   command -v make &>/dev/null || missing+=("make")
@@ -327,9 +328,64 @@ install_deps() {
     done
   fi
   if [[ -z "$LLVM_CFG" ]]; then
-    fail "llvm-config still not found after install"
+    warn "llvm-config not found — continuing without LLVM (optional)"
   fi
   ok "Dependencies ready"
+}
+
+# ---------------------------------------------------------------------------
+# Prebuilt binary fast path (no compiler needed)
+# ---------------------------------------------------------------------------
+try_prebuilt() {
+  subtitle "Trying prebuilt binary (v${LAML_VERSION})"
+
+  local asset=""
+  case "${OS}-${ARCH}" in
+    linux-aarch64|termux-aarch64) asset="laml-linux-aarch64" ;;
+    *) info "No prebuilt binary for ${OS}-${ARCH} — falling back to source build"; return 1 ;;
+  esac
+
+  mkdir -p "$WORK_DIR"
+  local out="$WORK_DIR/$asset"
+
+  local url="$LAML_RELEASE/$asset"
+  spinner_start "Downloading $asset"
+  if command -v curl &>/dev/null; then
+    curl -fsSL -o "$out" "$url" 2>/dev/null || { spinner_stop; warn "Download failed ($url)"; return 1; }
+  elif command -v wget &>/dev/null; then
+    wget -q -O "$out" "$url" 2>/dev/null || { spinner_stop; warn "Download failed ($url)"; return 1; }
+  else
+    spinner_stop
+    warn "Neither curl nor wget found — falling back to source build"
+    return 1
+  fi
+  spinner_stop
+
+  chmod +x "$out"
+  local ver
+  ver="$("$out" version 2>&1 || true)"
+  if [[ "$ver" != *"$LAML_VERSION"* ]]; then
+    warn "Downloaded binary failed version check — falling back to source build"
+    return 1
+  fi
+  ok "Prebuilt binary verified: $ver"
+
+  subtitle "Installing LAML binary"
+  if [[ "$OS" == "termux" ]]; then
+    cp "$out" "$PREFIX/bin/laml"
+    chmod +x "$PREFIX/bin/laml"
+    ok "Installed to $PREFIX/bin/laml"
+  else
+    if command -v sudo &>/dev/null; then
+      sudo cp "$out" "$INSTALL_DIR/laml"
+      sudo chmod +x "$INSTALL_DIR/laml"
+    else
+      cp "$out" "$INSTALL_DIR/laml"
+      chmod +x "$INSTALL_DIR/laml"
+    fi
+    ok "Installed to $INSTALL_DIR/laml"
+  fi
+  return 0
 }
 
 # ---------------------------------------------------------------------------
@@ -486,6 +542,14 @@ main() {
 
   hr
   detect_platform
+  hr
+  if try_prebuilt; then
+    hr
+    verify
+    hr
+    print_footer
+    exit 0
+  fi
   hr
   check_deps
   hr

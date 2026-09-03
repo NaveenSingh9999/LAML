@@ -17,7 +17,7 @@ struct LValueRef {
 class Evaluator {
 public:
     explicit Evaluator(std::shared_ptr<Env> global)
-        : global(std::move(global)) { current_ = this; }
+        : global(std::move(global)) { current() = this; }
 
     Value eval(const ASTNode& node, std::shared_ptr<Env> env);
 
@@ -27,10 +27,9 @@ public:
     // Public so builtins (try/import) can call first-class functions and
     // evaluate into the global environment.
     std::shared_ptr<Env> globalEnv() { return global; }
-    static Evaluator* current() { return current_; }
+    static Evaluator*& current() { thread_local Evaluator* t = nullptr; return t; }
 
 private:
-    static Evaluator* current_;
     std::shared_ptr<Env> global;
 
     Value evalProgram(const ASTNode& node, std::shared_ptr<Env> env);

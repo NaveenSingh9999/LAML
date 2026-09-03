@@ -4,6 +4,7 @@
 #include <thread>
 #include <atomic>
 #include <memory>
+#include <mutex>
 #include <vector>
 
 struct CloscTask {
@@ -29,9 +30,13 @@ struct CloscManager {
     void stopAll();
     void waitAll();
     void killProcess();
+    size_t liveCount();
+    static bool isStopping() { return stopping_; }
 
 private:
     std::vector<std::unique_ptr<CloscTask>> tasks;
+    std::mutex mtx;
+    inline static std::atomic<bool> stopping_{false};
     CloscManager() = default;
     ~CloscManager();
 };

@@ -1,0 +1,49 @@
+~ General-purpose stdlib test: math, arrays, strings, objects, conv, fs, assert, floats
+say(abs(-7) + abs(7 - 10))
+say(min(3, 9) + max(3, 9))
+say(floor(2.7) + ceil(2.2))
+say(sqrt(16) + pow(2, 10))
+say("rand:" + (randInt(5) >= 0 && randInt(1, 10) <= 10))
+
+let a = [3, 1, 2]
+sort(a)
+say(join(a, ","))
+append(a, 4)
+say(pop(a))
+say(join(a, ","))
+remove(a, 0)
+say(join(a, ","))
+reverse(a)
+say(join(a, ","))
+say(slice([10, 20, 30, 40], 1, 2))
+
+say(upper("hello") + lower("WORLD"))
+say(startsWith("foobar", "foo"))
+say(endsWith("foobar", "bar"))
+say(replace("aaa", "a", "b"))
+say(repeat("ab", 3))
+say(slice("hello", 1, 3))
+
+val o = {name: "laml", ver: 4}
+say(join(keys(o), ","))
+say(has(o, "name"))
+say(has(o, "zzz"))
+say(string(42) + string(2.5) + string(true))
+
+say(fileExists("examples/hello.lm"))
+writeFile("./t_gp.tmp", "hi")
+appendFile("./t_gp.tmp", "-there")
+say(readFile("./t_gp.tmp"))
+say(fileExists("./t_gp.tmp"))
+fileDelete("./t_gp.tmp")
+say(fileExists("./t_gp.tmp"))
+
+assert(1 + 1 == 2, "math broke")
+say(type(try(func() { assert(false, "boom") })))
+
+say(2.5 <= 2.5)
+say(1 < 2.5)
+say(2.5 >= 3)
+say(7.5 % 2)
+say(7 % 2.5)
+say("GP-ALL-DONE")

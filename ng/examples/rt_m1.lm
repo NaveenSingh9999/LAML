@@ -1,0 +1,7 @@
+~ M1 smoke: HTTP serve + on(request)
+on("request", func(req) {
+  if req["path"] == "/hi" { return "hello v41" }
+  return "LAML v4.1 rt ok path=" + req["path"]
+})
+serve(18080, {workers: 4})
+say("serving 18080")

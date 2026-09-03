@@ -49,11 +49,7 @@
             "patterns": [
                 {
                     "name": "keyword.control.laml",
-                    "match": "\\b(bring|make|loop|if|else|while|in|to|return|func|type|obj)\\b"
-                },
-                {
-                    "name": "keyword.other.laml",
-                    "match": "\\b(val|let|const|ptr|main|say)\\b"
+                    "match": "\\b(say|val|let|func|if|else|loop|while|in|to|return|closc|for|break|continue|nil)\\b"
                 },
                 {
                     "name": "constant.language.boolean.laml",

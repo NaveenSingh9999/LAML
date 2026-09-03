@@ -1,0 +1,15 @@
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+let gameOver = false
+let pos = -1
+
+while !gameOver {
+    let valid = false
+    while !valid {
+        pos = -1
+        pos = 4
+        valid = true
+    }
+    gameOver = true
+}
+say board[0]
+say "done"

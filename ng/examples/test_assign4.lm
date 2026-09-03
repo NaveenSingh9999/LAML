@@ -1,0 +1,28 @@
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+let gameOver = false
+let pos = -1
+
+while !gameOver {
+    let valid = false
+    while !valid {
+        pos = -1
+        say "Your move (1-9): "
+        let input = readLine()
+        if input == "1" { pos = 0 }
+        if input == "5" { pos = 4 }
+        if input == "9" { pos = 8 }
+        if pos >= 0 {
+            if board[pos] == " " {
+                board[pos] = "X"
+                valid = true
+                say "played " + pos
+            } else {
+                say "taken"
+            }
+        } else {
+            say "invalid"
+        }
+    }
+    gameOver = true
+}
+say "done"

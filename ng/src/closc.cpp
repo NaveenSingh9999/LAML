@@ -18,6 +18,7 @@ CloscManager::~CloscManager() {}  // stopAll called explicitly
 
 int CloscManager::registerSection(const std::string& name, int priority,
                                     std::function<void()> fn) {
+    std::lock_guard<std::mutex> lock(mtx);
     auto task = std::make_unique<CloscTask>();
     task->name = name;
     task->priority = priority;
@@ -28,20 +29,30 @@ int CloscManager::registerSection(const std::string& name, int priority,
     return id;
 }
 
+size_t CloscManager::liveCount() {
+    std::lock_guard<std::mutex> lock(mtx);
+    size_t n = 0;
+    for (auto& t : tasks) if (t && t->running) n++;
+    return n;
+}
+
 void CloscManager::stopAll() {
-    for (auto& t : tasks) {
-        if (t) {
-            t->requestStop();
-            t->join();
-        }
-    }
+    stopping_ = true;
+    std::vector<CloscTask*> snap;
+    { std::lock_guard<std::mutex> lock(mtx);
+      for (auto& t : tasks) if (t) { t->requestStop(); snap.push_back(t.get()); } }
+    for (auto* t : snap) t->join();
+    std::lock_guard<std::mutex> lock(mtx);
     tasks.clear();
 }
 
 void CloscManager::waitAll() {
-    for (auto& t : tasks) {
-        if (t && t->thread.joinable()) t->thread.join();
-    }
+    // Snapshot threads under lock, join without it: a closc body may
+    // itself register a new section (re-entrant), which must not block.
+    std::vector<CloscTask*> snap;
+    { std::lock_guard<std::mutex> lock(mtx);
+      for (auto& t : tasks) if (t) snap.push_back(t.get()); }
+    for (auto* t : snap) t->join();
 }
 
 void CloscManager::killProcess() {

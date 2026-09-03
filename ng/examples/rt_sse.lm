@@ -1,0 +1,14 @@
+~ LAML v4.1 canonical: SSE live feed + static root.
+~ Run: ./laml run examples/rt_sse.lm   (port 18099)
+~ Open http://127.0.0.1:18099/tick for the stream.
+on("request", func(req) {
+  if req["path"] == "/tick" {
+    val fd = req["fd"]
+    joinRoom(fd, "tickers")
+    return {sse: true}
+  }
+  return "open /tick for SSE"
+})
+setInterval(func() { broadcast("tickers", "t=" + clock()) }, 1000)
+serve(18099, {http: true, stats: true, workers: 4})
+say("rt_sse on 18099")

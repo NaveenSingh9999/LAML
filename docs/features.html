@@ -48,7 +48,7 @@
                 <h1 class="hero-title">Powerful Features for Modern Development</h1>
                 <p class="hero-description">
                     LAML combines the simplicity of Python with the performance of Go, 
-                    powered by the C++20 NG runtime (v4.0.0) for maximum efficiency.
+                    powered by the C++20 runtime (v4.1.0) for maximum efficiency.
                 </p>
                 
                 <!-- Feature highlights -->
@@ -110,7 +110,7 @@ print("Time: " + duration + "ms")</code></pre>
                     
                     <div class="demo-panel" id="syntax-demo">
                         <div class="code-editor">
-                            <pre><code class="language-laml">// Modern LAML v4.0.0 syntax
+                            <pre><code class="language-laml">// Modern LAML v4.1.0 syntax
 
 let numbers = [1, 2, 3, 4, 5];
 let doubled = [];
@@ -136,7 +136,7 @@ say "Doubled: " + doubled;</code></pre>
                     
                     <div class="demo-panel" id="features-demo">
                         <div class="code-editor">
-                            <pre><code class="language-laml">// LAML v4.0.0 features showcase
+                            <pre><code class="language-laml">// LAML v4.1.0 features showcase
 
 // Enhanced data types
 let age = 25;
@@ -206,7 +206,7 @@ say "Scores: " + scores;</code></pre>
                         </div>
                     </div>
                     <div class="feature-example">
-                        <pre><code>// LAML v4.0.0 syntax
+                        <pre><code>// LAML v4.1.0 syntax
 
 let numbers = [1, 2, 3, 4, 5];
 let sum = 0;
@@ -331,6 +331,24 @@ let result = users.get("alice") // inferred as User?</code></pre>
             </div>
 
             <!-- Standard Library Features -->
+            <div class="feature-card" data-category="stdlib">
+                <div class="feature-icon">📡</div>
+                <div class="feature-content">
+                    <h3>Realtime Servers in 10 Lines (v4.1.0)</h3>
+                    <p>WebSocket, SSE, rooms, presence, timers and JSON are built in. One event loop + worker pool holds thousands of connections with sub-millisecond handlers and bounded per-connection queues.</p>
+                    <div class="feature-example">
+                        <pre><code>~ 10-line chat relay
+on("connect", func(fd, path) { joinRoom(fd, "lobby") })
+on("message", func(fd, msg) { broadcast("lobby", msg, fd) })
+on("close", func(fd) { leaveAll(fd) })
+serve(8080, {ws: true, stats: true})
+
+~ measured: 7350/7350 fan-out delivered,
+~ 2000 idle WS at 13MB, slow clients dropped not OOMed</code></pre>
+                    </div>
+                </div>
+            </div>
+
             <div class="feature-card" data-category="stdlib">
                 <div class="feature-icon">🌐</div>
                 <div class="feature-content">
@@ -537,57 +555,63 @@ let array = np.array([1, 2, 3, 4, 5])</code></pre>
             
             <div class="benchmark-grid">
                 <div class="benchmark-card">
-                    <h3>Fibonacci (n=35)</h3>
+                    <h3>Per-connection memory (idle WS)</h3>
                     <div class="benchmark-chart">
                         <div class="benchmark-bar">
-                            <span class="benchmark-label">LAML</span>
-                            <div class="benchmark-fill" style="width: 100%;">42ms</div>
+                            <span class="benchmark-label">LAML v4.1*</span>
+                            <div class="benchmark-fill memory" style="width: 22%;">~6.6KB</div>
                         </div>
                         <div class="benchmark-bar">
-                            <span class="benchmark-label">Node.js</span>
-                            <div class="benchmark-fill" style="width: 75%;">56ms</div>
+                            <span class="benchmark-label">uWS (C++)</span>
+                            <div class="benchmark-fill memory" style="width: 10%;">~1.3KB</div>
+                        </div>
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">Go</span>
+                            <div class="benchmark-fill memory" style="width: 40%;">8–12KB</div>
+                        </div>
+                        <div class="benchmark-bar">
+                            <span class="benchmark-label">Node.js (ws)</span>
+                            <div class="benchmark-fill memory" style="width: 75%;">~30KB</div>
                         </div>
                         <div class="benchmark-bar">
                             <span class="benchmark-label">Python</span>
-                            <div class="benchmark-fill" style="width: 4%;">1050ms</div>
+                            <div class="benchmark-fill memory" style="width: 100%;">~50KB</div>
                         </div>
                     </div>
+                    <p class="benchmark-note">*LAML measured: 2000 idle WS at 13.3MB RSS. Others: published literature values, same order of magnitude across stacks.</p>
                 </div>
                 
                 <div class="benchmark-card">
-                    <h3>HTTP Server (req/sec)</h3>
+                    <h3>HTTP Server — measured on device (v4.1.0)</h3>
                     <div class="benchmark-chart">
                         <div class="benchmark-bar">
-                            <span class="benchmark-label">LAML</span>
-                            <div class="benchmark-fill" style="width: 100%;">85k</div>
+                            <span class="benchmark-label">LAML handler</span>
+                            <div class="benchmark-fill" style="width: 100%;">sub-ms p50/p99</div>
                         </div>
                         <div class="benchmark-bar">
-                            <span class="benchmark-label">Node.js</span>
-                            <div class="benchmark-fill" style="width: 65%;">55k</div>
+                            <span class="benchmark-label">20-conn mix</span>
+                            <div class="benchmark-fill" style="width: 65%;">~600 rps, 0 errs</div>
                         </div>
                         <div class="benchmark-bar">
-                            <span class="benchmark-label">Python</span>
-                            <div class="benchmark-fill" style="width: 12%;">10k</div>
+                            <span class="benchmark-label">Idle footprint</span>
+                            <div class="benchmark-fill memory" style="width: 25%;">2000 WS at 13MB</div>
                         </div>
                     </div>
+                    <p class="benchmark-note">Phone hardware + stdlib clients. See BENCH.md for full methodology.</p>
                 </div>
                 
-                <div class="benchmark-card">
-                    <h3>Memory Usage (MB)</h3>
-                    <div class="benchmark-chart">
-                        <div class="benchmark-bar">
-                            <span class="benchmark-label">LAML</span>
-                            <div class="benchmark-fill memory" style="width: 25%;">8MB</div>
-                        </div>
-                        <div class="benchmark-bar">
-                            <span class="benchmark-label">Node.js</span>
-                            <div class="benchmark-fill memory" style="width: 75%;">24MB</div>
-                        </div>
-                        <div class="benchmark-bar">
-                            <span class="benchmark-label">Python</span>
-                            <div class="benchmark-fill memory" style="width: 100%;">32MB</div>
-                        </div>
-                    </div>
+                <div class="benchmark-card benchmark-wide">
+                    <h3>Realtime servers: how LAML compares</h3>
+                    <p class="section-description">For IO-bound fan-out (chat, relay, pub/sub, game rooms) — not number crunching, where Rust/Go still win.</p>
+                    <table class="compare-table">
+                        <tr><th></th><th>Concurrency</th><th>Cost per conn</th><th>Broadcast</th><th>Handler code</th><th>Watch out for</th></tr>
+                        <tr><td><strong>LAML v4.1</strong></td><td>1 event loop + worker pool</td><td>~6.6KB measured</td><td>C++ fan-out, one call</td><td>5 lines, closures + rooms</td><td>Young ecosystem</td></tr>
+                        <tr><td><strong>Node.js</strong></td><td>Single event loop</td><td>~30KB (ws)</td><td>Fast until loop blocks</td><td>Small, huge npm</td><td>CPU work stalls all clients</td></tr>
+                        <tr><td><strong>Go</strong></td><td>Goroutine per conn</td><td>8–12KB + GC scan</td><td>Great with bounded queues</td><td>Simple, verbose</td><td>GC pauses, timer herds at scale</td></tr>
+                        <tr><td><strong>Rust</strong></td><td>Async tasks</td><td>Minimal, zero-cost</td><td>Fastest raw ceiling</td><td>50+ lines, borrow checker</td><td>Slow iteration, steep curve</td></tr>
+                        <tr><td><strong>Python</strong></td><td>Asyncio / threads</td><td>~50KB, GIL</td><td>Fine at small scale</td><td>Tiny, familiar</td><td>GIL caps fan-out throughput</td></tr>
+                    </table>
+                    <p class="benchmark-note">LAML's bet: C++ moves bytes (framing, fan-out, timers) while dynamic closures carry meaning — uWS-class IO with scripting-language iteration.</p>
                 </div>
             </div>
         </div>

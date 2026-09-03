@@ -1,0 +1,14 @@
+let pos = -1
+let gameOver = false
+let input = ""
+while !gameOver {
+    let valid = false
+    while !valid {
+        pos = -1
+        input = readLine()
+        say input
+        valid = true
+    }
+    gameOver = true
+}
+say "done"

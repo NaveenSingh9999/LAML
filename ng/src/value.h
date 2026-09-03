@@ -83,6 +83,7 @@ struct Value {
     static Value makeInt(int64_t v) { Value r; r.type = ValType::Int; r.intVal = v; return r; }
     static Value makeFloat(double v) { Value r; r.type = ValType::Float; r.floatVal = v; return r; }
     static Value makeString(const std::string& v) { Value r; r.type = ValType::String; r.strVal = v; return r; }
+    static Value makeString(std::string&& v) { Value r; r.type = ValType::String; r.strVal = std::move(v); return r; }
     static Value makeBool(bool v) { Value r; r.type = ValType::Bool; r.boolVal = v; return r; }
     static Value makeArray(const std::vector<Value>& v) { Value r; r.type = ValType::Array; r.arrVal = std::make_shared<std::vector<Value>>(v); return r; }
     static Value makeError(const std::string& m) { Value r; r.type = ValType::Error; r.errMsg = m; return r; }

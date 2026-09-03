@@ -2,6 +2,9 @@
 #include "sys_builtins.h"
 #include "str_builtins.h"
 #include "net_builtins.h"
+#include "gen_builtins.h"
+#include "rt_bridge.h"
+#include "closc.h"
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -11,6 +14,7 @@
 #include <vector>
 
 static Value builtinSay(const std::vector<Value>& args) {
+    std::lock_guard<std::mutex> l(lamlPrintMutex());
     for (size_t i = 0; i < args.size(); i++) {
         if (i > 0) std::cout << " ";
         std::cout << args[i].inspect();
@@ -20,6 +24,7 @@ static Value builtinSay(const std::vector<Value>& args) {
 }
 
 static Value builtinPrint(const std::vector<Value>& args) {
+    std::lock_guard<std::mutex> l(lamlPrintMutex());
     for (size_t i = 0; i < args.size(); i++) {
         if (i > 0) std::cout << " ";
         std::cout << args[i].inspect();
@@ -56,7 +61,17 @@ static Value builtinSleep(const std::vector<Value>& args) {
     if (args.empty()) return NIL;
     int64_t ms = 1000;
     if (args[0].type == ValType::Int) ms = args[0].intVal;
-    std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+    if (ms < 0) ms = 0;
+    // Slice into 50ms chunks so SIGTERM drain (CloscManager::stopAll sets
+    // stopping) wakes sleepers instead of hanging shutdown on a long sleep.
+    int64_t slept = 0;
+    while (slept < ms) {
+        if (CloscManager::isStopping()) break;
+        int64_t chunk = ms - slept;
+        if (chunk > 50) chunk = 50;
+        std::this_thread::sleep_for(std::chrono::milliseconds(chunk));
+        slept += chunk;
+    }
     return NIL;
 }
 
@@ -84,6 +99,11 @@ static Value builtinReadFile(const std::vector<Value>& args) {
     return Value::makeString(ss.str());
 }
 
+std::mutex& lamlPrintMutex() {
+    static std::mutex m;
+    return m;
+}
+
 void registerBuiltins(std::shared_ptr<Env> env) {
     auto reg = [&](const std::string& name, auto fn) {
         env->set(name, Value::makeBuiltin({fn}));
@@ -101,4 +121,6 @@ void registerBuiltins(std::shared_ptr<Env> env) {
     registerSysBuiltins(env);
     registerStrBuiltins(env);
     registerNetBuiltins(env);
+    registerGenBuiltins(env);
+    registerRtBuiltins(env);
 }

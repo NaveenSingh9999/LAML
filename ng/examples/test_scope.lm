@@ -1,0 +1,12 @@
+let pos = -1
+let gameOver = false
+while !gameOver {
+    let valid = false
+    while !valid {
+        pos = -1
+        say "inner loop"
+        valid = true
+    }
+    gameOver = true
+}
+say "done"

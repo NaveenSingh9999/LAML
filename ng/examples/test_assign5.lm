@@ -1,0 +1,15 @@
+let gameOver = false
+let pos = -1
+
+while !gameOver {
+    let valid = false
+    while !valid {
+        pos = -1
+        say "Your move: "
+        let input = readLine()
+        if input == "5" { pos = 4 }
+        if pos >= 0 { valid = true }
+    }
+    gameOver = true
+}
+say pos

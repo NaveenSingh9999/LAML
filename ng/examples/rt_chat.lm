@@ -1,0 +1,12 @@
+~ M2 smoke: WS chat relay + timers
+on("connect", func(fd, path) {
+  joinRoom(fd, "lobby")
+  send(fd, "welcome " + path)
+})
+on("message", func(fd, msg) {
+  broadcast("lobby", msg, fd)
+})
+on("close", func(fd) { leaveAll(fd) })
+setInterval(func() { broadcast("lobby", "tick") }, 5000)
+serve(18081, {ws: true, workers: 4})
+say("ws serving 18081")

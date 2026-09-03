@@ -1,0 +1,6 @@
+~ Bench HTTP server. Usage: BENCH_PORT=18090 ./laml run bench/bench_http_server.lm
+let port = 18090
+if env("BENCH_PORT") != "" { port = toInt(env("BENCH_PORT")) }
+on("request", func(req) { return "ok" })
+serve(port, {http: true, stats: true, workers: 4})
+say("bench-http on " + port)

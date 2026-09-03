@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <chrono>
+#include <cmath>
 #include <thread>
 #include <limits>
 #include <string>
@@ -13,8 +14,6 @@
 static Value error(const std::string& msg) {
     return Value::makeError(msg);
 }
-
-Evaluator* Evaluator::current_ = nullptr;
 
 bool isError(const Value& v) { return v.type == ValType::Error; }
 
@@ -136,22 +135,31 @@ Value Evaluator::eval(const ASTNode& node, std::shared_ptr<Env> env) {
     case ASTNode::Kind::CloscDecl: {
         CloscData cd;
         cd.name = node.strVal.empty() ? "closc" : node.strVal;
-        cd.priority = 5;
+        cd.priority = (int)node.intVal;
         if (!node.children.empty())
             cd.body = const_cast<ASTNode*>(&node.children[0]);
         cd.closure = env;
         auto closure = env;  // copy BEFORE makeClosc moves cd
         const ASTNode* body = cd.body;
         const std::string cname = cd.name;
+        int prio = cd.priority;
+        size_t live = CloscManager::instance().liveCount();
+        if (live >= 256) return error("too many live closc sections (256 max): use serve/on rooms for connections, closc for supervisors");
+        if (live == 64) std::cerr << "[CLOSC] warning: 64 live sections; closc is for supervisors, not per-connection (see broadcast/rooms)" << std::endl;
         Value cv = Value::makeClosc(std::move(cd));
         env->set(cname, cv);
 
+        // The thread owns its Evaluator (the current one dies with runFile's
+        // frame) and shares only the closure Env. Program ASTs are kept alive
+        // process-wide by main.cpp (see gRunAsts), like imports.
+        auto global = this->globalEnv();
         CloscManager::instance().registerSection(
-            cname, 5,
-            [this, closure, body]() {
+            cname, prio,
+            [global, closure, body]() {
+                Evaluator ev(global);
                 auto localEnv = std::make_shared<Env>(closure);
                 if (body) {
-                    this->eval(*body, localEnv);
+                    ev.eval(*body, localEnv);
                 }
             }
         );
@@ -190,11 +198,13 @@ Value Evaluator::evalIdent(const ASTNode& node, std::shared_ptr<Env> env) {
 
 Value Evaluator::evalSay(const ASTNode& node, std::shared_ptr<Env> env) {
     if (node.children.empty()) {
+        std::lock_guard<std::mutex> l(lamlPrintMutex());
         std::cout << std::endl;
         return NIL;
     }
     Value val = eval(node.children[0], env);
     if (isError(val)) return val;
+    std::lock_guard<std::mutex> l(lamlPrintMutex());
     std::cout << val.inspect() << std::endl;
     return val;
 }
@@ -401,8 +411,14 @@ Value Evaluator::evalInfix(const ASTNode& node, std::shared_ptr<Env> env) {
             if (right.floatVal == 0.0) return error("division by zero");
             return Value::makeFloat(left.floatVal / right.floatVal);
         }
+        if (op == "%") {
+            if (right.floatVal == 0.0) return error("modulo by zero");
+            return Value::makeFloat(std::fmod(left.floatVal, right.floatVal));
+        }
         if (op == "<") return Value::makeBool(left.floatVal < right.floatVal);
         if (op == ">") return Value::makeBool(left.floatVal > right.floatVal);
+        if (op == "<=") return Value::makeBool(left.floatVal <= right.floatVal);
+        if (op == ">=") return Value::makeBool(left.floatVal >= right.floatVal);
         if (op == "==") return Value::makeBool(left.floatVal == right.floatVal);
         if (op == "!=") return Value::makeBool(left.floatVal != right.floatVal);
     }
@@ -419,6 +435,16 @@ Value Evaluator::evalInfix(const ASTNode& node, std::shared_ptr<Env> env) {
             if (r == 0.0) return error("division by zero");
             return Value::makeFloat(l / r);
         }
+        if (op == "%") {
+            if (r == 0.0) return error("modulo by zero");
+            return Value::makeFloat(std::fmod(l, r));
+        }
+        if (op == "<") return Value::makeBool(l < r);
+        if (op == ">") return Value::makeBool(l > r);
+        if (op == "<=") return Value::makeBool(l <= r);
+        if (op == ">=") return Value::makeBool(l >= r);
+        if (op == "==") return Value::makeBool(l == r);
+        if (op == "!=") return Value::makeBool(l != r);
     }
 
     // String concat
@@ -487,6 +513,11 @@ Value Evaluator::evalIndex(const ASTNode& node, std::shared_ptr<Env> env) {
             return error("index out of bounds");
         auto ch = static_cast<unsigned char>(left.strVal[i]);
         return Value::makeInt(static_cast<int64_t>(ch));
+    }
+    if (left.type == ValType::Obj && idx.type == ValType::String && left.objVal) {
+        auto v = left.objVal->env->get(idx.strVal);
+        if (v) return *v;
+        return error("no property: " + idx.strVal);
     }
     return error("cannot index");
 }
